@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- defaultModelType : flat 有BLOB不拆分 -->
+    <context id="MysqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        
+        <!-- 关键字加上单引号 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <commentGenerator>
+            <!-- 不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不生成时间戳注释 -->
+            <!-- <property name="suppressDate" value="true"/> -->
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ssm"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.elangzhi.ssm.model" targetProject="src/main/java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources"/>
+
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.elangzhi.ssm.dao" targetProject="src/main/java"/>-->
+
+        <table tableName="%" enableCountByExample="false"
+                            enableUpdateByExample="false"
+                            enableDeleteByExample="false"
+                            enableSelectByExample="false"
+                            selectByExampleQueryId="false">
+
+        </table>
+    </context>
+</generatorConfiguration>
