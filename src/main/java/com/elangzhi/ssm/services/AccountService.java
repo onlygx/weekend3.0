@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 public class AccountService extends BaseService<Account> {
 
     @Resource
-    private LzDao lzDao;
+    private LzDao<Account> lzDao;
 
 
 }

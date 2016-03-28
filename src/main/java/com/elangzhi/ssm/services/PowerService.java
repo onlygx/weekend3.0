@@ -13,6 +13,6 @@ import javax.annotation.Resource;
 public class PowerService extends BaseService<Power> {
 
     @Resource
-    private LzDao lzDao;
+    private LzDao<Power> lzDao;
 
 }
