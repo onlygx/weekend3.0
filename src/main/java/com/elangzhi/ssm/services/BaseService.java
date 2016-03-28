@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class BaseService<T> {
 
     @Resource
-    private LzDao lzDao;
+    private LzDao<T> lzDao;
 
     /**
      * 保存
