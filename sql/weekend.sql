@@ -35,7 +35,7 @@ CREATE TABLE `t_account` (
 -- ----------------------------
 -- Records of t_account
 -- ----------------------------
-INSERT INTO `t_account` VALUES ('888888', 'admin', '1234', '1', '1', '888888', null, null);
+INSERT INTO `t_account` VALUES ('888888', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', '888888', null, null);
 
 -- ----------------------------
 -- Table structure for t_account_role
