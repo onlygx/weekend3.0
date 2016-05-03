@@ -1,67 +1,135 @@
 package com.elangzhi.ssm.controller;
 
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.elangzhi.ssm.controller.json.Tip;
+import com.elangzhi.ssm.services.BaseService;
 import com.elangzhi.ssm.tools.PageData;
+import com.github.pagehelper.PageInfo;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 
-public class BaseController {
-	
-	protected Logger logger = Logger.getLogger(this.getClass());
+public class BaseController<T> {
 
 	private static final long serialVersionUID = 6357869213649815390L;
-	
-	/**
-	 * 得到PageData
-	 */
-	public PageData getPageData(){
-		return new PageData(this.getRequest());
-	}
-	
+
+	protected Logger logger = Logger.getLogger(this.getClass());
+
+	@Resource
+	BaseService<T> baseService;
+
 
 	/**
-	 * 得到request对象
-	 */
-	public static HttpServletRequest getRequest() {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		
-		return request;
-	}
-
-	/**
-	 * 添加session
-	 * @param sessionName
-	 * @param object
+	 * 默认数据库添加
+	 * @param t
+	 * @return
      */
-	public void putSession(String sessionName,Object object){
-		getRequest().getSession().setAttribute(sessionName,object);
-	}
+    @RequestMapping(value="/save")
+    @ResponseBody
+    public Tip save(T t){
+        try {
+            baseService.save(t);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
 
     /**
-     * 获取session
-     * @param sessionName
-     * @return
+	 * 默认数据库修改
+	 * @param t
+	 * @return
      */
-	public Object getSession(String sessionName){
-		return getRequest().getSession().getAttribute(sessionName);
-	}
+    @RequestMapping(value="/update")
+    @ResponseBody
+    public Tip update(T t){
+        try {
+            baseService.update(t);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
 
     /**
-     * 删除session
-     * @param sessionName
+	 * 默认数据库删除
+	 * @param t
+	 * @return
      */
-    public void removeSession(String sessionName){
-        getRequest().getSession().removeAttribute(sessionName);
+    @RequestMapping(value="/delete")
+    @ResponseBody
+    public Tip delete(T t){
+        try {
+            baseService.delete(t);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
     }
 
 
-	
+	/**
+	 * 查找一个对象（一般根据id，看sql语句写什么，只要是对象里面的属性都行）
+	 * @param t
+	 * @return
+     */
+    @RequestMapping(value="/find")
+    @ResponseBody
+	public T find(T t){
+
+		return baseService.selectOne(t);
+	}
+
+    /**
+     * 获取所有列，不分页
+     * @param clazz
+     * @return
+     */
+    @RequestMapping(value="/list")
+    public ModelAndView list(HttpServletRequest request,T clazz) {
+        PageData pd = new PageData(request);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass());
+        pd.put("pageInfo",pageInfo);
+        return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
+    }
+
+    /**
+     * 获取所有列，分页默认10条
+     * @param clazz
+     * @return
+     */
+    @RequestMapping(value="/list/{page}")
+    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page) {
+        PageData pd = new PageData(request);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,10);
+        pd.put("pageInfo",pageInfo);
+        return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
+    }
+
+    /**
+     * 获取所有列，自定义分页
+     * @param clazz
+     * @return
+     */
+    @RequestMapping(value="/list/{page}/{size}")
+    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page,@PathVariable int size) {
+        PageData pd = new PageData(request);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,size);
+        pd.put("pageInfo",pageInfo);
+        return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
+    }
+
 }

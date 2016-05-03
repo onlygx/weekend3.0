@@ -157,3 +157,18 @@ tools.get = function (_url, _param, _success) {
     });
 };
 
+/**
+ * 删除
+ * @param _action
+ * @param _id
+ */
+tools.del = function (_action,_id){
+    tools.post(_action+"/delete",{"id":_id},function(data){
+        if(data.success){
+            art.tip("删除成功",500,function(){
+                loadHash();
+            });
+        }
+    });
+}
+

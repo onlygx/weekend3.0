@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.services;
 
 import com.elangzhi.ssm.dao.LzDao;
+import com.elangzhi.ssm.dao.PowerDao;
 import com.elangzhi.ssm.model.Power;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import javax.annotation.Resource;
 public class PowerService extends BaseService<Power> {
 
     @Resource
-    private LzDao<Power> lzDao;
+    private PowerDao powerDao;
+
+
 
 }

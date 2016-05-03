@@ -107,13 +107,13 @@
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="javascript:;" style="padding-top:12px;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<img alt="" class="img-circle" id="myHeadImg" src="${session.admin.head}"/>
-						<span class="username username-hide-on-mobile"> ${session.admin.name} </span>
+						<img alt="" class="img-circle" id="myHeadImg" src="${admin.head}"/>
+						<span class="username username-hide-on-mobile"> ${admin.name} </span>
 						<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="#module=admin/edit&action=find_admin&id=${session.admin.id} ">
+							<a href="#module=admin/edit&action=find_admin&id=${admin.id} ">
 							<i class="icon-user"></i> 我的资料 </a>
 						</li>
 						<li>

@@ -30,9 +30,9 @@
 				<!-- <span class="arrow open"></span> -->
 				</a>
 			</li>
-			<c:if test="${session.account.username=='admin'}">
+			<c:if test="${account.userName == 'admin'}">
                 <li>
-                    <a href="#module=power/list&action=list_power">
+                    <a href="#module=power/list/1">
                         <i class="fa fa-cogs "></i>
                         <span class="title">权限管理</span>
                     </a>

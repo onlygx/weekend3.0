@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 //@RequestMapping("/")
-public class IndexController extends BaseController{
+public class IndexController{
 
     /**
      * 跳转到首页

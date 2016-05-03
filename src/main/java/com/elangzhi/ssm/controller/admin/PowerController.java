@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.controller.admin;
 
 import com.elangzhi.ssm.controller.BaseController;
+import com.elangzhi.ssm.controller.json.Tip;
 import com.elangzhi.ssm.tools.PageData;
 import com.elangzhi.ssm.model.Power;
 import com.elangzhi.ssm.services.PowerService;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.print.attribute.IntegerSyntax;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -21,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/power")
-public class PowerController extends BaseController {
+public class PowerController extends BaseController<Power> {
 
 
 
@@ -55,7 +58,6 @@ public class PowerController extends BaseController {
         pd.put("pageInfo",pageInfo);
         return new ModelAndView("index",pd);
     }
-
 
 
 

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 管理员登陆
@@ -21,7 +23,7 @@ import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController extends BaseController {
+public class LoginController extends BaseController<Account> {
 
     /**
      * 跳转到登陆页面
@@ -43,7 +45,7 @@ public class LoginController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public Tip login(Account account){
+    public Tip login(Account account, HttpSession session){
         Account resoult = accountService.findByUserName(account);
 
         if(resoult == null){
@@ -55,9 +57,9 @@ public class LoginController extends BaseController {
             }
             if(resoult.getType() == 1){
                 Admin admin = adminService.selectOne(new Admin().setId(resoult.getInfoId()));
-                putSession(Const.ADMIN,admin);
+                session.setAttribute(Const.ADMIN,admin);
             }
-            putSession(Const.ACCOUNT,resoult);
+            session.setAttribute(Const.ACCOUNT,resoult);
             return new Tip();
         }else{
             return new Tip(2);
@@ -71,11 +73,11 @@ public class LoginController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value="/logout",method = RequestMethod.POST)
-    public Tip logout(){
+    public Tip logout(HttpSession session){
 
         try {
-            removeSession(Const.ACCOUNT);
-            removeSession(Const.ADMIN);
+            session.removeAttribute(Const.ACCOUNT);
+            session.removeAttribute(Const.ADMIN);
             return new Tip();
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,13 +22,25 @@
 	<strong>欢迎登陆！</strong> <a href="/druid" target="_blank" style="color: white;"> 点此查看系统日志</a>
 </div>
 
-<div>
+<div class="note note-info">
+	<h4 class="block">Session Admin</h4>
 	<ul>
-		<li>session-admin：${session.admin}</li>
-		<li>昵称：${session.admin.name}</li>
-		<li>头像地址：${session.admin.head}</li>
+		<li>ID：${admin.id}</li>
+		<li>昵称：${admin.name}</li>
+		<li>头像地址：${admin.head}</li>
+	</ul>
+
+	<h4 class="block">Session Account</h4>
+	<ul>
+		<li>ID：${account.id}</li>
+		<li>用户名：${account.userName} </li>
+		<li>密码：${account.password}</li>
+		<li>类型：${account.type}</li>
+		<li>状态：${account.status}</li>
 	</ul>
 </div>
+
+
 <div class="clearfix"> </div>
 
 <script type="text/javascript">
