@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.services;
 
 import com.elangzhi.ssm.dao.LzDao;
+import com.elangzhi.ssm.tools.Logger;
 import com.elangzhi.ssm.tools.PageData;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.RowBounds;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
 public class BaseService<T> {
 
     @Resource
-    private LzDao<T> lzDao;
+    public LzDao<T> lzDao;
 
     /**
      * 保存
@@ -24,10 +25,17 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer save(T t) throws Exception {
+    public Integer save(T t) {
         String statement = t.getClass().getSimpleName()+"Mapper.insert";
-        return lzDao.save(statement,t);
+        try {
+            return lzDao.save(statement,t);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 保存失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
+
 
     /**
      * 查找
@@ -35,10 +43,18 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public T selectOne(T t) throws Exception {
+    public T selectOne(T t){
         String statement = t.getClass().getSimpleName()+"Mapper.selectByPrimaryKey";
-        return lzDao.selectOne(statement,t);
+        try {
+
+            return lzDao.selectOne(statement,t);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 查找失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
+
 
     /**
      * 修改
@@ -46,9 +62,15 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer update(T t) throws Exception {
+    public Integer update(T t) {
         String statement = t.getClass().getSimpleName()+"Mapper.updateByPrimaryKey";
-        return lzDao.update(statement,t);
+        try {
+            return lzDao.update(statement,t);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 修改失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -57,9 +79,15 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer delete(T t) throws Exception {
+    public Integer delete(T t) {
         String statement = t.getClass().getSimpleName()+"Mapper.deleteByPrimaryKey";
-        return lzDao.delete(statement,t);
+        try {
+            return lzDao.delete(statement,t);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 删除失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -69,9 +97,15 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo list(PageData pd, Class clazz) throws Exception {
+    public PageInfo list(PageData pd, Class clazz) {
         String statement = clazz.getSimpleName()+"Mapper.list";
-        return lzDao.list(statement,pd);
+        try {
+            return lzDao.list(statement,pd);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 获取列表失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -80,9 +114,15 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo list(PageData pd,Class clazz,int page,int size) throws Exception {
+    public PageInfo list(PageData pd,Class clazz,int page,int size) {
         String statement = clazz.getSimpleName()+"Mapper.list";
-        return lzDao.list(statement,pd,new RowBounds(page,size));
+        try {
+            return lzDao.list(statement,pd,new RowBounds(page,size));
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(this.getClass()+ " 分页获取列表失败！错误原因如下：");
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

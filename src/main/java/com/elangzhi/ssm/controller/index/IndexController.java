@@ -1,15 +1,11 @@
 package com.elangzhi.ssm.controller.index;
 
-import com.elangzhi.ssm.controller.json.Tip;
+import com.elangzhi.ssm.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * Created by GaoXiang on 2015/10/22 0022.
@@ -17,23 +13,27 @@ import java.util.Date;
 
 @Controller
 //@RequestMapping("/")
-public class IndexController {
+public class IndexController extends BaseController{
 
-    @RequestMapping("/")
-    public ModelAndView showCall(@PathVariable String name,HttpServletRequest request,ModelMap model){
-        model.addAttribute("date", new Date());
-        model.addAttribute("name", name);
-        model.addAttribute("adminJson", "json content");
-        return new ModelAndView("index",model);
+    /**
+     * 跳转到首页
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/",method = RequestMethod.GET)
+    public ModelAndView index(HttpServletRequest request,ModelMap model){
+        return new ModelAndView("admin/index");
     }
 
 
-    @RequestMapping("/saveTest")
-    @ResponseBody
-    public Tip saveTest(@RequestParam String name){
-
-        System.out.println(name);
-        return new Tip();
+    /**
+     * 跳转到欢迎页面
+     * @return
+     */
+    @RequestMapping(value="/home",method = RequestMethod.GET)
+    public ModelAndView home(){
+        return new ModelAndView("admin/body/home");
     }
 
 }

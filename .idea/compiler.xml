@@ -26,6 +26,7 @@
         <module name="ssmService1.0" />
         <module name="WebService2.0" />
         <module name="weekend" />
+        <module name="weekend3.0" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
@@ -33,6 +34,7 @@
       <module name="ssmService1.0" target="1.8" />
       <module name="WebService2.0" target="1.8" />
       <module name="weekend" target="1.8" />
+      <module name="weekend3.0" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -25,7 +25,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		}else{
 			HttpSession session = request.getSession();
-			Account account = (Account)session.getAttribute(Const.SESSION_ACCOUNT);
+			Account account = (Account)session.getAttribute(Const.ACCOUNT);
 			if(account != null){
 				path = path.substring(1, path.length());
 				/*boolean b = Jurisdiction.hasJurisdiction(path);

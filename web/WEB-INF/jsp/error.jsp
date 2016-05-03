@@ -37,7 +37,7 @@
   </div>
   
   <script type="text/javascript">
-  $(top.hangge());
+
   function showErr(){
   	document.getElementById("err").style.display = "";
   }

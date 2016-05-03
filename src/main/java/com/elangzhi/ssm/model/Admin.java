@@ -25,8 +25,9 @@ public class Admin {
         return id;
     }
 
-    public void setId(Long id) {
+    public Admin setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {

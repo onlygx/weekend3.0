@@ -16,6 +16,14 @@ public class LzDao<T> {
     private SqlSessionTemplate sqlSessionTemplate;
 
     /**
+     * 获取 sqlSessionTemplate
+     * @return
+     */
+    public SqlSessionTemplate getSqlSessionTemplate(){
+        return this.sqlSessionTemplate;
+    }
+
+    /**
      * 保存对象
      * @param str
      * @param obj
