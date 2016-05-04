@@ -1,6 +1,5 @@
-package com.elangzhi.ssm.controller.admin;
+package com.elangzhi.ssm.controller;
 
-import com.elangzhi.ssm.controller.BaseController;
 import com.elangzhi.ssm.controller.json.Tip;
 import com.elangzhi.ssm.model.Account;
 import com.elangzhi.ssm.model.Admin;
@@ -13,17 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * 管理员登陆
+ * 登陆
  * Created by GaoXiang on 2016/5/3 0003.
  */
 
 @Controller
 @RequestMapping("/login")
-public class LoginController extends BaseController<Account> {
+public class LoginController {
 
     /**
      * 跳转到登陆页面
@@ -31,7 +29,7 @@ public class LoginController extends BaseController<Account> {
      */
     @RequestMapping(value="/loginPage",method = RequestMethod.GET)
     public ModelAndView loginPage(){
-
+        //TODO 验证码操作
         return new ModelAndView("admin/login");
     }
 
@@ -48,13 +46,18 @@ public class LoginController extends BaseController<Account> {
     public Tip login(Account account, HttpSession session){
         Account resoult = accountService.findByUserName(account);
 
+        //判断有没有账号
         if(resoult == null){
             return new Tip(1);
+
+        // 判断密码
         }else if(resoult.getPassword().equals(account.getPassword())){
 
+            //判断状态1 表示正常
             if(resoult.getStatus() < 0){
                 return new Tip(3);
             }
+            // 判断类型 1 表示管理员
             if(resoult.getType() == 1){
                 Admin admin = adminService.selectOne(new Admin().setId(resoult.getInfoId()));
                 session.setAttribute(Const.ADMIN,admin);
