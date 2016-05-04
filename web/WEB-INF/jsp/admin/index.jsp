@@ -9,8 +9,9 @@
 
 <jsp:include page="body/head.jsp"/>
 
+
 <!-- BEGIN BODY -->
-<body class="page-md page-header-fixed page-quick-sidebar-over-content">
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo">
 
 	<jsp:include page="body/header.jsp"/>
 		

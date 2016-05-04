@@ -56,11 +56,7 @@ function hashIsChange(newHash){
 function loadHash(){
 
     var params = delToParam(window.currentHash);
-
-    var _url ;
-
-    _url = params["module"];
-
+    var _url = params["module"];
     params["module"] = undefined;
     params["_t"] = new Date().getTime();
 

@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.controller.admin;
 
 import com.elangzhi.ssm.controller.BaseController;
+import com.elangzhi.ssm.controller.json.Tip;
 import com.elangzhi.ssm.model.Admin;
 import com.elangzhi.ssm.tools.PageData;
 import com.elangzhi.ssm.services.AccountService;
@@ -25,6 +26,12 @@ public class AdminController extends BaseController<Admin> {
     @RequestMapping("/errorTest")
     public void errorTest(){
         throw new NullPointerException();
+    }
+
+    @Override
+    public Tip save(Admin admin) {
+        logger.info("打印 Override");
+        return super.save(admin);
     }
 
     //--------------------------- property --------------------------

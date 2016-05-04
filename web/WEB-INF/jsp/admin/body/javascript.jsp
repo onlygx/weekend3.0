@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="/static/metronic/plugins/respond.min.js"></script>
 <script src="/static/metronic/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="/static/metronic/plugins/jquery.min.js"></script>
+<script src="/static/js/jquery-1.11.3.js"></script>
+<script src="/static/bootstrap/bootstrap.min.js"></script>
 <script src="/static/metronic/plugins/jquery-migrate.min.js"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="/static/metronic/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="/static/metronic/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/metronic/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script src="/static/metronic/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/static/metronic/plugins/jquery.blockui.min.js"></script>
@@ -17,6 +18,7 @@
 <script src="/static/metronic/plugins/uniform/jquery.uniform.min.js"></script>
 <script src="/static/metronic/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- END CORE PLUGINS -->
+
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="/static/metronic/plugins/bootbox/bootbox.min.js" ></script>
 <script src="/static/metronic/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js"></script>
@@ -32,14 +34,14 @@
 <script src="/static/metronic/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
 <script src="/static/metronic/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
+<script src="/static/bootstrap-paginator/bootstrap-paginator.js"></script>
 
 <script src="/static/metronic/js/metronic.js"></script>
 <script src="/static/metronic/layout/scripts/layout.js"></script>
 <script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>
-<script src="/static/metronic/layout/scripts/demo.js"></script> 
+<script src="/static/metronic/layout/scripts/demo.js"></script>
 
 
-<!-- <script src="/admin/js/ajaxfileupload.js"></script> -->
 <script src="/static/js/art.js"></script>
 <script src="/static/js/tools.js"></script>
 <script src="/static/js/initHash.js"></script>

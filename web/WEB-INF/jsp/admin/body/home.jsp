@@ -13,7 +13,7 @@
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
-			<a href="#">日志</a>
+			<a href="#"></a>
 		</li>
 	</ul>
 </div>

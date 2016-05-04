@@ -157,18 +157,53 @@ tools.get = function (_url, _param, _success) {
     });
 };
 
+
 /**
  * 删除
  * @param _action
  * @param _id
  */
-tools.del = function (_action,_id){
-    tools.post(_action+"/delete",{"id":_id},function(data){
-        if(data.success){
-            art.tip("删除成功",500,function(){
-                loadHash();
-            });
+tools.del = function(_module,_id){
+
+    art.confirm("确定删除么？",function() {
+        tools.post(_module + "/delete", {"id": _id}, function (data) {
+            if (data.success) {
+                art.tip("删除成功", 500, function () {
+                    loadHash();
+                });
+            }
+        });
+    });
+};
+
+
+tools.getIds = function(_tableId){
+    var ids = "";
+    $('#'+_tableId).find(".checkboxes").each(function(){
+        var isCheck = $(this).is(":checked");
+        if(isCheck){
+            ids+=","+$(this).val();
         }
     });
-}
+    ids = ids.substring(1);
+    return ids;
+};
 
+
+/**
+ * 批量删除
+ * @param _module
+ * @param _ids
+ */
+tools.deleteByIds = function(_module){
+    var ids = tools.getIds("table");
+    art.confirm("确定删除选中信息么？",function(){
+        tools.post(_module+"/deleteByIds",{"ids":ids},function(data){
+            if(data.success){
+                tools.tip("批量删除成功。",null,function(){
+                    loadHash();
+                });
+            }
+        });
+    });
+};
