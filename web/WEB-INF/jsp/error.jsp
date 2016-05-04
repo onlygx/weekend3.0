@@ -1,46 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  <meta charset="utf-8" />
-  <base href="<%=basePath%>">
-<title>应用程序异常 (500)</title> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 
-<script type="text/javascript" src="static/js/jquery-1.7.2.js"></script>
-    <style type="text/css"> 
-        body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-        div.dialog {
-            width: 80%;
-            padding: 1em 4em;
-            margin: 4em auto 0 auto;
-            border: 1px solid #ccc;
-            border-right-color: #999;
-            border-bottom-color: #999;
-        }
-        h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-    </style> 
-</head> 
- 
-<body> 
-  <div class="dialog"> 
-    <h1>应用程序异常</h1> 
-    <p>抱歉！您访问的页面出现异常，请稍后重试或联系管理员。</p> 
-    <p><a href="javascript:showErr();">详 情</a> 
-<a href="javascript:history.back(-1)">返 回</a> 
-    </p> 
-    <div style="display:none;text-align: left;" id="err">${exception }</div>
-  </div>
-  
-  <script type="text/javascript">
+<h3 class="page-title">
+    系统 <small> Error</small>
+</h3>
 
-  function showErr(){
-  	document.getElementById("err").style.display = "";
-  }
-  </script>
-</body> 
-</html>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="javascript:void(0);">主页</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">错误</a>
+        </li>
+    </ul>
+</div>
+<% Exception ex = (Exception)request.getAttribute("exception"); %>
+
+<div class="note note-danger">
+    <p style="font-size: 16px;">
+        系统发生错误：<%= ex.getMessage()%>
+    </p>
+</div>
+
+<div class="portlet box green-haze">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa   fa-smile-o"></i>详细错误信息：
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="expand " data-original-title="" title=""></a>
+        </div>
+    </div>
+    <div class="portlet-body" style="display: block;">
+        <% ex.printStackTrace(new java.io.PrintWriter(out)); %>
+    </div>
+</div>
+

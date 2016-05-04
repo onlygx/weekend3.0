@@ -23,7 +23,7 @@
 			</li>
 		
 			<li class="start active" style="margin-top: 22px;">
-				<a href="#module=body/home">
+				<a href="#module=home">
 				<i class="icon-home"></i>
 				<span class="title">主页</span>
 				<span class="selected"></span>

@@ -22,6 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/admin")
 public class AdminController extends BaseController<Admin> {
 
+    @RequestMapping("/errorTest")
+    public void errorTest(){
+        throw new NullPointerException();
+    }
 
     //--------------------------- property --------------------------
     @Resource

@@ -19,7 +19,7 @@
 </div>
 <!-- END PAGE HEADER-->
 <div class="alert alert-success">
-	<strong>欢迎登陆！</strong> <a href="/druid" target="_blank" style="color: white;"> 点此查看系统日志</a>
+	<strong>欢迎登陆！</strong> <a href="/druid" target="_blank" style="color: white;"> 点此查看 druid 监控数据</a>
 </div>
 
 <div class="note note-info">

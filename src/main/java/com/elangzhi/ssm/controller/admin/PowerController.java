@@ -28,40 +28,11 @@ public class PowerController extends BaseController<Power> {
 
 
 
-    @RequestMapping(value="/login_insert")
-    public ModelAndView test(Power power, ModelMap model)throws Exception{
-        power.setId(UUIDFactory.getLongId());
-        model.put("status",powerService.save(power));
-        model.put("id",power.getId());
-        return new ModelAndView("index",model);
-    }
-
-    @RequestMapping(value="/login_delete")
-    public ModelAndView test2(Power power,ModelMap model)throws Exception{
-        model.put("status",powerService.delete(power));
-        model.put("id",power.getId());
-        return new ModelAndView("index",model);
-    }
-
-    @RequestMapping(value="/login_select")
-    public ModelAndView test4(Power power,ModelMap model)throws Exception{
-        Power power1 = powerService.selectOne(power);
-        model.put("status",power1.getName());
-        model.put("id",power.getId());
-        return new ModelAndView("index",model);
-    }
-
-    @RequestMapping(value="/login_list/{page}/{size}")
-    public ModelAndView test3(HttpServletRequest request,@PathVariable Integer page,@PathVariable Integer size)throws Exception{
-        PageData pd = new PageData(request);
-        PageInfo pageInfo =  powerService.list(pd,Power.class,page,size);
-        pd.put("pageInfo",pageInfo);
-        return new ModelAndView("index",pd);
-    }
 
 
 
 
+    //---------------------------------- property ------------------------------------------
     @Resource
     PowerService powerService;
 }
