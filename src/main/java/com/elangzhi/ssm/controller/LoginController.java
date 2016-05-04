@@ -29,7 +29,7 @@ public class LoginController {
      */
     @RequestMapping(value="/loginPage",method = RequestMethod.GET)
     public ModelAndView loginPage(){
-        //TODO 验证码操作
+        // 验证码操作
         return new ModelAndView("admin/login");
     }
 
