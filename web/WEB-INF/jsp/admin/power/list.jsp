@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
 <h4> 分页信息： ${pageInfo.toString()}</h4>
-
+<a>测试</a>
 <table style="width: 100%;" class="table table-striped table-bordered">
     <tr>
         <th>id</th>

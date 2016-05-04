@@ -35,7 +35,12 @@
   </update>
 
   <select id="list" resultType="java.util.Map">
-      select * from t_power
+    select * from t_power
+    where 1=1
+      <if test="name != null">
+        and `name` like CONCAT('%',#{name},'%')
+      </if>
+
   </select>
 
 </mapper>
