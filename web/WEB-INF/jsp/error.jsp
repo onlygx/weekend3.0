@@ -4,18 +4,7 @@
     系统 <small> Error</small>
 </h3>
 
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>
-            <a href="javascript:void(0);">主页</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">错误</a>
-        </li>
-    </ul>
-</div>
+
 <% Exception ex = (Exception)request.getAttribute("exception"); %>
 
 <div class="note note-danger">

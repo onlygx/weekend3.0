@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- BEGIN PAGE HEADER-->
+<%--
 <h3 class="page-title">
 	主页
 </h3>
+--%>
 
 <!-- END PAGE HEADER-->
 <div class="alert alert-success">

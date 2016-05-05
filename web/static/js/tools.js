@@ -176,16 +176,17 @@ tools.del = function(_module,_id){
     });
 };
 
-
+/**
+ * 获取勾选了多少
+ * @param _tableId
+ * @returns {Array}
+ */
 tools.getIds = function(_tableId){
-    var ids = "";
-    $('#'+_tableId).find(".checkboxes").each(function(){
-        var isCheck = $(this).is(":checked");
-        if(isCheck){
-            ids+=","+$(this).val();
-        }
+    var checks = $('#'+_tableId).find(".checkboxes:checked");
+    var ids = new Array();
+    checks.each(function(){
+        ids.push($(this).val());
     });
-    ids = ids.substring(1);
     return ids;
 };
 
@@ -197,6 +198,7 @@ tools.getIds = function(_tableId){
  */
 tools.deleteByIds = function(_module){
     var ids = tools.getIds("table");
+
     art.confirm("确定删除选中信息么？",function(){
         tools.post(_module+"/deleteByIds",{"ids":ids},function(data){
             if(data.success){

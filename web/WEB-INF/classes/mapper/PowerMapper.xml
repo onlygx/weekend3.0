@@ -34,13 +34,16 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="java.util.Map">
-    select * from t_power
+  <select id="list" resultType="com.elangzhi.ssm.model.Power" >
+    select *
+    from t_power
     where 1=1
       <if test="name != null">
         and `name` like CONCAT('%',#{name},'%')
       </if>
-
+      <if test="parentId != null">
+        and parent_id = #{parentId}
+      </if>
   </select>
 
 </mapper>

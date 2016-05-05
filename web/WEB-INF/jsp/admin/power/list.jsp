@@ -15,29 +15,28 @@
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-paper-plane font-green-haze"></i>
-			<span class="caption-subject bold font-green-haze uppercase">搜索</span>
+            <span class="caption-subject bold font-green-haze uppercase">搜索</span>
             <span class="caption-helper">点击键盘回车按钮或者右侧搜索按钮开始检索</span>
         </div>
         <div class="tools">
             <a href="" class="collapse" data-original-title="" title=""> </a>
-            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
-            </a>
-            <a href="" class="reload" data-original-title="" title="">
-            </a>
-            <a href="javascript:;" class="fullscreen" data-original-title="" title="">
-            </a>
-            <a href="" class="remove" data-original-title="" title="">
-            </a>
         </div>
         <div class="actions">
-            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch();"> <i class="icon-magnifier"></i> 搜索 </button>
-            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title="" title=""></a>
+            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch();"><i class="icon-magnifier"></i> 搜索
+            </button>
+            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
+               title=""></a>
         </div>
+
     </div>
     <div class="portlet-body">
 
         <form class="form-inline margin-bottom-40" role="form" id="tableParams">
+
+            <div class="form-group form-md-line-input has-success">
+                <input type="text" class="form-control" name="parentId" value="${parentId}" placeholder="权限parentId">
+                <div class="form-control-focus"></div>
+            </div>
             <div class="form-group form-md-line-input has-success">
                 <input type="text" class="form-control" name="name" value="${name}" autofocus placeholder="权限名称">
                 <div class="form-control-focus"></div>
@@ -56,13 +55,15 @@
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-speech  font-blue-hoki"></i>
-			<span class="caption-subject font-blue-hoki">数据表</span>
+            <span class="caption-subject font-blue-hoki">数据表</span>
             <span class="caption-helper">点击右侧可以刷新或者全屏</span>
         </div>
 
         <div class="actions">
-            <a class="btn btn-circle btn-icon-only btn-default " href="javascript:loadHash();" title="刷新"><i class="fa fa-refresh"></i></a>
-            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title="" title="全屏"></a>
+            <a class="btn btn-circle btn-icon-only btn-default " href="javascript:loadHash();" title="刷新"><i
+                    class="fa fa-refresh"></i></a>
+            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
+               title="全屏"></a>
         </div>
         <div id="paginator" style="padding-right: 20px;"></div>
     </div>
@@ -83,34 +84,54 @@
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-danger" onclick="deleteAll();"> 批量删除 <i class="fa fa-times"></i></button>
+                        <button class="btn btn-danger" onclick="tools.deleteByIds('power');"> 批量删除 <i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>
         </div>
         <table style="width: 100%;" class="table table-striped table-bordered" id="table">
+            <thead>
             <tr>
                 <th class="table-checkbox">
                     <input type="checkbox" class="group-checkable"/>
                 </th>
                 <th>id</th>
-                <th>name</th>
                 <th>url</th>
+                <th>名称</th>
+                <th>
+                    图标
+                </th>
+                <th>
+                    父级编号
+                </th>
+                <th style="min-width: 100px;">
+                    类型
+                </th>
+                <th>
+                    排序
+                </th>
                 <th>操作</th>
             </tr>
-
+            </thead>
+            <tbody>
             <c:forEach var="item" items="${pageInfo.list}" varStatus="status">
                 <tr>
                     <td class="center"><input type="checkbox" class="checkboxes" value="${item.id}"/></td>
                     <td>${item.id}</td>
-                    <td>${item.name}</td>
                     <td>${item.url}</td>
+                    <td class="center">
+                        <a  style="color: blue;" href="#module=power/list/1&parentId=${item.id}">${item.name}</a>
+                    </td>
+                    <td class="center"> <i class="${item.icon}"></i> </td>
+                    <td class="center"> ${item.parentId}</td>
+                    <td class="center">${item.type==0?"菜单权限":"操作权限" }</td>
+                    <td class="center">${item.sort}</td>
                     <td>
                         <a href="javascript:void(0);" onclick="tools.del('power','${item.id}')">删除</a>
                     </td>
                 </tr>
             </c:forEach>
-
+            </tbody>
         </table>
     </div>
 </div>
@@ -131,7 +152,8 @@
 
     // 条件查询参数
     var formParam = {
-        name: "${name}"
+        name: "${name}",
+        parentId: "${parentId}"
     };
 
     $(document).ready(function () {
@@ -140,22 +162,23 @@
 
     });
 
-    function tableSearch(){
+    function tableSearch() {
 
         var param = tools.formParams("tableParams");
         var url = "/power/list/1";
 
-        for(var paramKey in param){
+        for (var paramKey in param) {
             url += "&" + paramKey;
             url += "=" + param[paramKey];
         }
 
-        window.location.hash = "#module="+url;
-    };
+        window.location.hash = "#module=" + url;
+    }
+    ;
 
     //绑定回车事件
-    $(document).keydown(function(event){
-        if(event.keyCode==13){
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
             tableSearch()
         }
     });

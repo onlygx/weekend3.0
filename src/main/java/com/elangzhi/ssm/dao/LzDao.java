@@ -75,7 +75,7 @@ public class LzDao<T> {
      * @throws Exception
      */
     public PageInfo<T> list(String str, Object obj) throws Exception {
-        return new PageInfo(sqlSessionTemplate.selectList(str, obj));
+        return new PageInfo<T>(sqlSessionTemplate.selectList(str, obj));
     }
 
     /**
@@ -86,6 +86,6 @@ public class LzDao<T> {
      * @throws Exception
      */
     public PageInfo<T> list(String str, Object obj, RowBounds rowBounds) throws Exception {
-        return new PageInfo(sqlSessionTemplate.selectList(str, obj,rowBounds));
+        return new PageInfo<T>(sqlSessionTemplate.selectList(str, obj,rowBounds));
     }
 }

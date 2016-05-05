@@ -97,7 +97,7 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo list(PageData pd, Class clazz) {
+    public PageInfo<T> list(PageData pd, Class clazz) {
         String statement = clazz.getSimpleName()+"Mapper.list";
         try {
             return lzDao.list(statement,pd);
@@ -114,7 +114,7 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo list(PageData pd,Class clazz,int page,int size) {
+    public PageInfo<T> list(PageData pd,Class clazz,int page,int size) {
         String statement = clazz.getSimpleName()+"Mapper.list";
         try {
             return lzDao.list(statement,pd,new RowBounds(page,size));

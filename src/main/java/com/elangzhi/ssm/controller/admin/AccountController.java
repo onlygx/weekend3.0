@@ -1,6 +1,6 @@
 package com.elangzhi.ssm.controller.admin;
 
-import com.elangzhi.ssm.controller.BaseController;
+import com.elangzhi.ssm.controller.AdminBaseController;
 import com.elangzhi.ssm.model.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/account")
-public class AccountController extends BaseController<Account> {
+public class AccountController extends AdminBaseController<Account> {
 }

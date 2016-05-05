@@ -1,5 +1,7 @@
 package com.elangzhi.ssm.model;
 
+import java.util.List;
+
 public class Power {
     private Long id;
 
@@ -17,12 +19,34 @@ public class Power {
 
     private String icon;
 
+    //自定义
+    private Long belong;//是否包含在某个集合里 我的权限 或者某个角色
+    private List<Power> powers; // 下级权限
+
+
+    public Long getBelong() {
+        return belong;
+    }
+
+    public void setBelong(Long belong) {
+        this.belong = belong;
+    }
+
+    public List<Power> getPowers() {
+        return powers;
+    }
+
+    public void setPowers(List<Power> powers) {
+        this.powers = powers;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Power setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {

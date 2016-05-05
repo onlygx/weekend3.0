@@ -4,18 +4,6 @@
     系统 <small> 404</small>
 </h3>
 
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>
-            <a href="javascript:void(0);">主页</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">404</a>
-        </li>
-    </ul>
-</div>
 
 <div class="note note-danger" >
     <p style="font-size: 16px;">
