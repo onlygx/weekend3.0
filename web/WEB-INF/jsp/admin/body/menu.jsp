@@ -14,15 +14,10 @@
 		<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
 		<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
 		<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-		<ul class="page-sidebar-menu "  data-keep-expanded="true" data-auto-scroll="true"  data-slide-speed="300">
-			<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-			<li class="sidebar-toggler-wrapper">
-				<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-				<div class="sidebar-toggler"></div>
-				<!-- END SIDEBAR TOGGLER BUTTON -->
-			</li>
-		
-			<li class="start active" style="margin-top: 22px;">
+
+		<ul class="page-sidebar-menu "  data-keep-expanded="false" data-auto-scroll="true"  data-slide-speed="200">
+
+			<li class="start " >
 				<a href="#module=home">
 				<i class="icon-home"></i>
 				<span class="title">主页</span>
@@ -79,7 +74,7 @@
 				</li>
 			</s:iterator>--%>
 			
-			<li  class="open">
+			<li class="open">
 				<a href="javascript:;">
 				<i class="icon-cup"></i>
 				<span class="title">hash 传参测试</span>
@@ -87,7 +82,7 @@
 				</a>
 				<ul class="sub-menu" style="display: block;">
 					<li>
-						<div style="width: 100%;background-color: gray;padding: 20px;">
+						<div style="width: 100%;background-color: gainsboro;padding: 20px;">
 							<textarea placeholder="#module=power-list&action=list_power" class="form-control" rows="" cols=""
                                       style="width: 100%;height: 100px;">#module=home</textarea>
 							<br>

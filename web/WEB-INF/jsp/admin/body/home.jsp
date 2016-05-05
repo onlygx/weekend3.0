@@ -2,21 +2,9 @@
 
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-系统 <small> 状态</small>
+	主页
 </h3>
 
-<div class="page-bar">
-	<ul class="page-breadcrumb">
-		<li>
-			<i class="fa fa-home"></i>
-			<a href="javascript:void(0);">主页</a>
-			<i class="fa fa-angle-right"></i>
-		</li>
-		<li>
-			<a href="#"></a>
-		</li>
-	</ul>
-</div>
 <!-- END PAGE HEADER-->
 <div class="alert alert-success">
 	<strong>欢迎登陆！</strong> <a href="/druid" target="_blank" style="color: white;"> 点此查看 druid 监控数据</a>

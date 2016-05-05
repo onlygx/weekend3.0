@@ -6,7 +6,7 @@
 <script src="/static/metronic/plugins/respond.min.js"></script>
 <script src="/static/metronic/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="/static/js/jquery-1.11.3.js"></script>
+<script src="/static/js/jquery-1.12.3.js"></script>
 <script src="/static/bootstrap/bootstrap.min.js"></script>
 <script src="/static/metronic/plugins/jquery-migrate.min.js"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
@@ -38,8 +38,9 @@
 
 <script src="/static/metronic/js/metronic.js"></script>
 <script src="/static/metronic/layout/scripts/layout.js"></script>
-<script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>
 <script src="/static/metronic/layout/scripts/demo.js"></script>
+<script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>
+
 
 
 <script src="/static/js/art.js"></script>

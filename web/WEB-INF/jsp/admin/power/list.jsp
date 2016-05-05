@@ -9,24 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
-<!-- BEGIN PAGE HEADER-->
-<h3 class="page-title">
-    系统权限列表
-</h3>
-
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>
-            <a href="#module=home">主页</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="javascript:void(0);">权限管理</a>
-        </li>
-    </ul>
-</div>
-<!-- END PAGE HEADER-->
 
 <!-- BEGIN PAGE TOOLS-->
 <div class="portlet light bg-inverse">
@@ -36,7 +18,19 @@
 			<span class="caption-subject bold font-green-haze uppercase">搜索</span>
             <span class="caption-helper">点击键盘回车按钮或者右侧搜索按钮开始检索</span>
         </div>
+        <div class="tools">
+            <a href="" class="collapse" data-original-title="" title=""> </a>
+            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+            </a>
+            <a href="" class="reload" data-original-title="" title="">
+            </a>
+            <a href="javascript:;" class="fullscreen" data-original-title="" title="">
+            </a>
+            <a href="" class="remove" data-original-title="" title="">
+            </a>
+        </div>
         <div class="actions">
+            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
             <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch();"> <i class="icon-magnifier"></i> 搜索 </button>
             <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title="" title=""></a>
         </div>
@@ -48,8 +42,9 @@
                 <input type="text" class="form-control" name="name" value="${name}" autofocus placeholder="权限名称">
                 <div class="form-control-focus"></div>
             </div>
-
         </form>
+
+
     </div>
 </div>
 

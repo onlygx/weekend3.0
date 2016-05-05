@@ -11,7 +11,7 @@
     <meta content="GaoXiang" name="author"/>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+    <%--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>--%>
     <link href="/static/bootstrap/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="/static/metronic/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="/static/metronic/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
@@ -35,6 +35,7 @@
     <link href="/static/metronic/layout/css/layout.css" rel="stylesheet" type="text/css"/>
     <link href="/static/metronic/layout/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="/static/metronic/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+
 
     <link href="/static/css/scrollbar.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
