@@ -117,7 +117,7 @@
             <div class="form-actions"  >
                 <div class="row">
                     <div class="col-md-offset-3 col-md-4">
-                        <button type="button" class="btn green" onclick="save();">
+                        <button type="button" class="btn green" onclick="tools.save('power');">
                             <i class="fa  fa-cog fa-spin "></i>提交</button>
                         <button type="button" class="btn default" onclick="history.go(-1);">
                             <i class="fa  fa-refresh fa-spin "></i>返回</button>
@@ -129,18 +129,6 @@
     </div>
 </div>
 <script>
-    function save(){
-        var param = tools.formParams("saveForm");
-        tools.post("/power/save",param,function(data){
-            if(data.success){
-                tools.tip("添加成功！");
-                loadHash();
-            }else{
-                var _case = {1:"添加失败，请联系管理员。"};
-                tools.errorTip(_case, data.code);
-            }
-        });
-    }
 
     /**
      * 选择父级权限
@@ -181,8 +169,6 @@
             tools.post("/power/countByParentId",{"parentId":parentId},function(data){
                 input.val(++data);
             });
-
-
         });
     });
 </script>

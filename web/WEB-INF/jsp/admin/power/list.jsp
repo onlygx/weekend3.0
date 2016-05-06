@@ -9,7 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
-
+<h3 class="page-title">
+    权限列表
+</h3>
 <!-- BEGIN PAGE TOOLS-->
 <div class="portlet light bg-inverse">
     <div class="portlet-title">
@@ -95,8 +97,8 @@
                 <th class="table-checkbox">
                     <input type="checkbox" class="group-checkable"/>
                 </th>
-                <th>id</th>
-                <th>url</th>
+                <th>编号</th>
+                <th>路径</th>
                 <th>名称</th>
                 <th>
                     图标
@@ -128,6 +130,7 @@
                     <td class="center">${item.sort}</td>
                     <td>
                         <a href="javascript:void(0);" onclick="tools.del('power','${item.id}')">删除</a>
+                        <a href="#module=/power/edit&id=${item.id}" >查看\编辑</a>
                     </td>
                 </tr>
             </c:forEach>

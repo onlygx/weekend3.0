@@ -36,7 +36,9 @@ public class PowerController extends AdminBaseController<Power> {
     public Tip deleteByIds(@RequestParam("ids[]") List<Long> ids){
         try {
             for(Long id : ids){
-                powerService.delete(new Power().setId(id));
+                Power temp = new Power();
+                temp.setId(id);
+                powerService.delete(temp);
             }
             return new Tip();
         } catch (Exception e) {

@@ -59,7 +59,9 @@ public class LoginController {
             }
             // 判断类型 1 表示管理员
             if(resoult.getType() == 1){
-                Admin admin = adminService.selectOne(new Admin().setId(resoult.getInfoId()));
+                Admin temp = new Admin();
+                temp.setId(resoult.getInfoId());
+                Admin admin = adminService.selectOne(temp);
                 session.setAttribute(Const.ADMIN,admin);
             }
             session.setAttribute(Const.ACCOUNT,resoult);

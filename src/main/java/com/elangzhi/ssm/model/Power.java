@@ -44,9 +44,8 @@ public class Power {
         return id;
     }
 
-    public Power setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {

@@ -43,6 +43,17 @@ public class AdminBaseController<T> {
     }
 
 
+    /**
+     * 进入编辑页面
+     * @param t
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/edit")
+    public ModelAndView edit(T t,ModelMap model){
+        model.put("data",baseService.selectOne(t));
+        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/edit",model);
+    }
 
 	/**
 	 * 默认数据库添加
@@ -105,9 +116,9 @@ public class AdminBaseController<T> {
     @RequestMapping(value="/find")
     @ResponseBody
 	public T find(T t){
-
 		return baseService.selectOne(t);
 	}
+
 
     /**
      * 获取所有列，不分页

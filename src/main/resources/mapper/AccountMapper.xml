@@ -8,4 +8,13 @@
     where user_name = #{userName}
   </select>
 
+  <insert id="insert" parameterType="admin" >
+    insert into t_account (id, user_name, password,`type`,status,info_id,qq_id,sina_id)
+    values ( #{id},#{userName},#{password},#{type},#{status},#{infoId},#{qqId},#{sinaId})
+  </insert>
+
+    <delete id="deleteByPrimaryKey">
+        delete from t_account where id = #{id}
+    </delete>
+
 </mapper>

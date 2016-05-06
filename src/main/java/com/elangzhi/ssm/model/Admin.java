@@ -2,7 +2,7 @@ package com.elangzhi.ssm.model;
 
 import java.util.Date;
 
-public class Admin {
+public class Admin extends Account {
     private Long id;
 
     private String name;
@@ -25,9 +25,8 @@ public class Admin {
         return id;
     }
 
-    public Admin setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {

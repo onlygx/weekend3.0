@@ -20,6 +20,10 @@
       )
   </insert>
 
+    <delete id="deleteByPrimaryKey">
+        delete from t_admin where id = #{id}
+    </delete>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.Admin" >
     update t_admin
     <set >
@@ -50,5 +54,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="list" resultType="com.elangzhi.ssm.model.Admin" >
+    select *
+    from t_admin
+    where 1=1
+    <if test="name != null">
+      and `name` like CONCAT('%',#{name},'%')
+    </if>
+  </select>
 
 </mapper>

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+
 <!-- BEGIN FORM-->
 <div class="portlet light bg-inverse">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject font-red-sunglo bold uppercase">后台管理用户添加</span>
+			<span class="caption-subject font-red-sunglo bold uppercase">管理员添加</span>
 			<span class="caption-helper">用户名称和密码是必填项</span>
 		</div>
 	</div>
@@ -17,8 +18,10 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-qq"></i>
-						<input type="text" class="form-control" name="data.name" placeholder="用户姓名">
-						<input type="hidden" name="data.head" value="/admin/image/defaultHead.jpg">
+						<input type="text" class="form-control" name="name" placeholder="用户姓名">
+						<input type="hidden" name="head" value="/images/account/defaultHead.jpg">
+						<input type="hidden" name="id" value="${longId}">
+						<input type="hidden" name="account.id" value="${longId+1}">
 					</div>
 				</div>
 			</div>
@@ -28,7 +31,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-male"></i>
-						<input type="text" class="form-control" name="account.username"  placeholder="用户账号">
+						<input type="text" class="form-control" name="userName"  placeholder="用户账号">
 					</div>
 				</div>
 			</div>
@@ -38,7 +41,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" name="account.password"  placeholder="用户密码">
+						<input type="password" class="form-control" name="password"  placeholder="用户密码">
 					</div>
 				</div>
 			</div>
@@ -48,7 +51,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-hdd-o"></i>
-						<input type="text" class="form-control" name="data.email"  placeholder="邮箱">
+						<input type="text" class="form-control" name="email"  placeholder="邮箱">
 					</div>
 				</div>
 			</div>
@@ -58,7 +61,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-mobile-phone "></i>
-						<input type="text" class="form-control" name="data.phone"  placeholder="电话">
+						<input type="text" class="form-control" name="phone"  placeholder="电话">
 					</div>
 				</div>
 			</div>
@@ -68,7 +71,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-home"></i>
-						<input type="text" class="form-control" name="data.address"  placeholder="地址">
+						<input type="text" class="form-control" name="address"  placeholder="地址">
 					</div>
 				</div>
 			</div>
@@ -78,7 +81,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-smile-o"></i>
-						<input type="text" class="form-control" name="data.idCard"  placeholder="身份证">
+						<input type="text" class="form-control" name="idCard"  placeholder="身份证">
 					</div>
 				</div>
 			</div>
@@ -89,16 +92,16 @@
 					<div class="radio-list">
 						<div class="icheck-inline">
 							<label>
-							<input type="radio" value="1" name="data.sex" checked class="icheck" data-radio="iradio_flat-green"> 男 </label>
+							<input type="radio" value="1" name="sex" checked class="icheck" data-radio="iradio_flat-green"> 男 </label>
 							<label>
-							<input type="radio" value="0" name="data.sex"  class="icheck" data-radio="iradio_flat-green"> 女 </label>
+							<input type="radio" value="0" name="sex"  class="icheck" data-radio="iradio_flat-green"> 女 </label>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			
 		</div>
+
 		<div class="form-actions">
 			<div class="row">
 				<div class="col-md-offset-3 col-md-4">
@@ -113,32 +116,28 @@
 	<!-- END FORM-->
 	</div>
 </div>
+
+<script src="/static/js/jquery.md5.js"></script>
 <script>
 function save(){
 	var param = tools.formParams("saveForm");
-	
-	if(param["data.name"] == "" || param["data.name"] == null){
+
+	if(param["name"] == "" || param["name"] == null){
 		tools.tip("请输入姓名");
 		return null;
 	}
-	if(param["account.username"] == "" || param["account.username"] == null){
+	if(param["userName"] == "" || param["userName"] == null){
 		tools.tip("请输入用户名");
 		return null;
 	}
-	if(param["account.password"] == "" || param["account.password"] == null){
+	if(param["password"] == "" || param["password"] == null){
 		tools.tip("请输入密码");
 		return null;
 	}
-	tools.action("/admin/save_admin",param,function(data){
-		if(data.success){
-			tools.tip("添加成功！",null,function(){
-				history.go(-1);
-			});
-		}else{
-			var _case = {1:"添加失败，请联系管理员。"};
-			tools.errorTip(_case, data.code);
-		}
-	});
+    $("input[name='password']").val($.md5(param["password"]));
+
+    tools.save("admin");
+    $("input[name='password']").val("");
 }
 
 $(document).ready(function(){

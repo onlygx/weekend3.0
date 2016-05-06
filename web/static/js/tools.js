@@ -97,6 +97,9 @@ tools.errorTip = function(_case, _code) {
  */
 tools.setMain = function(data){
 	$("#main").html(data);
+    if(data instanceof Object){
+        $("#main").html(JSON.stringify(data,null,"\t"));
+    }
 };
 
 /**
@@ -157,23 +160,67 @@ tools.get = function (_url, _param, _success) {
     });
 };
 
+/**
+ * 提交修改信息
+ * @param _module
+ */
+tools.edit = function(_module){
+    var state;
+    var param = tools.formParams("editForm");
+    tools.post(_module +"/update",param,function(data){
+        state = data.success;
+        if(data.success){
+            tools.tip("修改成功！",null,function(){
+                history.go(-1);
+            });
+        }else{
+            tools.tip("修改失败！错误代号："+data.code,1000,null,"danger");
+
+        }
+    });
+    return state;
+};
+
+/**
+ * 保存到数据库
+ * @param _module
+ */
+tools.save = function(_module){
+    var state;
+    var param = tools.formParams("saveForm");
+    tools.post(_module +"/save",param,function(data){
+        state = data.success;
+        if(data.success){
+            art.tip("提交成功", 500, function () {
+                loadHash();
+            });
+        }else{
+            tools.tip("提交失败！错误代号："+data.code,1000,null,"danger");
+        }
+    });
+    return state;
+};
 
 /**
  * 删除
- * @param _action
- * @param _id
+ * @param _module 模块名称
+ * @param _id 要删除的id
  */
 tools.del = function(_module,_id){
-
+    var state;
     art.confirm("确定删除么？",function() {
         tools.post(_module + "/delete", {"id": _id}, function (data) {
+            state = data.success;
             if (data.success) {
                 art.tip("删除成功", 500, function () {
                     loadHash();
                 });
+            }else{
+                tools.tip("删除失败！错误代号："+data.code,1000,null,"danger");
             }
         });
     });
+    return state;
 };
 
 /**
@@ -193,18 +240,19 @@ tools.getIds = function(_tableId){
 
 /**
  * 批量删除
- * @param _module
- * @param _ids
+ * @param _module 模块名称
+ * @param _ids ids[]
  */
 tools.deleteByIds = function(_module){
     var ids = tools.getIds("table");
-
     art.confirm("确定删除选中信息么？",function(){
         tools.post(_module+"/deleteByIds",{"ids":ids},function(data){
             if(data.success){
                 tools.tip("批量删除成功。",null,function(){
                     loadHash();
                 });
+            }else{
+                tools.tip("批量删除败！错误代号："+data.code,1000,null,"danger");
             }
         });
     });

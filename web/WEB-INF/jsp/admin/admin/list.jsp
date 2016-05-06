@@ -1,122 +1,171 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!-- BEGIN PAGE HEADER-->
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2016/5/3 0003
+  Time: 下午 22:08
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+
 <h3 class="page-title">
-系统用户列表
+    管理员列表
 </h3>
+<!-- BEGIN PAGE TOOLS-->
+<div class="portlet light bg-inverse">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-paper-plane font-green-haze"></i>
+            <span class="caption-subject bold font-green-haze uppercase">搜索</span>
+            <span class="caption-helper">点击键盘回车按钮或者右侧搜索按钮开始检索</span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse" data-original-title="" title=""> </a>
+        </div>
+        <div class="actions">
+            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch();"><i class="icon-magnifier"></i> 搜索
+            </button>
+            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
+               title=""></a>
+        </div>
 
-<div class="page-bar">
-	<ul class="page-breadcrumb">
-		<li>
-			<i class="fa fa-home"></i>
-			<a href="javascript:void(0);">主页</a>
-			<i class="fa fa-angle-right"></i>
-		</li>
-		<li>
-			<a href="#">用户管理</a>
-		</li>
-	</ul>
+    </div>
+    <div class="portlet-body">
+
+        <form class="form-inline margin-bottom-40" role="form" id="tableParams">
+
+            <div class="form-group form-md-line-input has-success">
+                <input type="text" class="form-control" name="name" value="${name}" autofocus placeholder="名称">
+                <div class="form-control-focus"></div>
+            </div>
+        </form>
+
+    </div>
 </div>
-<!-- END PAGE HEADER-->
-<div class="table-toolbar">
-	<div class="row">
-		<div class="col-md-6">
 
-			<div class="btn-group">
-				<a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
-					<i class="fa  fa-refresh fa-spin "></i>返回
-				</a>
-				<a href="#module=admin/add" class="btn green">
-					添加  <i class="fa fa-plus"></i>
-				</a>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="btn-group pull-right">
-				<button class="btn btn-danger" onclick="deleteAll();" > 批量删除 <i class="fa fa-times"></i></button>
-			</div>
-		</div>
-	</div>
+<!-- END PAGE TOOLS-->
+
+
+<!-- BEGIN PAGE TABLE-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-speech  font-blue-hoki"></i>
+            <span class="caption-subject font-blue-hoki">数据表</span>
+            <span class="caption-helper">点击右侧可以刷新或者全屏</span>
+        </div>
+
+        <div class="actions">
+            <a class="btn btn-circle btn-icon-only btn-default " href="javascript:loadHash();" title="刷新"><i
+                    class="fa fa-refresh"></i></a>
+            <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
+               title="全屏"></a>
+        </div>
+        <div id="paginator" style="padding-right: 20px;"></div>
+    </div>
+    <div class="portlet-body">
+
+        <div class="table-toolbar">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="btn-group">
+                        <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
+                            <i class="fa  fa-refresh fa-spin "></i>返回
+                        </a>
+                        <a href="#module=power/add" class="btn green">
+                            添加 <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-danger" onclick="tools.deleteByIds('power');"> 批量删除 <i
+                                class="fa fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table style="width: 100%;" class="table table-striped table-bordered" id="table">
+            <thead>
+            <tr>
+                <th class="table-checkbox">
+                    <input type="checkbox" class="group-checkable"/>
+                </th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>
+                    手机
+                </th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="item" items="${pageInfo.list}" varStatus="status">
+                <tr>
+                    <td class="center"><input type="checkbox" class="checkboxes" value="${item.id}"/></td>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td>${item.phone}</td>
+
+                    <td>
+                        <a href="javascript:void(0);" onclick="tools.del('admin','${item.id}')">删除</a>
+                        <a href="#module=/admin/edit&id=${item.id}">查看\编辑</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
-<table class="table table-striped table-bordered table-hover" id="dataTable">
-<thead>
-<tr>
-	<th class="table-checkbox">
-		<input type="checkbox" class="group-checkable" />
-	</th>
-	<th>
-		 编号
-	</th>
-	<th >
-		 用户名
-	</th>
-	<th >
-		 姓名
-	</th>
-	<th>
-		 联系方式
-	</th>
-	<th>
-		 授权
-	</th>
-	<th>
-		 查看/编辑
-	</th>
-</tr>
-</thead>
-<tbody>
-<s:iterator value="list">
-	<tr class="odd gradeX">
-		<td class="center"><input type="checkbox" class="checkboxes" value="${id }"/></td>
-		<td class="center"><s:property value="id"/></td>
-		<td class="center">
-		<s:property value="username"/>
-		</td>
-		<td class="center">
-		<a  style="color: blue;" href="javascript:void(0);"><s:property value="name"/></a>
-		</td>
-		<td class="center">${phone } </td>
-		<td class="center">
-			<a style="color: green;"  href="javascript:changeRole('${account.id}');"> 授权</a>
-		</td>
-		<td class="center">
-			<a style="color: green;"  href="#module=admin/edit&action=find_admin&id=${id }">查看/编辑</a>
-		</td>
-	</tr>
-</s:iterator>
+<!-- END PAGE TABLE-->
 
-</tbody>
-</table>
-<script src="/admin/js/listMethod.js"></script>
-<script type="text/javascript">
+<!-- BEGIN PAGE JAVASCRIPT-->
+<script src="/static/js/initList.js"></script>
+<script>
 
+    // 分页插件参数
+    var pageParam = {
+        url: "/admin/list",
+        pageSize: ${pageInfo.pageSize},         //每页显示行数 默认10
+        currentPage: ${pageInfo.pageNum},   //当前页数
+        totalPages: ${pageInfo.pages},      //总页数
+        //numberOfPages: 5,                 //显示的页数
+    };
 
-function changeRole(id){
+    // 条件查询参数
+    var formParam = {
+        name: "${name}"
+    };
 
-	var div = $("<div style=\"height:450px;overflow: scroll;\">").load("/admin/findAll_role?id="+id+"&path=/admin/admin/chooseRole.jsp");
+    $(document).ready(function () {
 
-	art.dialog("选择此用户拥有的角色 (请打钩并确定)",div,function(){
-		return saveSelected();
-	});
-}
+        initList();
 
-function deleteAll(){
-	var ids = "";
-	$('#dataTable').find(".checkboxes").each(function(){
-		var isCheck = $(this).is(":checked");
-		if(isCheck){
-			ids+=","+$(this).val();
-		}
-	});
-	ids = ids.substring(1);
-	art.confirm("确定删除选中信息么？",function(){
-		tools.action("/admin/deleteByIds_admin",{"ids":ids},function(data){
-			if(data.success){
-				tools.tip("删除成功。",null,function(){
-					loadHash();
-				});
-			} 
-		});
-	});
-}
+    });
+
+    function tableSearch() {
+
+        var param = tools.formParams("tableParams");
+        var url = "/admin/list/1";
+
+        for (var paramKey in param) {
+            url += "&" + paramKey;
+            url += "=" + param[paramKey];
+        }
+
+        window.location.hash = "#module=" + url;
+    }
+    ;
+
+    //绑定回车事件
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            tableSearch()
+        }
+    });
 </script>
+<!-- END PAGE JAVASCRIPT-->
