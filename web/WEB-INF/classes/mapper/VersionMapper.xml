@@ -1,34 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mapper.VersionMapper" >
-  <resultMap id="BaseResultMap" type="com.elangzhi.ssm.model.Version" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="code" property="code" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="set_time" property="setTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.elangzhi.ssm.model.Version" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, code, `name`, url, set_time
-  </sql>
-  <sql id="Blob_Column_List" >
-    content
-  </sql>
+<mapper namespace="VersionMapper" >
+
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    select
+    id, code, `name`, url, set_time,content
     from t_version
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_version
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.elangzhi.ssm.model.Version" >
     insert into t_version (id, code, `name`, 
       url, set_time, content
@@ -37,49 +23,7 @@
       #{url,jdbcType=VARCHAR}, #{setTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elangzhi.ssm.model.Version" >
-    insert into t_version
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="code != null" >
-        code,
-      </if>
-      <if test="name != null" >
-        `name`,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-      <if test="setTime != null" >
-        set_time,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="setTime != null" >
-        #{setTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.Version" >
     update t_version
     <set >
@@ -101,21 +45,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.elangzhi.ssm.model.Version" >
-    update t_version
-    set code = #{code,jdbcType=INTEGER},
-      `name` = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      set_time = #{setTime,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.Version" >
-    update t_version
-    set code = #{code,jdbcType=INTEGER},
-      `name` = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      set_time = #{setTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+    <select id="list" resultType="role">
+        select * from t_role
+        where 1=1
+        <if test="name != null" >
+            `name` = #{name}
+        </if>
+    </select>
+
 </mapper>

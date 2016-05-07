@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mapper.CityMapper" >
+<mapper namespace="CityMapper" >
 
- <!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
--->
-  <resultMap id="BaseResultMap" type="com.elangzhi.ssm.model.City" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="py" property="py" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="special" property="special" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, parent_id, `name`, py, code, `type`, special
-  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
+    select
+    id, parent_id, `name`, py, code, `type`, special
     from t_city
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -34,56 +21,8 @@
       #{py,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{special,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elangzhi.ssm.model.City" >
-    insert into t_city
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="parentId != null" >
-        parent_id,
-      </if>
-      <if test="name != null" >
-        `name`,
-      </if>
-      <if test="py != null" >
-        py,
-      </if>
-      <if test="code != null" >
-        code,
-      </if>
-      <if test="type != null" >
-        `type`,
-      </if>
-      <if test="special != null" >
-        special,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="py != null" >
-        #{py,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="special != null" >
-        #{special,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.City" >
+
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.City" >
     update t_city
     <set >
       <if test="parentId != null" >
@@ -107,14 +46,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.City" >
-    update t_city
-    set parent_id = #{parentId,jdbcType=BIGINT},
-      `name` = #{name,jdbcType=VARCHAR},
-      py = #{py,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
-      `type` = #{type,jdbcType=INTEGER},
-      special = #{special,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+  <select id="list">
+    select * from t_city where 1=1
+  </select>
 </mapper>

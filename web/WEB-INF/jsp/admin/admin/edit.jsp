@@ -17,9 +17,9 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-qq"></i>
-						<input type="hidden" name="data.id" value="${data.id }">
-						<input type="hidden" name="data.head" value="${data.head }">
-						<input type="text" class="form-control" name="data.name" value="${data.name }" placeholder="用户姓名">
+						<input type="hidden" name="id" value="${data.id }">
+						<input type="hidden" name="head" value="${data.head }">
+						<input type="text" class="form-control" name="name" value="${data.name }" placeholder="用户姓名">
 					</div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-hdd-o"></i>
-						<input type="text" class="form-control" name="data.email" value="${data.email }"  placeholder="邮箱">
+						<input type="text" class="form-control" name="email" value="${data.email }"  placeholder="邮箱">
 					</div>
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-mobile-phone "></i>
-						<input type="text" class="form-control" name="data.phone" value="${data.phone }"  placeholder="电话">
+						<input type="text" class="form-control" name="phone" value="${data.phone }"  placeholder="电话">
 					</div>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-home"></i>
-						<input type="text" class="form-control" name="data.address" value="${data.address }"  placeholder="用户地址">
+						<input type="text" class="form-control" name="address" value="${data.address }"  placeholder="用户地址">
 					</div>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-smile-o"></i>
-						<input type="text" class="form-control" name="data.idCard" value="${data.idCard }"  placeholder="身份证">
+						<input type="text" class="form-control" name="idCard" value="${data.idCard }"  placeholder="身份证">
 					</div>
 				</div>
 			</div>
@@ -91,9 +91,9 @@
 					<div class="radio-list"> 
 						<div class="icheck-inline">
 							<label>
-							<input type="radio" value="1" name="data.sex" ${data.sex==1?"checked":"" }  class="icheck" data-radio="iradio_flat-green"> 男 </label>
+							<input type="radio" value="1" name="sex" ${data.sex==1?"checked":"" }  class="icheck" data-radio="iradio_flat-green"> 男 </label>
 							<label>
-							<input type="radio" value="0" name="data.sex" ${data.sex==0?"checked":"" }  class="icheck" data-radio="iradio_flat-green"> 女 </label>
+							<input type="radio" value="0" name="sex" ${data.sex==0?"checked":"" }  class="icheck" data-radio="iradio_flat-green"> 女 </label>
 						</div>
 					</div>
 				</div>
@@ -116,17 +116,25 @@
 </div>
 <script>
 function edit(){
+
 	var param = tools.formParams("editForm");
-	tools.action("/admin/update_admin",param,function(data){
-		if(data.success){
-			tools.tip("修改成功！",null,function(){
-				history.go(-1);
-			});
-		}else{
-			var _case = {1:"修改失败，请联系管理员。"};
-			tools.errorTip(_case, data.code);
-		}
-	});
+
+	if(param["name"] == "" || param["name"] == null){
+		tools.tip("请输入姓名");
+		return null;
+	}
+	if(param["userName"] == "" || param["userName"] == null){
+		tools.tip("请输入用户名");
+		return null;
+	}
+	if(param["password"] == "" || param["password"] == null){
+		tools.tip("请输入密码");
+		return null;
+	}
+
+	$("input[name='password']").val($.md5(param["password"]));
+	tools.edit("admin");
+	var param = tools.formParams("editForm");
 }
 
 $(document).ready(function(){

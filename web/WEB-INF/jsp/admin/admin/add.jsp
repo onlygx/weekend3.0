@@ -134,9 +134,11 @@ function save(){
 		tools.tip("请输入密码");
 		return null;
 	}
+
     $("input[name='password']").val($.md5(param["password"]));
 
     tools.save("admin");
+
     $("input[name='password']").val("");
 }
 

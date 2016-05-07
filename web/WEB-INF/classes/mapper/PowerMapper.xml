@@ -22,7 +22,7 @@
       #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
   </insert>
 
-  <update id="updateByPrimaryKey" >
+  <update id="updateByPrimaryKey">
     update t_power
     set `name` = #{name,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},

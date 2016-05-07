@@ -21,7 +21,7 @@
                 <div class="form-group last">
                     <label class="col-md-3 control-label">父级权限</label>
                     <div class="col-md-5">
-                        已选择：<span id="powerNameShow" class="form-control-static" style="color:blue;">隐藏</span>
+                        已选择：<span id="powerNameShow" class="form-control-static" style="color:blue;">隐藏(编号：${data.parentId })</span>
                         <input type="hidden" name="parentId" value="${data.parentId }">
                         <a class="btn btn-info  pull-right" href="javascript:chooseParent();">选择父级权限</a>
                     </div>
@@ -103,7 +103,7 @@
             <div class="form-actions">
                 <div class="row">
                     <div class="col-md-offset-3 col-md-5">
-                        <button type="button" class="btn green" onclick="tools.edit();">
+                        <button type="button" class="btn green" onclick="tools.edit('power');">
                             <i class="fa  fa-cog fa-spin "></i>提交</button>
                         <button type="button" class="btn default" onclick="history.go(-1);">
                             <i class="fa  fa-refresh fa-spin "></i>返回</button>

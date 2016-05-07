@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="AccountRoleMapper" >
 
-  <select id="selectByPrimaryKey">
+  <select id="selectByPrimaryKey" parameterType="accountRole" resultType="accountRole">
     select 
     id, account_id, role_id
     from t_account_role
@@ -12,38 +12,14 @@
     delete from t_account_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.AccountRole" >
+  <insert id="insert" parameterType="accountRole" >
     insert into t_account_role (id, account_id, role_id
       )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elangzhi.ssm.model.AccountRole" >
-    insert into t_account_role
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="accountId != null" >
-        account_id,
-      </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.AccountRole" >
+
+  <update id="updateByPrimaryKey" parameterType="accountRole" >
     update t_account_role
     <set >
       <if test="accountId != null" >
@@ -55,10 +31,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.AccountRole" >
-    update t_account_role
-    set account_id = #{accountId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+  <select id="list" resultType="accountRole" parameterType="pd">
+    select * from t_account_role
+  </select>
+
 </mapper>

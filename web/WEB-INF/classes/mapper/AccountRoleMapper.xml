@@ -18,32 +18,8 @@
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.elangzhi.ssm.model.AccountRole" >
-    insert into t_account_role
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="accountId != null" >
-        account_id,
-      </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.AccountRole" >
+
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.AccountRole" >
     update t_account_role
     <set >
       <if test="accountId != null" >
@@ -55,10 +31,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.AccountRole" >
-    update t_account_role
-    set account_id = #{accountId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+  <select id="list" resultType="com.elangzhi.ssm.model.AccountRole">
+    select * from t_account_role
+  </select>
+
 </mapper>

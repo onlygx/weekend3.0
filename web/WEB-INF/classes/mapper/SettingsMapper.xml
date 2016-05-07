@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mapper.SettingsMapper" >
-  <resultMap id="BaseResultMap" type="com.elangzhi.ssm.model.Settings" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="value" property="value" jdbcType="VARCHAR" />
-    <result column="account_id" property="accountId" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, `name`, `value`, account_id, `type`
-  </sql>
+<mapper namespace="SettingsMapper" >
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+    id, `name`, `value`, account_id, `type`
     from t_settings
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -27,44 +19,8 @@
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
       #{accountId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.elangzhi.ssm.model.Settings" >
-    insert into t_settings
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        `name`,
-      </if>
-      <if test="value != null" >
-        `value`,
-      </if>
-      <if test="accountId != null" >
-        account_id,
-      </if>
-      <if test="type != null" >
-        `type`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null" >
-        #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.Settings" >
+
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.Settings" >
     update t_settings
     <set >
       <if test="name != null" >
@@ -82,12 +38,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.Settings" >
-    update t_settings
-    set `name` = #{name,jdbcType=VARCHAR},
-      `value` = #{value,jdbcType=VARCHAR},
-      account_id = #{accountId,jdbcType=BIGINT},
-      `type` = #{type,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+  <select id="list">
+    select * from t_settings
+  </select>
 </mapper>

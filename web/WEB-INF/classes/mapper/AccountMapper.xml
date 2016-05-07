@@ -2,10 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="AccountMapper" >
 
-  <select id="findByUserName" parameterType="account" resultType="account" >
+  <select id="findByUserName" resultType="account" parameterType="account">
     select *
     from t_account
     where user_name = #{userName}
   </select>
+
+  <select id="selectByPrimaryKey" resultType="account" parameterType="java.lang.Long" >
+    select
+    id, user_name, `password`, `type`, `status`, info_id, qq_id, sina_id
+    from t_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="account" >
+    insert into t_account (id, user_name, password,`type`,status,info_id,qq_id,sina_id)
+    values ( #{id},#{userName},#{password},#{type},#{status},#{infoId},#{qqId},#{sinaId})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="account" >
+    update t_account
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="infoId != null" >
+        info_id = #{infoId,jdbcType=BIGINT},
+      </if>
+      <if test="qqId != null" >
+        qq_id = #{qqId,jdbcType=VARCHAR},
+      </if>
+      <if test="sinaId != null" >
+        sina_id = #{sinaId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteByPrimaryKey">
+        delete from t_account where id = #{id}
+  </delete>
+
+    <select id="list">
+        select * from t_account
+    </select>
 
 </mapper>
