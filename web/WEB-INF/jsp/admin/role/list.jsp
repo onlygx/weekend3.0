@@ -1,4 +1,5 @@
 <%--
+  列表
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2016/5/3 0003
@@ -10,7 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
 <h3 class="page-title">
-    管理员列表
+    角色列表
 </h3>
 <!-- BEGIN PAGE TOOLS-->
 <div class="portlet light bg-inverse">
@@ -24,7 +25,7 @@
             <a href="" class="collapse" data-original-title="" title=""> </a>
         </div>
         <div class="actions">
-            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch('admin');"><i class="icon-magnifier"></i> 搜索
+            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch('role');"><i class="icon-magnifier"></i> 搜索
             </button>
             <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
                title=""></a>
@@ -74,14 +75,14 @@
                         <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
                             <i class="fa  fa-refresh fa-spin "></i>返回
                         </a>
-                        <a href="#module=power/add" class="btn green">
+                        <a href="#module=role/add" class="btn green">
                             添加 <i class="fa fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-danger" onclick="tools.deleteByIds('power');"> 批量删除 <i
+                        <button class="btn btn-danger" onclick="tools.deleteByIds('role');"> 批量删除 <i
                                 class="fa fa-times"></i></button>
                     </div>
                 </div>
@@ -94,11 +95,8 @@
                     <input type="checkbox" class="group-checkable"/>
                 </th>
                 <th>编号</th>
-                <th>姓名</th>
-                <th>邮箱</th>
-                <th>
-                    手机
-                </th>
+                <th>名称</th>
+                <th>备注</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -108,12 +106,10 @@
                     <td class="center"><input type="checkbox" class="checkboxes" value="${item.id}"/></td>
                     <td>${item.id}</td>
                     <td>${item.name}</td>
-                    <td>${item.email}</td>
-                    <td>${item.phone}</td>
-
+                    <td>${item.intro}</td>
                     <td>
-                        <a href="javascript:void(0);" onclick="tools.del('admin','${item.id}')">删除</a>
-                        <a href="#module=/admin/edit&id=${item.id}">查看\编辑</a>
+                        <a href="javascript:void(0);" onclick="tools.del('role','${item.id}')">删除</a>
+                        <a href="#module=/role/edit&id=${item.id}">查看\编辑</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -129,7 +125,7 @@
 
     // 分页插件参数
     var pageParam = {
-        url: "/admin/list",
+        url: "/role/list",
         pageSize: ${pageInfo.pageSize},         //每页显示行数 默认10
         currentPage: ${pageInfo.pageNum},   //当前页数
         totalPages: ${pageInfo.pages},      //总页数

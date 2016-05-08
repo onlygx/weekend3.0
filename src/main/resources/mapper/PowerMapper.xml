@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="PowerMapper" >
 
-  <select id="selectByPrimaryKey" resultType="com.elangzhi.ssm.model.Power" >
+  <select id="selectByPrimaryKey" resultType="power"  parameterType="power" >
     select *
     from t_power
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteByPrimaryKey"  >
+  <delete id="deleteByPrimaryKey"   parameterType="power" >
     delete from t_power
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" >
+  <insert id="insert" parameterType="power">
     insert into t_power (id, `name`, intro, 
       parent_id, `type`, url, 
       sort, icon)
@@ -22,7 +22,7 @@
       #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
   </insert>
 
-  <update id="updateByPrimaryKey">
+  <update id="updateByPrimaryKey" parameterType="power">
     update t_power
     set `name` = #{name,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},
@@ -34,7 +34,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="com.elangzhi.ssm.model.Power" >
+  <select id="list" resultType="power" parameterType="pd">
     select *
     from t_power
     where 1=1
@@ -44,6 +44,29 @@
       <if test="parentId != null">
         and parent_id = #{parentId}
       </if>
+    order by sort
   </select>
 
+  <select id="findByAccount" parameterType="account" resultType="power">
+        select distinct a.*
+        from t_power a
+        left join t_role_power b on a.id = b.power_id
+        where 1=1
+            and b.role_id in (
+                select c.role_id from t_account_role c where c.account_id = #{id}
+            )
+            and a.type = 0
+        order by a.sort
+  </select>
+
+    <select id="findByRole" parameterType="role" resultType="power">
+        select c.*,d.role_id belong
+        from t_power c
+        left join(
+            select a.id,b.role_id from t_power a
+            left join t_role_power b on a.id = b.power_id
+            where b.role_id = #{id}
+        ) d on c.id = d.id
+        order by c.sort
+     </select>
 </mapper>

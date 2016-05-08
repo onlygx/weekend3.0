@@ -9,7 +9,7 @@
     from t_city
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="city" >
     delete from t_city
     where id = #{id,jdbcType=BIGINT}
   </delete>

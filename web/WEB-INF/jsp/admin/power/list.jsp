@@ -24,7 +24,7 @@
             <a href="" class="collapse" data-original-title="" title=""> </a>
         </div>
         <div class="actions">
-            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch();"><i class="icon-magnifier"></i> 搜索
+            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch('power');"><i class="icon-magnifier"></i> 搜索
             </button>
             <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
                title=""></a>
@@ -165,25 +165,5 @@
 
     });
 
-    function tableSearch() {
-
-        var param = tools.formParams("tableParams");
-        var url = "/power/list/1";
-
-        for (var paramKey in param) {
-            url += "&" + paramKey;
-            url += "=" + param[paramKey];
-        }
-
-        window.location.hash = "#module=" + url;
-    }
-    ;
-
-    //绑定回车事件
-    $(document).keydown(function (event) {
-        if (event.keyCode == 13) {
-            tableSearch()
-        }
-    });
 </script>
 <!-- END PAGE JAVASCRIPT-->

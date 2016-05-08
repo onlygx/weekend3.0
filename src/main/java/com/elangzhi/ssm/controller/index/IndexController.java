@@ -1,6 +1,4 @@
 package com.elangzhi.ssm.controller.index;
-
-import com.elangzhi.ssm.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 首页控制
  * Created by GaoXiang on 2015/10/22 0022.
  */
 

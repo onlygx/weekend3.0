@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="AdminMapper" >
 
-  <select id="selectByPrimaryKey" resultType="admin" parameterType="admin">
+  <select id="selectByPrimaryKey" resultType="admin"  parameterType="admin" >
     select
      id, `name`, email, phone, address, sex, id_card, set_time, head
     from t_admin
@@ -20,7 +20,7 @@
       )
   </insert>
 
-    <delete id="deleteByPrimaryKey">
+    <delete id="deleteByPrimaryKey" parameterType="admin" >
         delete from t_admin where id = #{id}
     </delete>
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="RolePowerMapper" >
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="rolePower" parameterType="rolePower" >
     select 
     id, role_id, power_id
     from t_role_power
@@ -14,14 +14,14 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.RolePower" >
+  <insert id="insert" parameterType="rolePower" >
     insert into t_role_power (id, role_id, power_id
       )
     values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.RolePower" >
+  <update id="updateByPrimaryKey" parameterType="rolePower" >
     update t_role_power
     <set >
       <if test="roleId != null" >
@@ -34,7 +34,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list">
+  <select id="list" resultType="rolePower" parameterType="pd">
     select * from t_role_power
   </select>
 </mapper>

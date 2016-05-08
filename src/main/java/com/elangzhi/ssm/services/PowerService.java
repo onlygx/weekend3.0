@@ -1,7 +1,7 @@
 package com.elangzhi.ssm.services;
 
-import com.elangzhi.ssm.dao.LzDao;
 import com.elangzhi.ssm.dao.PowerDao;
+import com.elangzhi.ssm.model.Account;
 import com.elangzhi.ssm.model.Power;
 import com.elangzhi.ssm.tools.PageData;
 import com.github.pagehelper.PageInfo;
@@ -22,19 +22,37 @@ public class PowerService extends BaseService<Power> {
 
 
     /**
-     * 获取
+     * 获取列表
      * @param pd
      * @return
      */
-    public PageInfo<Power> list(PageData pd) {
+    public PageInfo<Power> list(PageData pd) throws Exception {
         return super.list(pd, Power.class);
+    }
+
+    /**
+     * 获取指定用户的权限列表
+     * @param accountId
+     * @return
+     */
+    public List<Power> findByAccount(Account account){
+
+        List<Power> p = powerDao.findByAccount(account).getList();
+        List<Power> menu = searchListByParentId(p,0l);
+        for(Power pp : menu){
+            pp.setPowers(searchListByParentId(p,pp.getId()));
+            for(Power ppp : pp.getPowers()){
+                ppp.setPowers(searchListByParentId(p,ppp.getId()));
+            }
+        }
+        return menu;
     }
 
     /**
      * 分级获取权限
      * @return
      */
-    public List<Power> listAll() {
+    public List<Power> listAll() throws Exception {
 
         List<Power> p = list(new PageData(),Power.class).getList();
         List<Power> menu = searchListByParentId(p,0l);

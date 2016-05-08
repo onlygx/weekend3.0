@@ -3,7 +3,7 @@
 <mapper namespace="SettingsMapper" >
 
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="settings" parameterType="settings" >
     select 
     id, `name`, `value`, account_id, `type`
     from t_settings
@@ -13,14 +13,14 @@
     delete from t_settings
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.Settings" >
+  <insert id="insert" parameterType="settings" >
     insert into t_settings (id, `name`, `value`, 
       account_id, `type`)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
       #{accountId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.Settings" >
+  <update id="updateByPrimaryKey" parameterType="settings" >
     update t_settings
     <set >
       <if test="name != null" >
@@ -39,7 +39,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list">
+  <select id="list" resultType="settings" parameterType="pd">
     select * from t_settings
   </select>
 </mapper>

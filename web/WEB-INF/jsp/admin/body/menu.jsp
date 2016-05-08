@@ -35,44 +35,44 @@
             </c:if>
 
 
-			<%--<s:iterator value="#session.powerList">
+			<c:forEach var="item" items="${powerList}" varStatus="status">
 				<li>
-					<a href="${url }">
-					<i class="${icon }"></i>
-					<span class="title" title="${intro }">${name }</span>
-					<s:if test="powers.size() > 0">
+					<a href="${item.url }">
+					<i class="${item.icon }"></i>
+					<span class="title" title="${item.intro }">${item.name }</span>
+					<c:if test="${item.powers.size() > 0}">
 						<span class="arrow "></span>
-					</s:if>
+					</c:if>
 					</a>
-					<s:if test="powers.size() > 0">
+					<c:if test="${item.powers.size() > 0}">
 						<ul class="sub-menu">
-							<s:iterator value="powers">
+							<c:forEach var="item2" items="${item.powers}" varStatus="status2">
 								<li>
-									<a href="${url }">
-									<i class="${icon }"></i>
-									<span class="title" title="${intro }">${name }</span>
-									<s:if test="powers.size() > 0">
+									<a href="${item2.url }">
+									<i class="${item2.icon }"></i>
+									<span class="title" title="${item2.intro }">${item2.name }</span>
+									<c:if test="${item2.powers.size() > 0}">
 										<span class="arrow "></span>
-									</s:if>
+									</c:if>
 									</a>
-									<s:if test="powers.size() > 0">
+									<c:if test="${item2.powers.size() > 0}">
 										<ul class="sub-menu">
-											<s:iterator value="powers">
+											<c:forEach var="item3" items="${item2.powers}" varStatus="status3" >
 												<li>
-													<a href="${url }">
-													<i class="${icon }"></i>
-													<span class="title" title="${intro }">${name }</span>
+													<a href="${item3.url }">
+													<i class="${item3.icon }"></i>
+													<span class="title" title="${item3.intro }">${item3.name }</span>
 													</a>
 												</li>
-											</s:iterator>
+											</c:forEach>
 										</ul>
-									</s:if>
+									</c:if>
 								</li>
-							</s:iterator>
+							</c:forEach>
 						</ul>
-					</s:if>
+					</c:if>
 				</li>
-			</s:iterator>--%>
+			</c:forEach>
 			
 			<li class="open">
 				<a href="javascript:;">

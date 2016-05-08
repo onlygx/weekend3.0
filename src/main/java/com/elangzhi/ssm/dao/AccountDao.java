@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AccountDao extends LzDao<Account> {
 
-    public Account findByUserName(Account account){
-        return getSqlSessionTemplate().selectOne("AccountMapper.findByUserName", account);
+    public Account findByUserName(Account account) throws Exception {
+
+        return selectOne("AccountMapper.findByUserName", account);
+
     }
 }

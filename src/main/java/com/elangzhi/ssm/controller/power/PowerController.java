@@ -1,4 +1,4 @@
-package com.elangzhi.ssm.controller.admin;
+package com.elangzhi.ssm.controller.power;
 
 import com.elangzhi.ssm.controller.AdminBaseController;
 import com.elangzhi.ssm.controller.json.Tip;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
+ * 权限管理
  * Created by GaoXiang on 2016/2/29 0029.
  */
 
@@ -49,7 +50,7 @@ public class PowerController extends AdminBaseController<Power> {
 
 
     @RequestMapping("/listAll")
-    public ModelAndView listAll(ModelMap model){
+    public ModelAndView listAll(ModelMap model) throws Exception {
         List<Power> powerList = powerService.listAll();
         model.put("powerList",powerList);
         return new ModelAndView("admin/power/chooseParent",model);
@@ -57,7 +58,7 @@ public class PowerController extends AdminBaseController<Power> {
 
     @RequestMapping("/countByParentId")
     @ResponseBody
-    public Integer countByParentId(HttpServletRequest request){
+    public Integer countByParentId(HttpServletRequest request) throws Exception {
         PageData pd = new PageData(request);
         PageInfo<Power> pageInfo = powerService.list(pd);
         return pageInfo.getList().size();

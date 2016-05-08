@@ -21,7 +21,6 @@
 						<input type="text" class="form-control" name="name" placeholder="用户姓名">
 						<input type="hidden" name="head" value="/images/account/defaultHead.jpg">
 						<input type="hidden" name="id" value="${longId}">
-						<input type="hidden" name="account.id" value="${longId+1}">
 					</div>
 				</div>
 			</div>

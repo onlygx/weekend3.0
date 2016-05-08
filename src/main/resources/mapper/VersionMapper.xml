@@ -3,7 +3,7 @@
 <mapper namespace="VersionMapper" >
 
 
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="version" parameterType="version" >
     select
     id, code, `name`, url, set_time,content
     from t_version
@@ -15,7 +15,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.Version" >
+  <insert id="insert" parameterType="version" >
     insert into t_version (id, code, `name`, 
       url, set_time, content
       )
@@ -24,7 +24,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.ssm.model.Version" >
+  <update id="updateByPrimaryKeySelective" parameterType="version" >
     update t_version
     <set >
       <if test="code != null" >
@@ -46,8 +46,8 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <select id="list" resultType="role">
-        select * from t_role
+    <select id="list" resultType="version" parameterType="pd">
+        select * from t_version
         where 1=1
         <if test="name != null" >
             `name` = #{name}

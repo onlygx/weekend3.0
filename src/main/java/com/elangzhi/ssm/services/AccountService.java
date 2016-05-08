@@ -20,9 +20,12 @@ public class AccountService  extends BaseService<Account>{
      * @param account
      * @return
      */
-    public Account findByUserName(Account account){
-        return accountDao.findByUserName(account);
+    public Account findByUserName(Account account) {
+        try {
+            return accountDao.findByUserName(account);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
-
 }

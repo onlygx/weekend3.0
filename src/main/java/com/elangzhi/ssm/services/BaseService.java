@@ -25,15 +25,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer save(T t) {
+    public Integer save(T t) throws Exception {
         String statement = t.getClass().getSimpleName()+"Mapper.insert";
-        try {
-            return lzDao.save(statement,t);
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 保存失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.save(statement,t);
     }
 
 
@@ -43,16 +37,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public T selectOne(T t){
+    public T selectOne(T t) throws Exception {
         String statement = t.getClass().getSimpleName()+"Mapper.selectByPrimaryKey";
-        try {
-
-            return lzDao.selectOne(statement,t);
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 查找失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.selectOne(statement,t);
     }
 
 
@@ -62,15 +49,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer update(T t) {
+    public Integer update(T t) throws Exception {
         String statement = t.getClass().getSimpleName()+"Mapper.updateByPrimaryKey";
-        try {
-            return lzDao.update(statement,t);
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 修改失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.update(statement,t);
     }
 
     /**
@@ -79,15 +60,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public Integer delete(T t) {
+    public Integer delete(T t) throws Exception {
         String statement = t.getClass().getSimpleName()+"Mapper.deleteByPrimaryKey";
-        try {
-            return lzDao.delete(statement,t);
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 删除失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.delete(statement,t);
     }
 
 
@@ -97,15 +72,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo<T> list(PageData pd, Class clazz) {
+    public PageInfo<T> list(PageData pd, Class clazz) throws Exception {
         String statement = clazz.getSimpleName()+"Mapper.list";
-        try {
-            return lzDao.list(statement,pd);
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 获取列表失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.list(statement,pd);
     }
 
     /**
@@ -114,15 +83,9 @@ public class BaseService<T> {
      * @return
      * @throws Exception
      */
-    public PageInfo<T> list(PageData pd,Class clazz,int page,int size) {
+    public PageInfo<T> list(PageData pd,Class clazz,int page,int size) throws Exception {
         String statement = clazz.getSimpleName()+"Mapper.list";
-        try {
-            return lzDao.list(statement,pd,new RowBounds(page,size));
-        } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(this.getClass()+ " 分页获取列表失败！错误原因如下：");
-            e.printStackTrace();
-            return null;
-        }
+        return lzDao.list(statement,pd,new RowBounds(page,size));
     }
 
 

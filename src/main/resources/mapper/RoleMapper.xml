@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="RoleMapper" >
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="role" parameterType="role" >
     select 
     id, `name`, intro, set_time, account_id
     from t_role
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="role" >
     delete from t_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.Role" >
+  <insert id="insert" parameterType="role" >
     insert into t_role (id, `name`, intro,
       set_time, account_id)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
       #{setTime,jdbcType=TIMESTAMP}, #{accountId,jdbcType=BIGINT})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.Role" >
+  <update id="updateByPrimaryKey" parameterType="role" >
     update t_role
     <set >
       <if test="name != null" >
@@ -38,7 +38,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list">
-    select * from role where 1=1
+  <select id="list" resultType="role" parameterType="pd">
+    select * from t_role where 1=1
+    <if test="name != null" >
+     and `name` like CONCAT('%',#{name},'%')
+    </if>
   </select>
 </mapper>

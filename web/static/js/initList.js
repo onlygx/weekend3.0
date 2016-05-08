@@ -5,8 +5,7 @@ function initList(){
     // 初始化分页插件
     initPaginator();
 
-
-
+    //全选
     $(".group-checkable").click(function(){
         var group = $(this);
         $('#table').find(".checkboxes").each(function(){
@@ -16,11 +15,13 @@ function initList(){
         });
     });
 
+    //选择一行
     $(".checkboxes").click(function(){
         var isCheck = $(this).is(":checked");
         isCheck ? $(this).parents('tr').addClass("active") : $(this).parents('tr').removeClass("active");
     });
 
+    //点击每一行空白处
     $("#table tr").click(function(){
         var checkbox = $(this).find(".checkboxes").eq(0);
         var isCheck = checkbox.is(":checked");
@@ -35,7 +36,9 @@ function initList(){
     });
 }
 
-
+/**
+ * 初始化分页插件
+ */
 function initPaginator(){
 
     var option = getPaginatorOption(pageParam,formParam);
@@ -44,7 +47,21 @@ function initPaginator(){
 
 }
 
-
+/**
+ * 获取分页插件参数
+ * @param _param
+ * @param _formParam
+ * @returns
+ * {
+ *      {
+ *      currentPage: *,
+ *      totalPages: *,
+ *      numberOfPages: *,
+ *      itemTexts: options.itemTexts,
+ *      onPageClicked: options.onPageClicked
+ *      }
+ * }
+ */
 function getPaginatorOption(_param,_formParam){
 
     var pageSize = _param.pageSize == undefined ? 10 : _param.pageSize;                     //每页显示行数 默认10
@@ -91,3 +108,24 @@ function getPaginatorOption(_param,_formParam){
     };
     return options;
 }
+
+//搜索按钮
+function tableSearch(_module) {
+
+    var param = tools.formParams("tableParams");
+    var url = "/"+_module+"/list/1";
+
+    for (var paramKey in param) {
+        url += "&" + paramKey;
+        url += "=" + param[paramKey];
+    }
+
+    window.location.hash = "#module=" + url;
+};
+
+//绑定回车事件
+$(document).keydown(function (event) {
+    if (event.keyCode == 13) {
+        tableSearch()
+    }
+});

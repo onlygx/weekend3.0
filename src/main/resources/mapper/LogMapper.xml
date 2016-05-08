@@ -3,16 +3,16 @@
 <mapper namespace="LogMapper" >
 
 
-  <select id="selectByPrimaryKey" resultType="city" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="log" parameterType="log" >
     select id, content, `type`, set_time, account_id, `status`
     from t_log
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="log" >
     delete from t_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="city" >
+  <insert id="insert" parameterType="log" >
     insert into t_log (id, content, `type`, 
       set_time, account_id, `status`
       )
@@ -21,7 +21,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="city" >
+  <update id="updateByPrimaryKey" parameterType="log" >
     update t_log
     <set >
       <if test="content != null" >
@@ -43,8 +43,8 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" parameterType="pd" resultType="city">
-    select * from t_city where 1=1
+  <select id="list" parameterType="pd" resultType="log">
+    select * from t_log where 1=1
   </select>
 
 </mapper>

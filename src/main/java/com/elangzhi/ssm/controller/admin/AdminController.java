@@ -57,7 +57,7 @@ public class AdminController extends AdminBaseController<Admin> {
      * 3，账号已存在
      */
     @Override
-    public Tip save(Admin admin) {
+    public Tip save(Admin admin) throws Exception {
 
         Account account = new Account();
         account.setId(admin.getId()+1);

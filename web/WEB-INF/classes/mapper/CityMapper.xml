@@ -3,17 +3,17 @@
 <mapper namespace="CityMapper" >
 
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultType="city" parameterType="city" >
     select
     id, parent_id, `name`, py, code, `type`, special
     from t_city
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="city" >
     delete from t_city
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.elangzhi.ssm.model.City" >
+  <insert id="insert" parameterType="city" >
     insert into t_city (id, parent_id, `name`, 
       py, code, `type`, special
       )
@@ -22,7 +22,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.elangzhi.ssm.model.City" >
+  <update id="updateByPrimaryKey" parameterType="city" >
     update t_city
     <set >
       <if test="parentId != null" >
@@ -47,7 +47,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list">
+  <select id="list" resultType="city" parameterType="pd">
     select * from t_city where 1=1
   </select>
 </mapper>

@@ -50,7 +50,7 @@ public class AdminBaseController<T> {
      * @return
      */
     @RequestMapping(value="/edit")
-    public ModelAndView edit(T t,ModelMap model){
+    public ModelAndView edit(T t,ModelMap model) throws Exception {
         model.put("data",baseService.selectOne(t));
         return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/edit",model);
     }
@@ -62,11 +62,12 @@ public class AdminBaseController<T> {
      */
     @RequestMapping(value="/save")
     @ResponseBody
-    public Tip save(T t){
+    public Tip save(T t) throws Exception {
         try {
             baseService.save(t);
             return new Tip();
         } catch (Exception e) {
+            logger.getLogger(this.getClass()).error(this.getClass()+ " 保存失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -84,6 +85,7 @@ public class AdminBaseController<T> {
             baseService.update(t);
             return new Tip();
         } catch (Exception e) {
+            logger.getLogger(this.getClass()).error(this.getClass()+ " 修改失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -101,6 +103,7 @@ public class AdminBaseController<T> {
             baseService.delete(t);
             return new Tip();
         } catch (Exception e) {
+            logger.getLogger(this.getClass()).error(this.getClass()+ " 删除失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -115,7 +118,7 @@ public class AdminBaseController<T> {
      */
     @RequestMapping(value="/find")
     @ResponseBody
-	public T find(T t){
+	public T find(T t) throws Exception {
 		return baseService.selectOne(t);
 	}
 
@@ -126,7 +129,7 @@ public class AdminBaseController<T> {
      * @return
      */
     @RequestMapping(value="/list")
-    public ModelAndView list(HttpServletRequest request,T clazz) {
+    public ModelAndView list(HttpServletRequest request,T clazz) throws Exception {
         PageData pd = new PageData(request);
         PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass());
         pd.put("pageInfo",pageInfo);
@@ -139,7 +142,7 @@ public class AdminBaseController<T> {
      * @return
      */
     @RequestMapping(value="/list/{page}")
-    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page) {
+    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page) throws Exception {
         PageData pd = new PageData(request);
         PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,10);
         pd.put("pageInfo",pageInfo);
@@ -152,7 +155,7 @@ public class AdminBaseController<T> {
      * @return
      */
     @RequestMapping(value="/list/{page}/{size}")
-    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page,@PathVariable int size) {
+    public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page,@PathVariable int size) throws Exception {
         PageData pd = new PageData(request);
         PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,size);
         pd.put("pageInfo",pageInfo);
