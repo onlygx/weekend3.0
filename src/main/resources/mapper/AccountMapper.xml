@@ -5,14 +5,37 @@
   <select id="findByUserName" resultType="account" parameterType="account" >
     select *
     from t_account
-    where user_name = #{userName}
+    where 1=1
+    and user_name = #{userName,jdbcType=VARCHAR}
+
   </select>
 
   <select id="selectByPrimaryKey" resultType="account" parameterType="account" >
     select
     id, user_name, `password`, `type`, `status`, info_id, qq_id, sina_id
     from t_account
-    where id = #{id,jdbcType=BIGINT}
+    where 1=1
+
+    <if test="id != null" >
+      and id = #{id,jdbcType=BIGINT}
+    </if>
+
+    <if test="userName != null" >
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+
+    <if test="infoId != null" >
+      and info_id = #{infoId,jdbcType=BIGINT}
+    </if>
+
+    <if test="qqId != null" >
+      and qq_id = #{qqId,jdbcType=VARCHAR}
+    </if>
+
+    <if test="sinaId != null" >
+      and sina_id = #{sinaId,jdbcType=VARCHAR}
+    </if>
+
   </select>
 
   <insert id="insert" parameterType="account" >

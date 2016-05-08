@@ -44,6 +44,7 @@
       <if test="parentId != null">
         and parent_id = #{parentId}
       </if>
+    order by sort
   </select>
 
   <select id="findByAccount" parameterType="account" resultType="power">
@@ -55,6 +56,7 @@
                 select c.role_id from t_account_role c where c.account_id = #{id}
             )
             and a.type = 0
+        order by a.sort
   </select>
 
     <select id="findByRole" parameterType="role" resultType="power">
@@ -65,5 +67,6 @@
             left join t_role_power b on a.id = b.power_id
             where b.role_id = #{id}
         ) d on c.id = d.id
+        order by c.sort
      </select>
 </mapper>

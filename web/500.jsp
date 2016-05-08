@@ -9,4 +9,6 @@
 	<p style="font-size: 16px;">
 		 服务器：<span style="color:blue;">500错误</span>
 	</p>
+
+    ${exception}
 </div>

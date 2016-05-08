@@ -74,14 +74,14 @@
                         <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
                             <i class="fa  fa-refresh fa-spin "></i>返回
                         </a>
-                        <a href="#module=power/add" class="btn green">
+                        <a href="#module=admin/add" class="btn green">
                             添加 <i class="fa fa-plus"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-danger" onclick="tools.deleteByIds('power');"> 批量删除 <i
+                        <button class="btn btn-danger" onclick="tools.deleteByIds('admin');"> 批量删除 <i
                                 class="fa fa-times"></i></button>
                     </div>
                 </div>

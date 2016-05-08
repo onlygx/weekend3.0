@@ -50,7 +50,7 @@ public class AdminBaseController<T> {
      * @return
      */
     @RequestMapping(value="/edit")
-    public ModelAndView edit(T t,ModelMap model) throws Exception {
+    public ModelAndView edit(ModelMap model,T t) throws Exception {
         model.put("data",baseService.selectOne(t));
         return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/edit",model);
     }
@@ -67,7 +67,7 @@ public class AdminBaseController<T> {
             baseService.save(t);
             return new Tip();
         } catch (Exception e) {
-            logger.getLogger(this.getClass()).error(this.getClass()+ " 保存失败！错误原因如下：");
+            logger.getLogger(t.getClass()).error(this.getClass()+ " 保存失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -80,12 +80,12 @@ public class AdminBaseController<T> {
      */
     @RequestMapping(value="/update")
     @ResponseBody
-    public Tip update(T t){
+    public Tip update(T t) throws Exception {
         try {
             baseService.update(t);
             return new Tip();
         } catch (Exception e) {
-            logger.getLogger(this.getClass()).error(this.getClass()+ " 修改失败！错误原因如下：");
+            logger.getLogger(t.getClass()).error(this.getClass()+ " 修改失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -103,7 +103,7 @@ public class AdminBaseController<T> {
             baseService.delete(t);
             return new Tip();
         } catch (Exception e) {
-            logger.getLogger(this.getClass()).error(this.getClass()+ " 删除失败！错误原因如下：");
+            logger.getLogger(t.getClass()).error(this.getClass()+ " 删除失败！错误原因如下：");
             e.printStackTrace();
             return new Tip(1);
         }
@@ -118,8 +118,9 @@ public class AdminBaseController<T> {
      */
     @RequestMapping(value="/find")
     @ResponseBody
-	public T find(T t) throws Exception {
-		return baseService.selectOne(t);
+	public ModelMap find(ModelMap model,T t) throws Exception {
+        model.put("data",baseService.selectOne(t));
+		return model;
 	}
 
 

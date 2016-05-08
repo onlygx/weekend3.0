@@ -3,48 +3,34 @@
 <div class="portlet light bg-inverse">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject font-red-sunglo bold uppercase">用户编辑</span>
-			<span class="caption-helper">用户名称和密码是必填项</span>
+			<span class="caption-subject font-red-sunglo bold uppercase">管理员编辑</span>
+			<span class="caption-helper">修改资料</span>
 		</div>
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
 	<form action="#" class="form-horizontal" id="editForm">
 		<div class="form-body">
-			
+
 			<div class="form-group frist">
-				<label class="col-md-3 control-label">用户姓名</label>
+				<label class="col-md-3 control-label">用户头像</label>
+				<div class="col-md-4">
+					<img src="${data.head }" style="max-width: 150px;">
+					<input type="hidden" name="head" value="${data.head }">
+				</div>
+			</div>
+
+			<div class="form-group frist">
+				<label class="col-md-3 control-label">昵称</label>
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-qq"></i>
 						<input type="hidden" name="id" value="${data.id }">
-						<input type="hidden" name="head" value="${data.head }">
-						<input type="text" class="form-control" name="name" value="${data.name }" placeholder="用户姓名">
+						<input type="text" class="form-control" name="name" value="${data.name }" placeholder="昵称">
 					</div>
 				</div>
 			</div>
-			
-			<div class="form-group last">
-				<label class="col-md-3 control-label">用户账号</label>
-				<div class="col-md-4">
-					<div class="input-icon">
-						<i class="fa fa-male"></i>
-						<input type="hidden" name="account.id" value="${account.id }">
-						<input type="text" class="form-control" name="account.username" value="${account.username }"  placeholder="用户账号">
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group last">
-				<label class="col-md-3 control-label">用户密码</label>
-				<div class="col-md-4">
-					<div class="input-icon">
-						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" name="account.password" value="${account.password }"  placeholder="用户密码">
-					</div>
-				</div>
-			</div>
-						
+
 			<div class="form-group last">
 				<label class="col-md-3 control-label">用户邮箱</label>
 				<div class="col-md-4">
@@ -103,7 +89,7 @@
 		<div class="form-actions">
 			<div class="row">
 				<div class="col-md-offset-3 col-md-5">
-					<button type="button" class="btn green" onclick="edit();">
+					<button type="button" class="btn green" onclick="tools.edit('admin');">
 					<i class="fa  fa-cog fa-spin "></i>提交</button>
 					<button type="button" class="btn default" onclick="history.go(-1);">
 					<i class="fa  fa-refresh fa-spin "></i>返回</button>
@@ -114,28 +100,9 @@
 	<!-- END FORM-->
 	</div>
 </div>
+
 <script>
-function edit(){
 
-	var param = tools.formParams("editForm");
-
-	if(param["name"] == "" || param["name"] == null){
-		tools.tip("请输入姓名");
-		return null;
-	}
-	if(param["userName"] == "" || param["userName"] == null){
-		tools.tip("请输入用户名");
-		return null;
-	}
-	if(param["password"] == "" || param["password"] == null){
-		tools.tip("请输入密码");
-		return null;
-	}
-
-	$("input[name='password']").val($.md5(param["password"]));
-	tools.edit("admin");
-	var param = tools.formParams("editForm");
-}
 
 $(document).ready(function(){
 	$(".icheck").iCheck({

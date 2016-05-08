@@ -1,5 +1,6 @@
 package com.elangzhi.ssm.controller.file;
 
+import com.elangzhi.ssm.controller.json.Tip;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * 文件上传、管理
@@ -19,29 +21,34 @@ import java.util.Date;
 @RequestMapping("/file")
 public class FileController {
 
-    @RequestMapping("/image")
+    @RequestMapping("/uploadTempImage")
     @ResponseBody
-    public ModelMap fileUpload(@RequestParam(value = "file") MultipartFile file,
-                          @RequestParam(value = "name") String name,
-                          ModelMap model,
-                          HttpServletRequest request) {
+    public Tip uploadTempImage(
+                            @RequestParam(value = "file") MultipartFile file,
+                            @RequestParam(value = "filename") String filename,
+                            ModelMap model,
+                            HttpServletRequest request) {
 
         if (file != null) {
             try {
                 //上传地址
-                String path = request.getSession().getServletContext().getRealPath("/upload/headimg/");
-                String fileName = file.getOriginalFilename();
-                file.transferTo(new File(path, fileName));
+                String url = "/upload/tempImg/"
+                            + System.currentTimeMillis()
+                            + "_headImg_"
+                        + (Math.abs(new Random().nextInt())%32000+10000)
+                        + filename.substring(filename.lastIndexOf("."));
+
+                String path = request.getServletContext().getRealPath(url);
+
+                file.transferTo(new File(path));
+
+                return new Tip(url);
             } catch (IOException e) {
                 e.printStackTrace();
+                return new Tip(2);
             }
         } else {
-            return null;
+            return new Tip(1);
         }
-
-        model.put("fileName", file.getOriginalFilename());
-        model.put("name", name);
-        model.put("date", new Date());
-        return model;
     }
 }

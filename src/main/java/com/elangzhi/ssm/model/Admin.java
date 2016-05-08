@@ -21,6 +21,17 @@ public class Admin extends Account {
 
     private String head;
 
+    // 自定义
+    private Long accountId;
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
     public Long getId() {
         return id;
     }

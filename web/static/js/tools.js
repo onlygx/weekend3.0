@@ -192,7 +192,7 @@ tools.save = function(_module){
         state = data.success;
         if(data.success){
             art.tip("提交成功", 500, function () {
-                loadHash();
+                history.go(-1);
             });
         }else{
             tools.tip("提交失败！错误代号："+data.code,1000,null,"danger");

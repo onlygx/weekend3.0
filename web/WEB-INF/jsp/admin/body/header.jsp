@@ -18,6 +18,7 @@
 		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
 		</a>
 		<!-- END RESPONSIVE MENU TOGGLER -->
+		<img src="/images/project/admin-gif.jpg" style="width: 60px;height: 60px;margin-top: 5px;" alt="logo" class="logo-default" >
 
 		<!-- BEGIN PAGE TOP -->
 		<div class="page-top">
@@ -35,13 +36,19 @@
 						</a>
 						<ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="#module=admin/edit&action=find_admin&id=${admin.id} ">
+                                <a href="#module=/admin/edit&id=${admin.id} ">
                                     <i class="icon-user"></i> 我的资料 </a>
                             </li>
+
                             <li>
-                                <a href="#module=admin/headimg">
+                                <a href="#module=admin/headimg&id=${admin.id}">
                                     <i class="icon-picture"></i> 我的头像 </a>
                             </li>
+
+							<li>
+								<a href="#module=account/edit&id=${account.id}">
+									<i class="icon-lock"></i> 密码修改 </a>
+							</li>
 
                             <li class="divider"> </li>
                             <li>

@@ -7,13 +7,17 @@ import com.elangzhi.ssm.model.Admin;
 import com.elangzhi.ssm.model.Power;
 import com.elangzhi.ssm.services.AccountService;
 import com.elangzhi.ssm.services.AdminService;
+import com.elangzhi.ssm.tools.PageData;
 import com.elangzhi.ssm.tools.UUIDFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +30,12 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController extends AdminBaseController<Admin> {
 
+    @RequestMapping(value="/headimg")
+    public ModelAndView headimg(Admin admin,ModelMap model) throws Exception {
+        admin = adminService.selectOne(admin);
+        model.put("data",admin);
+        return new ModelAndView("admin/admin/headimg",model);
+    }
 
     /**
      * 数据库批量删除
@@ -66,8 +76,9 @@ public class AdminController extends AdminBaseController<Admin> {
         account.setInfoId(admin.getId());
         account.setStatus(1);
         account.setType(1);
-        admin.setSetTime(new Date());
 
+        admin.setSetTime(new Date());
+        admin.setName(admin.getUserName());
         Account resoult = accountService.findByUserName(account);
         if(resoult != null){
             return new Tip(3,resoult.getId());

@@ -41,8 +41,6 @@
 <script src="/static/metronic/layout/scripts/demo.js"></script>
 <script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>
 
-
-
 <script src="/static/js/art.js"></script>
 <script src="/static/js/tools.js"></script>
 <script src="/static/js/initHash.js"></script>
