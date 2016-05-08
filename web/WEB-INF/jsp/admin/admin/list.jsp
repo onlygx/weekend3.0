@@ -64,29 +64,30 @@
         </div>
         <div id="paginator" style="padding-right: 20px;"></div>
     </div>
-    <div class="portlet-body">
 
-        <div class="table-toolbar">
-            <div class="row">
-                <div class="col-md-6">
+    <div class="table-toolbar">
+        <div class="row">
+            <div class="col-md-6">
 
-                    <div class="btn-group">
-                        <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
-                            <i class="fa  fa-refresh fa-spin "></i>返回
-                        </a>
-                        <a href="#module=admin/add" class="btn green">
-                            添加 <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
+                <div class="btn-group">
+                    <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
+                        <i class="fa  fa-refresh fa-spin "></i>返回
+                    </a>
+                    <a href="#module=admin/add" class="btn green">
+                        添加 <i class="fa fa-plus"></i>
+                    </a>
                 </div>
-                <div class="col-md-6">
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-danger" onclick="tools.deleteByIds('admin');"> 批量删除 <i
-                                class="fa fa-times"></i></button>
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="btn-group pull-right">
+                    <button class="btn btn-danger" onclick="tools.deleteByIds('admin');"> 批量删除 <i
+                            class="fa fa-times"></i></button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="portlet-body  table-responsive">
+
         <table style="width: 100%;" class="table table-striped table-bordered" id="table">
             <thead>
             <tr>

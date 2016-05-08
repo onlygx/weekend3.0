@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.controller.file;
 
 import com.elangzhi.ssm.controller.json.Tip;
+import org.aspectj.util.FileUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,24 +26,19 @@ public class FileController {
     @ResponseBody
     public Tip uploadTempImage(
                             @RequestParam(value = "file") MultipartFile file,
-                            @RequestParam(value = "filename") String filename,
                             ModelMap model,
                             HttpServletRequest request) {
 
+
         if (file != null) {
             try {
-                //上传地址
-                String url = "/upload/tempImg/"
-                            + System.currentTimeMillis()
-                            + "_headImg_"
-                        + (Math.abs(new Random().nextInt())%32000+10000)
-                        + filename.substring(filename.lastIndexOf("."));
-
-                String path = request.getServletContext().getRealPath(url);
-
+                String fileName = file.getOriginalFilename();
+                String saveName = System.currentTimeMillis() +"_head"+ fileName.substring(fileName.lastIndexOf("."));
+                String filePath = "/upload/tempImg/" + saveName;
+                String path = request.getServletContext().getRealPath(filePath);
                 file.transferTo(new File(path));
 
-                return new Tip(url);
+                return new Tip(filePath);
             } catch (IOException e) {
                 e.printStackTrace();
                 return new Tip(2);
