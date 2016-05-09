@@ -1,6 +1,7 @@
 package com.elangzhi.ssm.controller.file;
 
 import com.elangzhi.ssm.controller.json.Tip;
+import com.elangzhi.ssm.tools.UUIDFactory;
 import org.aspectj.util.FileUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 文件上传、管理
@@ -22,6 +24,8 @@ import java.util.Random;
 @RequestMapping("/file")
 public class FileController {
 
+    private String DISK_SANEPATH = "C:/langzhi/tempImg/";
+
     @RequestMapping("/uploadTempImage")
     @ResponseBody
     public Tip uploadTempImage(
@@ -29,15 +33,14 @@ public class FileController {
                             ModelMap model,
                             HttpServletRequest request) {
 
-
+        initDir();
         if (file != null) {
             try {
                 String fileName = file.getOriginalFilename();
-                String saveName = System.currentTimeMillis() +"_head"+ fileName.substring(fileName.lastIndexOf("."));
-                String filePath = "/upload/tempImg/" + saveName;
+                String saveName = UUIDFactory.getLongId() + fileName.substring(fileName.lastIndexOf("."));
+                String filePath = DISK_SANEPATH + saveName;
                 String path = request.getServletContext().getRealPath(filePath);
                 file.transferTo(new File(path));
-
                 return new Tip(filePath);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,6 +48,16 @@ public class FileController {
             }
         } else {
             return new Tip(1);
+        }
+    }
+
+
+    public void initDir(){
+        File file =new File(DISK_SANEPATH);
+        //如果文件夹不存在则创建
+        if  (!file .exists()  && !file .isDirectory())
+        {
+            file .mkdir();
         }
     }
 }

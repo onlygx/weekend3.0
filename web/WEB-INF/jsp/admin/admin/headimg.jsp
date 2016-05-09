@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2" id="cParam">
+                    <div class="col-md-2 hide" id="cParam">
                         <table>
                             <tr>
                                 <td style="text-align: right;">id：</td>
