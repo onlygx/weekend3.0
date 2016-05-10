@@ -6,7 +6,6 @@ import com.elangzhi.ssm.model.Account;
 import com.elangzhi.ssm.model.Admin;
 import com.elangzhi.ssm.services.AccountService;
 import com.elangzhi.ssm.services.AdminService;
-import com.elangzhi.ssm.tools.Const;
 import com.elangzhi.ssm.tools.ImageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

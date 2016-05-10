@@ -8,10 +8,12 @@
     from t_account_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="accountRole"  >
     delete from t_account_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="accountRole" >
     insert into t_account_role (id, account_id, role_id
       )
