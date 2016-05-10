@@ -35,6 +35,8 @@
 <script src="/static/metronic/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
 <script src="/static/bootstrap-paginator/bootstrap-paginator.js"></script>
+<script src="/static/js/jquery-validate/jquery.validate.js"></script>
+<script src="/static/js/jquery-validate/messages_zh.js"></script>
 
 <script src="/static/metronic/js/metronic.js"></script>
 <script src="/static/metronic/layout/scripts/layout.js"></script>

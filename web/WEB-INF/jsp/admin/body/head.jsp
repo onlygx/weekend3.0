@@ -28,6 +28,9 @@
     <link href="/static/metronic/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <!-- END PAGE LEVEL PLUGIN STYLES -->
 
+    <!-- BEGIN MY PLUGIN STYLES -->
+    <link href="/static/bootstrap-paginator/bootstrap-responsive.css" rel="stylesheet"/>
+    <!-- END MY PLUGIN STYLES -->
 
     <!-- BEGIN THEME STYLES -->
     <link href="/static/metronic/css/components-md.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -41,10 +44,7 @@
     <!-- END THEME STYLES -->
 
 
-    <!-- BEGIN MY PLUGIN STYLES -->
 
-    <link href="/static/bootstrap-paginator/bootstrap-responsive.css" rel="stylesheet"/>
-    <!-- END MY PLUGIN STYLES -->
 
     <link rel="shortcut icon" href="/images/project/favicon.ico"/>
 </head>

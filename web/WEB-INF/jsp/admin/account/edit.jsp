@@ -28,7 +28,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" name="password" value=""  placeholder="新密码">
+						<input type="password" class="form-control" required minlength="6"  id="rePassword" value="" placeholder="新密码">
 					</div>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" id="rePassword" value=""  placeholder="再次输入新密码">
+						<input type="password" class="form-control"  required equalTo="#rePassword" name="password" value="" placeholder="再次输入新密码">
 					</div>
 				</div>
 			</div>
@@ -61,30 +61,27 @@
 </div>
 <script src="/static/js/jquery.md5.js"></script>
 <script>
+
+	$("#editForm").validate();
+
 function edit(){
 
-	var param = tools.formParams("editForm");
+	//加密
+	var pwd = $("input[name='password']").eq(0);
+	if(pwd.val().trim().length == 0){
+		$("#editForm").valid()
+		return;
+	}
+	var md5 = $.md5(pwd.val());
+	pwd.val(md5);
+	$("#rePassword").val(md5);
 
-	if(param["password"] == "" || param["password"] == null){
-		tools.tip("请输入密码");
-		return null;
+	var success = tools.edit("account");
+
+	if(success){
+		window.location.href="/login/loginPage";
 	}
 
-    if($("#rePassword").val()  == "" || $("#rePassword").val() == null){
-        tools.tip("请再次输入密码");
-        return null;
-    }
-
-	if($("#rePassword").val() != param["password"]){
-        tools.tip("两次密码输入不一致");
-        return null;
-	}
-
-	$("input[name='password']").val($.md5(param["password"]));
-
-	tools.edit("account");
-
-    window.location.href="/login/loginPage";
 }
 
 </script>

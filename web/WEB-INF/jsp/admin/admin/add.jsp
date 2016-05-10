@@ -18,7 +18,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa  fa-qq"></i>
-						<input type="text" class="form-control" name="userName" placeholder="用户名">
+						<input type="text" class="form-control" required minlength="5" name="userName" placeholder="用户名">
 						<input type="hidden" name="head" value="/images/account/default_head.jpg">
 						<input type="hidden" name="id" value="${longId}">
 					</div>
@@ -30,7 +30,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" name="password"  placeholder="密码">
+						<input type="password" class="form-control" required minlength="6"  id="rePassword" placeholder="密码">
 					</div>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 				<div class="col-md-4">
 					<div class="input-icon">
 						<i class="fa fa-lock"></i>
-						<input type="password" class="form-control" id="rePassword" value=""  placeholder="再次输入密码">
+						<input type="password" class="form-control"  required equalTo="#rePassword" name="password"  placeholder="再次输入密码">
 					</div>
 				</div>
 			</div>
@@ -65,37 +65,29 @@
 <script src="/static/js/jquery.md5.js"></script>
 <script>
 
+
+$("#saveForm").validate();
+
+
 function save(){
-	var param = tools.formParams("saveForm");
 
-	if(param["userName"] == "" || param["userName"] == null){
-		tools.tip("请输入用户名");
-		return null;
+	//加密
+	var pwd = $("input[name='password']").eq(0);
+	if(pwd.val().trim().length == 0){
+		$("#saveForm").valid()
+		return;
 	}
+	var md5 = $.md5(pwd.val());
+	pwd.val(md5);
+	$("#rePassword").val(md5);
 
-	if(param["password"] == "" || param["password"] == null){
-		tools.tip("请输入密码");
-		return null;
-	}
+	//提交
+    tools.save("admin");
 
+	//清空密码
+	$("input[name='password']").val("");
+	$("#rePassword").val("");
 
-	if($("#rePassword").val()  == "" || $("#rePassword").val() == null){
-		tools.tip("请再次输入密码");
-		return null;
-	}
-
-	if($("#rePassword").val() != param["password"]){
-		tools.tip("两次密码输入不一致");
-		return null;
-	}
-
-    $("input[name='password']").val($.md5(param["password"]));
-
-    var success = tools.save("admin");
-	if(!success){
-		$("input[name='password']").val("");
-		$("#rePassword").val("");
-	}
 }
 
 </script>

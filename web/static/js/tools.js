@@ -164,20 +164,23 @@ tools.get = function (_url, _param, _success) {
  * 提交修改信息
  * @param _module
  */
-tools.edit = function(_module){
-    var state;
-    var param = tools.formParams("editForm");
-    tools.post(_module +"/update",param,function(data){
-        state = data.success;
-        if(data.success){
-            tools.tip("修改成功！",null,function(){
-                history.go(-1);
-            });
-        }else{
-            tools.tip("修改失败！错误代号："+data.code,1000,null,"danger");
+tools.edit = function(_module,formId){
+    formId = formId == undefined ? "editForm" : formId;
+    var state = false;
+    var param = tools.formParams(formId);
+    if($("#"+formId).valid()) {
+        tools.post(_module + "/update", param, function (data) {
+            state = data.success;
+            if (data.success) {
+                tools.tip("修改成功！", null, function () {
+                    history.go(-1);
+                });
+            } else {
+                tools.tip("修改失败！错误代号：" + data.code, 1000, null, "danger");
 
-        }
-    });
+            }
+        });
+    }
     return state;
 };
 
@@ -185,19 +188,22 @@ tools.edit = function(_module){
  * 保存到数据库
  * @param _module
  */
-tools.save = function(_module){
-    var state;
-    var param = tools.formParams("saveForm");
-    tools.post(_module +"/save",param,function(data){
-        state = data.success;
-        if(data.success){
-            art.tip("提交成功", 500, function () {
-                history.go(-1);
-            });
-        }else{
-            tools.tip("提交失败！错误代号："+data.code,1000,null,"danger");
-        }
-    });
+tools.save = function(_module,formId){
+    formId = formId == undefined ? "saveForm" : formId;
+    var state = false;
+    var param = tools.formParams(formId);
+    if($("#"+formId).valid()){
+        tools.post(_module +"/save",param,function(data){
+            state = data.success;
+            if(data.success){
+                art.tip("提交成功", 500, function () {
+                    history.go(-1);
+                });
+            }else{
+                tools.tip("提交失败！错误代号："+data.code,1000,null,"danger");
+            }
+        });
+    }
     return state;
 };
 
@@ -245,6 +251,10 @@ tools.getIds = function(_tableId){
  */
 tools.deleteByIds = function(_module){
     var ids = tools.getIds("table");
+    if(ids.length == 0){
+        tools.tip("请先选择要删除的条目！",1000,null,"danger");
+        return;
+    }
     art.confirm("确定删除选中信息么？",function(){
         tools.post(_module+"/deleteByIds",{"ids":ids},function(data){
             if(data.success){

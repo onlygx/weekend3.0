@@ -24,7 +24,9 @@
 		<div class="page-content-wrapper">
 
 			<div class="page-content" id="main">
-
+				<div align="center" style="margin-top: 200px;">
+					<h2>加载中。。。</h2>
+				</div>
 			</div>
 
 		</div>
