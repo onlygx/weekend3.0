@@ -86,6 +86,14 @@ var Demo = function () {
                 } else {
                     $('.page-footer').appendTo('body > .container');
                 }
+            }else{
+            }
+
+
+            if ($.cookie) {
+                $.cookie('layout-option', layoutOption);
+                $.cookie('page-footer-option', footerOption);
+                $.cookie('page-header-top-dropdown-style-option', headerTopDropdownStyle);
             }
 
             if (lastSelectedLayout != layoutOption) {
@@ -121,9 +129,11 @@ var Demo = function () {
             // top dropdown style
             if (headerTopDropdownStyle === 'dark') {
                 $(".top-menu > .navbar-nav > li.dropdown").addClass("dropdown-dark");
+
             } else {
                 $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
             }
+
 
             //footer 
             if (footerOption === 'fixed') {
@@ -143,7 +153,7 @@ var Demo = function () {
             if (sidebarMenuOption === 'hover') {
                 if (sidebarOption == 'fixed') {
                     $('.sidebar-menu-option', panel).val("accordion");
-                    alert("Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.");
+                    alert("侧边栏静止模式下无法开启指向展开方式。");
                 } else {
                     $(".page-sidebar-menu").addClass("page-sidebar-menu-hover-submenu");
                 }                
@@ -191,6 +201,9 @@ var Demo = function () {
 
         $('.theme-colors > li', panel).click(function () {
             var color = $(this).attr("data-theme");
+            if ($.cookie) {
+                $.cookie('theme-color', color);
+            }
             setColor(color);
             $('ul > li', panel).removeClass("active");
             $(this).addClass("active");
@@ -244,7 +257,7 @@ var Demo = function () {
 
     // handle theme style
     var setThemeStyle = function(style) {
-        var file = (style === 'rounded' ? 'components-rounded' : 'components');
+        var file = (style === 'rounded' ? 'components-md' : 'components-rounded');
         file = (Metronic.isRTL() ? file + '-rtl' : file);
 
         $('#style_components').attr("href", Metronic.getGlobalCssPath() + file + ".css");
@@ -253,6 +266,49 @@ var Demo = function () {
             $.cookie('layout-style-option', style);
         }
     };
+
+    var setLayoutOption = function(style){
+        if (style === "boxed") {
+            $("body").addClass("page-boxed");
+
+            // set header
+            $('.page-header > .page-header-inner').addClass("container");
+            var cont = $('body > .clearfix').after('<div class="container"></div>');
+
+            // set content
+            $('.page-container').appendTo('body > .container');
+
+            $('.page-footer').appendTo('body > .container');
+            // set footer
+            var footerOption = $.cookie('page-footer-option');
+            if (footerOption === 'fixed') {
+                $('.page-footer').html('<div class="container">' + $('.page-footer').html() + '</div>');
+            } else {
+                $('.page-footer').appendTo('body > .container');
+            }
+
+        }
+    };
+
+    var setHeaderTopDropdownStyle = function(style){
+        console.log("setHeaderTopDropdownStyle:"+style);
+        if (style === 'dark') {
+            $(".top-menu > .navbar-nav > li.dropdown").addClass("dropdown-dark");
+
+        } else {
+            $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
+
+        }
+    };
+
+    var setFooterOption = function(style){
+        //footer
+        if (style === 'fixed') {
+            $("body").addClass("page-footer-fixed");
+        } else {
+            $("body").removeClass("page-footer-fixed");
+        }
+    }
 
     return {
 
@@ -267,10 +323,34 @@ var Demo = function () {
             });
 
             // set layout style from cookie
-            if ($.cookie && $.cookie('layout-style-option') === 'rounded') {
-                setThemeStyle($.cookie('layout-style-option'));
-                $('.theme-panel .layout-style-option').val($.cookie('layout-style-option'));
-            }            
+            if($.cookie){
+
+                // 主题样式
+                if($.cookie('layout-style-option')){
+                    setThemeStyle($.cookie('layout-style-option'));
+                    $('.theme-panel .layout-style-option').val($.cookie('layout-style-option'));
+                }
+
+                //布局
+                if($.cookie('layout-option')){
+                    setLayoutOption($.cookie('layout-option'));
+                    $('.theme-panel .layout-option').val($.cookie('layout-option'));
+                }
+
+                //顶部下拉颜色
+                var htds = $.cookie('page-header-top-dropdown-style-option');
+                if(htds){
+                    setHeaderTopDropdownStyle(htds);
+                    $('.theme-panel .page-header-top-dropdown-style-option').val(htds);
+                }
+
+                //底部状态
+                if($.cookie('page-footer-option')){
+                    setFooterOption($.cookie('page-footer-option'));
+                    $('.theme-panel .page-footer-option').val($.cookie('page-footer-option'));
+                }
+            }
+
         }
     };
 

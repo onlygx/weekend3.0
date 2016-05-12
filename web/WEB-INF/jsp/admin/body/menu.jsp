@@ -87,7 +87,7 @@
                                       style="width: 100%;height: 100px;">#module=home</textarea>
 							<br>
 							<button class="btn btn-info" onclick="window.location.hash=$(this).parent().find('textarea').eq(0).val();">加载页面</button>
-							<button class="btn btn-info pull-right" onclick="loadHash();">重载当前页面</button>
+							<button class="btn btn-info pull-right" onclick="loadHash();">重载页面</button>
 						</div>
 					</li>
 				</ul>

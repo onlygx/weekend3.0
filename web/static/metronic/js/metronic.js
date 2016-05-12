@@ -13,11 +13,11 @@ var Metronic = function() {
 
     var assetsPath = '/static/metronic/';
 
-    var globalImgPath = '/static/metronic/img/';
+    var globalImgPath = 'img/';
 
-    var globalPluginsPath = '/static/metronic/plugins/';
+    var globalPluginsPath = 'plugins/';
 
-    var globalCssPath = '/static/metronic/css/';
+    var globalCssPath = 'css/';
 
     // theme layout color set
 

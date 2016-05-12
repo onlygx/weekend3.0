@@ -41,7 +41,8 @@
 <script src="/static/metronic/js/metronic.js"></script>
 <script src="/static/metronic/layout/scripts/layout.js"></script>
 <script src="/static/metronic/layout/scripts/demo.js"></script>
-<script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>
+
+<%--<script src="/static/metronic/layout/scripts/quick-sidebar.js"></script>--%>
 
 <script src="/static/js/art.js"></script>
 <script src="/static/js/tools.js"></script>
@@ -60,8 +61,9 @@ $(document).ready(function() {
 function initPage(){
     Metronic.init(); // init metronic core componets
     Layout.init(); // init layout
-    QuickSidebar.init(); // init quick sidebar
-    Demo.init(); // init demo features
+    Demo.init();
+/*    QuickSidebar.init(); // init quick sidebar
+    Demo.init(); // init demo features*/
 
 }
 </script>
