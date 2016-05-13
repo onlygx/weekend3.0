@@ -155,7 +155,7 @@ tools.get = function (_url, _param, _success) {
         },
         complete: function (XMLHttpRequest, textStatus) {
             var time2 = new Date().getTime();
-            console.log("本次ajax操作耗时：" + (time2 - time) + "毫秒；");
+            console.info("本次ajax操作耗时：" + (time2 - time) + "毫秒；");
         }
     });
 };

@@ -9,9 +9,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
-<h3 class="page-title">
-    管理员列表
-</h3>
+<!-- BEGIN PAGE HEADER-->
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>管理员 <small> 列表</small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEADER-->
 <!-- BEGIN PAGE TOOLS-->
 <div class="portlet light bg-inverse">
     <div class="portlet-title">

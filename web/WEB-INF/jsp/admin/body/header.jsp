@@ -6,7 +6,7 @@
 		<div class="page-logo">
 			<a href="#module=home">
 				<%--<img src="/static/metronic/layout/img/logo-light.png" alt="logo" class="logo-default">--%>
-				<img src="/images/project/xiushe-logo.png" style="width: 130px;height: 60px;margin-top: 5px;" alt="logo" class="logo-default" >
+				<img src="/images/project/weekend-logo.png" style="width: 180px;height: 50px;margin-top: 10px;" alt="logo" class="logo-default" >
 			</a>
 			<%--<a  alt="logo" class="logo-default" href="#module=home" style="margin-top: 23px;font-size: 20px;">后台管理系统</a>--%>
 			<div class="menu-toggler sidebar-toggler">
@@ -20,7 +20,7 @@
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<img src="/images/project/admin-gif.jpg" style="width: 60px;height: 60px;margin-top: 5px;" alt="logo" class="logo-default" >
 
-		<!-- BEGIN PAGE TOP -->
+        <!-- BEGIN PAGE TOP -->
 		<div class="page-top">
 
 			<!-- BEGIN TOP NAVIGATION MENU -->

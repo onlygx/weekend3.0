@@ -25,6 +25,8 @@
 
 			<div class="page-content" id="main">
 				<div align="center" style="margin-top: 200px;">
+
+					<img src="/images/project/admin-gif.jpg" style="width: 60px;height: 60px;margin-top: 5px;" alt="logo" class="logo-default" >
 					<h2>加载中。。。</h2>
 				</div>
 			</div>

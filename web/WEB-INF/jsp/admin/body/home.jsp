@@ -9,7 +9,6 @@
 		<h1>SSM <small>系统 &amp; 主页</small></h1>
 	</div>
 	<!-- END PAGE TITLE -->
-
 </div>
 <!-- END PAGE HEADER-->
 <div class="note note-info">
