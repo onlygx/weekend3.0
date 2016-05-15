@@ -2,7 +2,8 @@ package com.elangzhi.ssm.model;
 
 import java.util.Date;
 
-public class Role {
+public class Role{
+
     private Long id;
 
     private String name;

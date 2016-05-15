@@ -9,7 +9,7 @@
     <!-- Spring和mybatis的配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring-mybatis.xml</param-value>
+        <param-value>classpath:spring-*.xml</param-value>
     </context-param>
 
     <!-- 连接池 启用Web监控统计功能   start-->
@@ -65,27 +65,15 @@
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
-        </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>
     </servlet>
+
     <!-- Spring MVC 拦截 -->
     <servlet-mapping>
         <servlet-name>SpringMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!-- tomcat等 启动之前执行 -->
-<!--    <filter>
-        <filter-name>startFilter</filter-name>
-        <filter-class>com.fh.filter.startFilter</filter-class>
-    </filter>
-
-
-    -->
 
     <!-- 拦截静态资源 不用spring mvc来处理 -->
     <servlet-mapping>
