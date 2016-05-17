@@ -31,14 +31,21 @@ public class FileController {
 
     private String DISK_SANEPATH;
 
+    /**
+     * 上传文件到临时文件目录，此目录清空不会影响程序运行和文件丢失。
+     * @param file 文件流，单个文件
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/uploadTempImage")
     @ResponseBody
-    public Tip uploadTempImage(
-                            @RequestParam(value = "file") MultipartFile file,
-                            ModelMap model,
-                            HttpServletRequest request) {
+    public Tip uploadTempImage( @RequestParam(value = "file") MultipartFile file,
+                                ModelMap model,
+                                HttpServletRequest request) {
 
         initDir();
+
         if (file != null) {
             try {
                 String fileName = file.getOriginalFilename();

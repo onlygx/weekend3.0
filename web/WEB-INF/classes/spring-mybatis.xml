@@ -94,11 +94,6 @@
     <!-- 通过配置织入@Aspectj切面 poxy-target-class="true"  使用CGLib动态代理技术织入 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <!-- 那些类的哪些方法参与事务(自动开启) -->
-    <aop:config>
-        <aop:pointcut id="allServiceMethod" expression="execution(* com.elangzhi.ssm.services.*.*(..))"/>
-        <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
-    </aop:config>
 
     <!--@Transactional 事务注解驱动-->
     <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
@@ -111,8 +106,17 @@
             <tx:method name="delete*" propagation="REQUIRED" read-only="false" />
             <tx:method name="update*" propagation="REQUIRED" read-only="false" />
             <tx:method name="change*" propagation="REQUIRED" read-only="false" />
+
+            <tx:method name="select*" propagation="SUPPORTS" />
+            <tx:method name="*list*"  propagation="SUPPORTS" />
         </tx:attributes>
     </tx:advice>
 
+
+    <!-- 那些类的哪些方法参与事务(自动开启) -->
+    <aop:config>
+        <aop:pointcut id="allServiceMethod" expression="execution(* com.elangzhi.ssm.services.*.*(..))"/>
+        <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
+    </aop:config>
 
 </beans>  
