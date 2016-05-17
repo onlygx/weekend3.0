@@ -22,15 +22,21 @@ function initList(){
     });
 
     //点击每一行空白处
-    $("#table tr").click(function(){
-        var checkbox = $(this).find(".checkboxes").eq(0);
-        var isCheck = checkbox.is(":checked");
-        if(isCheck){
-            checkbox.prop('checked',false);
-            $(this).removeClass("active");
-        }else{
-            checkbox.prop('checked',true);
-            $(this).addClass("active");
+    $("#table tbody tr").click(function(e){
+
+        var targetElement = e.srcElement.nodeName;
+        var isInput = targetElement == "INPUT";
+        //如果是checkbook标签 则不执行以下内容（和自身点击事件冲突）
+        if(!isInput){
+            var checkbox = $(this).find(".checkboxes").eq(0);
+            var isCheck = checkbox.is(":checked");
+            if(isCheck){
+                checkbox.prop('checked',false);
+                $(this).removeClass("active");
+            }else{
+                checkbox.prop('checked',true);
+                $(this).addClass("active");
+            }
         }
 
     });
@@ -43,7 +49,7 @@ function initPaginator(){
 
     var option = getPaginatorOption(pageParam,formParam);
 
-    $('#paginator').bootstrapPaginator(option);;
+    $('#paginator').bootstrapPaginator(option);
 
 }
 
@@ -110,13 +116,13 @@ function getPaginatorOption(_param,_formParam){
 function tableSearch() {
 
     var param = tools.formParams("tableParams");
-    var url = module + "/list/1";
+    var url = module + "/list";
 
     tools.post(url,param,function(data){
         tools.setMain(data);
     });
 
-};
+}
 
 
 
@@ -150,7 +156,7 @@ function deleteById(_id){
         });
     });
     return state;
-};
+}
 
 /**
  * 获取勾选了多少
@@ -164,7 +170,7 @@ function getIds(_tableId){
         ids.push($(this).val());
     });
     return ids;
-};
+}
 
 
 /**
@@ -187,4 +193,4 @@ function deleteByIds(){
             }
         });
     });
-};
+}

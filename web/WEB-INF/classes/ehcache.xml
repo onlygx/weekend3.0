@@ -7,13 +7,14 @@
 
     <defaultCache
             maxElementsInMemory="10000"
-            eternal="false"
-            timeToIdleSeconds="120"
-            timeToLiveSeconds="120"
-            overflowToDisk="true"
             maxElementsOnDisk="10000000"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="600"
+            overflowToDisk="true"
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
+            diskSpoolBufferSizeMB="200"
             memoryStoreEvictionPolicy="LRU"
 
     />
@@ -49,12 +50,11 @@
             properties="hostName=192.168.0.225,port=40003, socketTimeoutMillis=120000"/>-->
 
     <!--我们自己定义的缓存，名称为自定义-->
-    <cache name="admin"
+<!--    <cache name="admin"
            maxElementsInMemory="1000"
            eternal="false"
            timeToIdleSeconds="100000"
            timeToLiveSeconds="100000"
            overflowToDisk="false">
-       <!-- <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>-->
-    </cache>
+    </cache>-->
 </ehcache>

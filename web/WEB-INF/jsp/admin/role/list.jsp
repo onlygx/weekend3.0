@@ -20,7 +20,7 @@
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE TOOLS-->
-<div class="portlet light bg-inverse">
+<div class="portlet light">
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-paper-plane font-green-haze"></i>

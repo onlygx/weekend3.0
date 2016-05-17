@@ -3,9 +3,11 @@ package com.elangzhi.ssm.controller;
 import com.elangzhi.ssm.controller.json.Tip;
 import com.elangzhi.ssm.services.BaseService;
 import com.elangzhi.ssm.tools.PageData;
+import com.elangzhi.ssm.tools.ProjectConfig;
 import com.elangzhi.ssm.tools.UUIDFactory;
 import com.github.pagehelper.PageInfo;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ public class AdminBaseController<T> {
 	@Resource
 	BaseService<T> baseService;
 
+    @Autowired
+    ProjectConfig projectConfig;
 
     /**
      * 进入添加页面
@@ -158,7 +162,7 @@ public class AdminBaseController<T> {
     @RequestMapping(value="/list")
     public ModelAndView list(HttpServletRequest request,T clazz) throws Exception {
         PageData pd = new PageData(request);
-        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),1,10);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),1,projectConfig.getPageSize());
         pd.put("pageInfo",pageInfo);
         return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
     }
@@ -171,7 +175,7 @@ public class AdminBaseController<T> {
     @RequestMapping(value="/list/{page}")
     public ModelAndView list(HttpServletRequest request,T clazz,@PathVariable int page) throws Exception {
         PageData pd = new PageData(request);
-        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,10);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),page,projectConfig.getPageSize());
         pd.put("pageInfo",pageInfo);
         return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
     }

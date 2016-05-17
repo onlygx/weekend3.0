@@ -47,13 +47,13 @@ public class AdminController extends AdminBaseController<Admin> {
             @RequestParam(required = false) Long id,    // adminId
             @RequestParam(required = false) String src  // 图片地址
     ) {
-        String path = request.getServletContext().getRealPath(src);
+
         if ("".equals(src)) {
             return new Tip(1); //请选择图片
         } else if (x1 == null || w == null || y1 == null || h == null) {
             return new Tip(2); //请选择剪裁区域
         } else {
-            File file = new File(path);
+            File file = new File(src);
             //上传地址
             String url = "/images/headImage/"
                     + System.currentTimeMillis()

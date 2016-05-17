@@ -27,7 +27,7 @@
 			</li>
 			<c:if test="${account.userName == 'admin'}">
                 <li>
-                    <a href="#module=power/list/1&parentId=0">
+                    <a href="#module=power/all&parentId=0">
                         <i class="fa fa-cogs "></i>
                         <span class="title">权限管理</span>
                     </a>
@@ -37,7 +37,7 @@
 
 			<c:forEach var="item" items="${powerList}" varStatus="status">
 				<li>
-					<a href="${item.url }">
+					<a href="#module=${item.url }">
 					<i class="${item.icon }"></i>
 					<span class="title" title="${item.intro }">${item.name }</span>
 					<c:if test="${item.powers.size() > 0}">
@@ -48,7 +48,7 @@
 						<ul class="sub-menu">
 							<c:forEach var="item2" items="${item.powers}" varStatus="status2">
 								<li>
-									<a href="${item2.url }">
+									<a href="#module=${item2.url }">
 									<i class="${item2.icon }"></i>
 									<span class="title" title="${item2.intro }">${item2.name }</span>
 									<c:if test="${item2.powers.size() > 0}">
@@ -59,7 +59,7 @@
 										<ul class="sub-menu">
 											<c:forEach var="item3" items="${item2.powers}" varStatus="status3" >
 												<li>
-													<a href="${item3.url }">
+													<a href="#module=${item3.url }">
 													<i class="${item3.icon }"></i>
 													<span class="title" title="${item3.intro }">${item3.name }</span>
 													</a>

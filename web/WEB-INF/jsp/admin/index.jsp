@@ -11,7 +11,7 @@
 
 
 <!-- BEGIN BODY -->
-<body class="page-md page-header-fixed page-sidebar-closed-hide-logo">
+<body class="page-md page-sidebar-closed-hide-logo page-header-fixed page-sidebar-fixed">
 
 	<jsp:include page="body/header.jsp"/>
 		

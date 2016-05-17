@@ -82,7 +82,7 @@ tools.tip = function(content,time,callback,_type){
 tools.errorTip = function(_case, _code) {
 	
     if(_code == -1) { //超时
-    	var session = $("<div>").load("/admin/body/timeout.jsp");
+    	var session = $("<div>").html("session 超时！");
     	tools.setMain(session);
         return;
     }
@@ -115,7 +115,7 @@ tools.post = function(_url,_param,_success) {
         type: "post",
         data: _param,
         dataType: "json",
-        async: true,// false:同步请求
+        async: true,// false:同步请求 默认true
         success: _success,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             tools.setMain(XMLHttpRequest.responseText);

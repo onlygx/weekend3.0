@@ -169,7 +169,7 @@
                 var data = result.result;
                 if (data.success) {
                     $("#src").val(data.data);
-                    imgUrl = "/image/showImg?src=" + data.data;
+                    imgUrl = "/image/showTempImg?src=" + data.data;
                     jcrop_api.setImage(imgUrl);
                     jcrop_api.enable();
                     //设置默认选框

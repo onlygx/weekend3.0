@@ -1,5 +1,7 @@
 package com.elangzhi.ssm.controller.file;
 
+import com.elangzhi.ssm.tools.ProjectConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,25 +19,38 @@ import java.io.InputStream;
 @RequestMapping("/image")
 public class ImageController {
 
+    @RequestMapping("/showTempImg")
+    public void showTempImg(HttpServletResponse response, HttpServletRequest request,@RequestParam String src) throws IOException {
+        InputStream in;
+        if(!"".equals(src)){
+            in = new java.io.FileInputStream(src);
+            outputStream(response,in);
+        }
+    }
+
+
+
     @RequestMapping("/showImg")
     public void showImg(HttpServletResponse response, HttpServletRequest request,@RequestParam String src) throws IOException {
         InputStream in;
         if(!"".equals(src)){
             String realPath = request.getServletContext().getRealPath(src);
             in = new java.io.FileInputStream(realPath);
-
-            if ( in != null )
-            {
-                byte[] b = new byte[1024];
-                int len;
-                while( (len = in.read(b)) != -1 )
-                {
-                    response.getOutputStream().write(b);
-                }
-                in.close();
-            }
+            outputStream(response,in);
         }
+    }
 
+    /**
+     * 输出文件流
+     * @param response
+     * @param in
+     * @throws IOException
+     */
+    public void outputStream(HttpServletResponse response,InputStream in) throws IOException {
+        byte[] b = new byte[in.available()];
+        in.read(b);
+        response.getOutputStream().write(b);
+        response.getOutputStream().flush();
     }
 
 }

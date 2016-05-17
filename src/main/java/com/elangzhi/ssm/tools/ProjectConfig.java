@@ -9,48 +9,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectConfig {
 
-    @Value("${page.size}")
-    private String pageSize;
+    @Value("#{projectConfigurer['page.size']}")
+    private Integer pageSize;
 
-    @Value("${page.index}")
-    private String pageIndex;
-
-    @Value("${page.current}")
-    private String pageCurrent;
-
-    @Value("${page.total}")
-    private String pageTotal;
+    @Value("#{projectConfigurer['file.tempImagePath']}")
+    private String tempImagePath;
 
 
-    public String getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public String getPageIndex() {
-        return pageIndex;
+    public String getTempImagePath() {
+        return tempImagePath;
     }
 
-    public void setPageIndex(String pageIndex) {
-        this.pageIndex = pageIndex;
-    }
-
-    public String getPageCurrent() {
-        return pageCurrent;
-    }
-
-    public void setPageCurrent(String pageCurrent) {
-        this.pageCurrent = pageCurrent;
-    }
-
-    public String getPageTotal() {
-        return pageTotal;
-    }
-
-    public void setPageTotal(String pageTotal) {
-        this.pageTotal = pageTotal;
+    public void setTempImagePath(String tempImagePath) {
+        this.tempImagePath = tempImagePath;
     }
 }

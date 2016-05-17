@@ -19,7 +19,7 @@
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE TOOLS-->
-<div class="portlet light bg-inverse">
+<div class="portlet light">
     <div class="portlet-title">
         <div class="caption">
             <i class="icon-paper-plane font-green-haze"></i>
@@ -129,7 +129,7 @@
                     <td>${item.id}</td>
                     <td>${item.url}</td>
                     <td class="center">
-                        <a  style="color: blue;" href="#module=power/list/1&parentId=${item.id}">${item.name}</a>
+                        <a  style="color: blue;" href="#module=power/all&parentId=${item.id}">${item.name}</a>
                     </td>
                     <td class="center"> <i class="${item.icon}"></i> </td>
                     <td class="center"> ${item.parentId}</td>

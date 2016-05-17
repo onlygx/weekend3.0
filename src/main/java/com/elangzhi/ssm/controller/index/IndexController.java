@@ -20,7 +20,7 @@ public class IndexController{
      * @param model
      * @return
      */
-    @RequestMapping(value="/",method = RequestMethod.GET)
+    @RequestMapping(value="/")
     public ModelAndView index(HttpServletRequest request,ModelMap model){
         return new ModelAndView("admin/index");
     }
@@ -30,7 +30,7 @@ public class IndexController{
      * 跳转到欢迎页面
      * @return
      */
-    @RequestMapping(value="/home",method = RequestMethod.GET)
+    @RequestMapping(value="/home")
     public ModelAndView home(){
         return new ModelAndView("admin/body/home");
     }

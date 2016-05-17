@@ -1,8 +1,10 @@
 package com.elangzhi.ssm.controller.file;
 
 import com.elangzhi.ssm.controller.json.Tip;
+import com.elangzhi.ssm.tools.ProjectConfig;
 import com.elangzhi.ssm.tools.UUIDFactory;
 import org.aspectj.util.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,10 @@ import java.util.UUID;
 @RequestMapping("/file")
 public class FileController {
 
-    private String DISK_SANEPATH = "C:/langzhi/tempImg/";
+    @Autowired
+    ProjectConfig projectConfig;
+
+    private String DISK_SANEPATH;
 
     @RequestMapping("/uploadTempImage")
     @ResponseBody
@@ -39,8 +44,7 @@ public class FileController {
                 String fileName = file.getOriginalFilename();
                 String saveName = UUIDFactory.getLongId() + fileName.substring(fileName.lastIndexOf("."));
                 String filePath = DISK_SANEPATH + saveName;
-                String path = request.getServletContext().getRealPath(filePath);
-                file.transferTo(new File(path));
+                file.transferTo(new File(filePath));
                 return new Tip(filePath);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -52,8 +56,14 @@ public class FileController {
     }
 
 
+    /**
+     * 验证地址是否存在
+     */
     public void initDir(){
-        File file =new File(DISK_SANEPATH);
+
+        DISK_SANEPATH = projectConfig.getTempImagePath();
+
+        File file = new File(DISK_SANEPATH);
         //如果文件夹不存在则创建
         if  (!file .exists()  && !file .isDirectory())
         {

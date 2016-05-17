@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-05-13 11:13:35
+Date: 2016-05-17 21:02:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,9 +36,6 @@ CREATE TABLE `t_account` (
 -- Records of t_account
 -- ----------------------------
 INSERT INTO `t_account` VALUES ('888888', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', '888887', null, null);
-INSERT INTO `t_account` VALUES ('574267690869633614', 'test1', '978b5887c70fc0e5e512ddf049848769', '1', '1', '574267690869633613', null, null);
-INSERT INTO `t_account` VALUES ('1972787351572597700', 'test2', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', '1972787351572597699', null, null);
-INSERT INTO `t_account` VALUES ('9202842054631705939', 'test', '978b5887c70fc0e5e512ddf049848769', '1', '1', '9202842054631705938', null, null);
 
 -- ----------------------------
 -- Table structure for t_account_role
@@ -79,10 +76,7 @@ CREATE TABLE `t_admin` (
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES ('888887', 'Manager', '244556979@qq.com', '123456', '山东省 济南市 天桥区', '1', '37888820880808588X', '2015-04-24 14:59:12', '/images/account/default_head.jpg');
-INSERT INTO `t_admin` VALUES ('574267690869633613', '测试test1', 'qwe', 'qwe', 'qwe', '0', 'qwe', '2016-05-08 17:02:36', '/images/account/default_head.jpg');
-INSERT INTO `t_admin` VALUES ('1972787351572597699', 'test2', null, null, null, null, null, '2016-05-08 18:06:45', '/images/account/default_head.jpg');
-INSERT INTO `t_admin` VALUES ('9202842054631705938', '笨喵', '123', '123', '123', '1', '123', '2016-05-08 18:10:04', '/images/account/default_head.jpg');
+INSERT INTO `t_admin` VALUES ('888887', 'Manager', '244556979@qq.com', '123456', '山东省 济南市 天桥区', '1', '37888820880808588X', '2015-04-24 14:59:12', '/images/headImage/1463472849559_head.jpg');
 
 -- ----------------------------
 -- Table structure for t_book
@@ -3619,31 +3613,33 @@ CREATE TABLE `t_power` (
   `sort` int(3) DEFAULT NULL COMMENT '权限排序',
   `icon` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13766 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4388083004622194028 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_power
 -- ----------------------------
-INSERT INTO `t_power` VALUES ('13735', '管理员管理', '管理管理员信息', '0', '0', 'javascript:void(0);', '1', 'fa fa-user icon-state-info icon-lg ');
-INSERT INTO `t_power` VALUES ('13736', '管理员列表', '管理员增删改查', '13735', '0', '#module=admin/list', '1', 'fa fa-user icon-state-success');
-INSERT INTO `t_power` VALUES ('13737', '管理员添加', '管理员添加', '13735', '1', '#module=admin/add', '2', 'fa  fa-plus icon-state-info');
-INSERT INTO `t_power` VALUES ('13738', '管理员编辑', '管理员编辑', '13735', '1', 'javascript:void(0);', '3', 'fa  fa-edit icon-state-warning');
-INSERT INTO `t_power` VALUES ('13739', '管理员删除', '管理员删除', '13735', '1', 'javascript:void(0);', '4', 'fa  fa-trash-o icon-state-danger');
-INSERT INTO `t_power` VALUES ('13740', '角色管理', '管理角色信息', '0', '0', 'javascript:void(0);', '2', 'fa fa-male icon-state-info icon-lg ');
-INSERT INTO `t_power` VALUES ('13741', '角色列表', '管理角色信息。', '13740', '0', '#module=role/list', '1', 'fa fa-list-ul icon-state-success');
-INSERT INTO `t_power` VALUES ('13742', '角色添加', '添加角色', '13740', '1', '#module=role/add', '2', 'fa  fa-plus icon-state-info');
-INSERT INTO `t_power` VALUES ('13743', '角色编辑', '编辑角色信息', '13740', '1', 'javascript:void(0);', '3', 'fa  fa-edit icon-state-warning');
-INSERT INTO `t_power` VALUES ('13744', '角色删除', '删除角色信息', '13740', '1', 'javascript:void(0);', '4', 'fa  fa-trash-o icon-state-danger');
-INSERT INTO `t_power` VALUES ('13755', '分类管理', '', '0', '0', 'javascript:void(0);', '5', 'fa  fa-bars icon-state-info icon-lg ');
-INSERT INTO `t_power` VALUES ('13756', '分类列表', '', '13755', '0', '#module=type/list', '0', 'fa fa-list-ul icon-state-success');
-INSERT INTO `t_power` VALUES ('13757', '分类添加', '', '13755', '1', '#module=type/add', '0', 'fa  fa-plus icon-state-info');
-INSERT INTO `t_power` VALUES ('13758', '分类删除', '', '13755', '1', 'javascript:void(0);', '0', 'fa  fa-trash-o icon-state-danger');
-INSERT INTO `t_power` VALUES ('13759', '分类编辑', '', '13755', '1', 'javascript:void(0);', '0', 'fa  fa-edit icon-state-warning');
-INSERT INTO `t_power` VALUES ('13761', '用户管理', '', '0', '0', 'javascript:void(0);', '3', 'fa fa-user-md icon-state-info icon-lg');
-INSERT INTO `t_power` VALUES ('13762', '用户列表', '', '13761', '0', '#module=user/list', '0', 'fa fa-list-ul icon-state-success');
-INSERT INTO `t_power` VALUES ('13763', '用户添加', '', '13761', '1', 'javascript:void(0);', '0', 'fa  fa-plus icon-state-info');
-INSERT INTO `t_power` VALUES ('13764', '用户编辑', '', '13761', '1', 'javascript:void(0);', '0', 'fa  fa-edit icon-state-warning');
-INSERT INTO `t_power` VALUES ('13765', '用户删除', '', '13761', '1', 'javascript:void(0);', '0', 'fa  fa-trash-o icon-state-danger');
+INSERT INTO `t_power` VALUES ('13735', '管理员管理', '管理管理员信息', '0', '0', 'admin', '1', 'fa fa-user icon-state-info icon-lg ');
+INSERT INTO `t_power` VALUES ('13736', '管理员列表', '管理员增删改查', '13735', '0', 'admin/list', '1', 'fa fa-user icon-state-success');
+INSERT INTO `t_power` VALUES ('13737', '管理员添加', '管理员添加', '13735', '1', 'admin/save', '2', 'fa  fa-plus icon-state-info');
+INSERT INTO `t_power` VALUES ('13738', '管理员编辑', '管理员编辑', '13735', '1', 'admin/edit', '3', 'fa  fa-edit icon-state-warning');
+INSERT INTO `t_power` VALUES ('13739', '管理员删除', '管理员删除', '13735', '1', 'admin/delete', '4', 'fa  fa-trash-o icon-state-danger');
+INSERT INTO `t_power` VALUES ('13740', '角色管理', '管理角色信息', '0', '0', 'role', '2', 'fa fa-male icon-state-info icon-lg ');
+INSERT INTO `t_power` VALUES ('13741', '角色列表', '管理角色信息。', '13740', '0', 'role/list', '1', 'fa fa-list-ul icon-state-success');
+INSERT INTO `t_power` VALUES ('13742', '角色添加', '添加角色', '13740', '1', 'role/save', '2', 'fa  fa-plus icon-state-info');
+INSERT INTO `t_power` VALUES ('13743', '角色编辑', '编辑角色信息', '13740', '1', 'role/edit', '3', 'fa  fa-edit icon-state-warning');
+INSERT INTO `t_power` VALUES ('13744', '角色删除', '删除角色信息', '13740', '1', 'role/delete', '4', 'fa  fa-trash-o icon-state-danger');
+INSERT INTO `t_power` VALUES ('13755', '分类管理', '', '0', '0', 'type', '5', 'fa  fa-bars icon-state-info icon-lg ');
+INSERT INTO `t_power` VALUES ('13756', '分类列表', '', '13755', '0', 'type/list', '0', 'fa fa-list-ul icon-state-success');
+INSERT INTO `t_power` VALUES ('13757', '分类添加', '', '13755', '1', 'type/save', '0', 'fa  fa-plus icon-state-info');
+INSERT INTO `t_power` VALUES ('13758', '分类删除', '', '13755', '1', 'type/delete', '0', 'fa  fa-trash-o icon-state-danger');
+INSERT INTO `t_power` VALUES ('13759', '分类编辑', '', '13755', '1', 'type/edit', '0', 'fa  fa-edit icon-state-warning');
+INSERT INTO `t_power` VALUES ('13761', '用户管理', '', '0', '0', 'user', '3', 'fa fa-user-md icon-state-info icon-lg');
+INSERT INTO `t_power` VALUES ('13762', '用户列表', '', '13761', '0', 'user/list', '0', 'fa fa-list-ul icon-state-success');
+INSERT INTO `t_power` VALUES ('13763', '用户添加', '', '13761', '1', 'user/save', '0', 'fa  fa-plus icon-state-info');
+INSERT INTO `t_power` VALUES ('13764', '用户编辑', '', '13761', '1', 'user/edit', '0', 'fa  fa-edit icon-state-warning');
+INSERT INTO `t_power` VALUES ('13765', '用户删除', '', '13761', '1', 'user/delete', '0', 'fa  fa-trash-o icon-state-danger');
+INSERT INTO `t_power` VALUES ('1618053117878515653', '城市列表', '', '4388083004622194027', '0', 'city/list', '0', 'fa fa-list-ul icon-state-success');
+INSERT INTO `t_power` VALUES ('4388083004622194027', '城市管理', '', '0', '0', 'city', '4', 'fa fa-file icon-state-info icon-lg');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -3676,7 +3672,7 @@ CREATE TABLE `t_role_power` (
   PRIMARY KEY (`id`),
   KEY `role_power` (`power_id`) USING BTREE,
   KEY `role` (`role_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_role_power
@@ -3711,6 +3707,8 @@ INSERT INTO `t_role_power` VALUES ('54', '888888', '13762');
 INSERT INTO `t_role_power` VALUES ('55', '888888', '13763');
 INSERT INTO `t_role_power` VALUES ('56', '888888', '13764');
 INSERT INTO `t_role_power` VALUES ('57', '888888', '13765');
+INSERT INTO `t_role_power` VALUES ('58', '888888', '1618053117878515653');
+INSERT INTO `t_role_power` VALUES ('59', '888888', '4388083004622194027');
 
 -- ----------------------------
 -- Table structure for t_settings

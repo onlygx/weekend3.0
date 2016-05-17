@@ -15,7 +15,7 @@
 			<div class="form-group frist">
 				<label class="col-md-3 control-label">用户头像</label>
 				<div class="col-md-4">
-					<img src="${data.head }" style="max-width: 150px;">
+					<img src="${data.head }" style="max-width: 300px;">
 					<input type="hidden" name="head" value="${data.head }">
 				</div>
 			</div>
