@@ -14,7 +14,7 @@
 <div class="page-head">
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
-        <h1>角色 <small> 列表</small></h1>
+        <h1>城市 <small> 列表</small></h1>
     </div>
     <!-- END PAGE TITLE -->
 </div>
@@ -41,7 +41,7 @@
     <div class="portlet-body">
 
         <div class="form-inline margin-bottom-40" role="form" id="tableParams">
-
+            <input type="hidden" value="module">
             <div class="form-group form-md-line-input has-success">
                 <input type="text" class="form-control" name="name" value="${name}" autofocus placeholder="名称">
                 <div class="form-control-focus"></div>
@@ -79,7 +79,7 @@
                     <a href="javascript:void(0);" class="btn blue" onclick="history.go(-1);">
                         <i class="fa  fa-refresh fa-spin "></i>返回
                     </a>
-                    <a href="#module=role/add" class="btn green">
+                    <a href="#module=city/add" class="btn green">
                         添加 <i class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -100,9 +100,13 @@
                 <th class="table-checkbox">
                     <input type="checkbox" class="group-checkable"/>
                 </th>
-                <th>编号</th>
+                <th>ID</th>
                 <th>名称</th>
-                <th>备注</th>
+                <th>父级编号</th>
+                <th>拼音</th>
+                <th>编码</th>
+                <th>类型</th>
+                <th>特别</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -112,10 +116,14 @@
                     <td class="center"><input type="checkbox" class="checkboxes" value="${item.id}"/></td>
                     <td>${item.id}</td>
                     <td>${item.name}</td>
-                    <td>${item.intro}</td>
+                    <td>${item.parentId}</td>
+                    <td>${item.py}</td>
+                    <td>${item.code}</td>
+                    <td>${item.type}</td>
+                    <td>${item.special}</td>
                     <td>
                         <a href="javascript:void(0);" onclick="deleteById('${item.id}')">删除</a>
-                        <a href="#module=/role/edit&id=${item.id}">查看\编辑</a>
+                        <a href="#module=/city/edit&id=${item.id}">查看\编辑</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -130,7 +138,7 @@
 <script>
 
     // 当前module
-    var module = "role";
+    var module = "city";
 
     // 分页插件参数
     var pageParam = {

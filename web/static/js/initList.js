@@ -67,7 +67,7 @@ function getPaginatorOption(_param,_formParam){
     var pageSize = _param.pageSize == undefined ? 10 : _param.pageSize;                     //每页显示行数 默认10
     var currentPage = _param.currentPage == undefined ? 1 : _param.currentPage;             //当前页数 默认1
     var totalPages = _param.totalPages == undefined ? 1 : _param.totalPages;                //总页数 默认1
-    var numberOfPages = _param.numberOfPages == undefined ? 10 : _param.numberOfPages;      //显示的页数 默认10
+    var numberOfPages = _param.numberOfPages == undefined ? 8 : _param.numberOfPages;      //显示的页数 默认10
 
     if(currentPage > totalPages){
         totalPages++;
@@ -98,34 +98,93 @@ function getPaginatorOption(_param,_formParam){
                 url += "/" + pageSize ;
             }
 
-            for(var paramKey in _formParam){
-                url += "&" + paramKey;
-                url += "=" + _formParam[paramKey];
-            }
-
-            window.location.hash = "#module="+url;
+            tools.post(url,_formParam,function(data){
+                tools.setMain(data);
+            });
         }
     };
     return options;
 }
 
 //搜索按钮
-function tableSearch(_module) {
+function tableSearch() {
 
     var param = tools.formParams("tableParams");
-    var url = "/"+_module+"/list/1";
+    var url = module + "/list/1";
 
-    for (var paramKey in param) {
-        url += "&" + paramKey;
-        url += "=" + param[paramKey];
-    }
+    tools.post(url,param,function(data){
+        tools.setMain(data);
+    });
 
-    window.location.hash = "#module=" + url;
 };
 
-//绑定回车事件
-$(document).keydown(function (event) {
+
+
+/**
+ * 给列表页面绑定回车搜索事件。
+ */
+$("#tableParams").keydown(function (event) {
+
     if (event.keyCode == 13) {
-        tableSearch()
+
+        tableSearch();
     }
 });
+
+/**
+ * 删除单个
+ * @param _id 要删除的id
+ */
+function deleteById(_id){
+    var state;
+    art.confirm("确定删除么？",function() {
+        tools.post(module + "/delete", {"id": _id}, function (data) {
+            state = data.success;
+            if (data.success) {
+                art.tip("删除成功", 500, function () {
+                    loadHash();
+                });
+            }else{
+                tools.tip("删除失败！错误代号："+data.code,1000,null,"danger");
+            }
+        });
+    });
+    return state;
+};
+
+/**
+ * 获取勾选了多少
+ * @param _tableId
+ * @returns {Array}
+ */
+function getIds(_tableId){
+    var checks = $('#'+_tableId).find(".checkboxes:checked");
+    var ids = new Array();
+    checks.each(function(){
+        ids.push($(this).val());
+    });
+    return ids;
+};
+
+
+/**
+ * 批量删除
+ */
+function deleteByIds(){
+    var ids = getIds("table");
+    if(ids.length == 0){
+        tools.tip("请先选择要删除的条目！",1000,null,"danger");
+        return;
+    }
+    art.confirm("确定删除选中信息么？",function(){
+        tools.post(module + "/deleteByIds",{"ids":ids.join(",")},function(data){
+            if(data.success){
+                tools.tip("批量删除成功。",null,function(){
+                    loadHash();
+                });
+            }else{
+                tools.tip("批量删除败！错误代号："+data.code,1000,null,"danger");
+            }
+        });
+    });
+};

@@ -104,6 +104,25 @@ public class AdminBaseController<T> {
     }
 
 
+    /**
+	 * 批量数据库删除
+	 * @param t
+	 * @return
+     */
+    @RequestMapping(value="/deleteByIds")
+    @ResponseBody
+    public Tip deleteByIds(T t){
+        try {
+            baseService.deleteByIds(t);
+            return new Tip();
+        } catch (Exception e) {
+            logger.getLogger(t.getClass()).error(this.getClass()+ " 批量删除失败！错误原因如下：");
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
+
+
 
 	/**
 	 * 查找一个对象（一般根据id，看sql语句写什么，只要是对象里面的属性都行）
@@ -119,12 +138,12 @@ public class AdminBaseController<T> {
 
 
     /**
-     * 获取所有列，不分页
+     * 获取全部数据，不分页
      * @param clazz
      * @return
      */
-    @RequestMapping(value="/list")
-    public ModelAndView list(HttpServletRequest request,T clazz) throws Exception {
+    @RequestMapping(value="/all")
+    public ModelAndView all(HttpServletRequest request,T clazz) throws Exception {
         PageData pd = new PageData(request);
         PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass());
         pd.put("pageInfo",pageInfo);
@@ -132,7 +151,20 @@ public class AdminBaseController<T> {
     }
 
     /**
-     * 获取所有列，分页默认10条
+     * 获取列表，默认第一页，每页十条
+     * @param clazz
+     * @return
+     */
+    @RequestMapping(value="/list")
+    public ModelAndView list(HttpServletRequest request,T clazz) throws Exception {
+        PageData pd = new PageData(request);
+        PageInfo<T> pageInfo =  baseService.list(pd,clazz.getClass(),1,10);
+        pd.put("pageInfo",pageInfo);
+        return new ModelAndView("admin/"+clazz.getClass().getSimpleName().toLowerCase()+"/list",pd);
+    }
+
+    /**
+     * 获取列表，分页默认10条
      * @param clazz
      * @return
      */
@@ -145,7 +177,7 @@ public class AdminBaseController<T> {
     }
 
     /**
-     * 获取所有列，自定义分页
+     * 获取列表，自定义分页
      * @param clazz
      * @return
      */

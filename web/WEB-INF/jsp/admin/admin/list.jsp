@@ -30,7 +30,7 @@
             <a href="" class="collapse" data-original-title="" title=""> </a>
         </div>
         <div class="actions">
-            <button class="btn btn-circle btn-default btn-sm" onclick="tableSearch('admin');"><i class="icon-magnifier"></i> 搜索
+            <button class="btn btn-primary btn-circle btn-default btn-sm" onclick="tableSearch();"><i class="icon-magnifier"></i> 搜索
             </button>
             <a href="javascript:;" class="btn btn-circle btn-default btn-icon-only fullscreen" data-original-title=""
                title=""></a>
@@ -39,13 +39,13 @@
     </div>
     <div class="portlet-body">
 
-        <form class="form-inline margin-bottom-40" role="form" id="tableParams">
+        <div class="form-inline margin-bottom-40" role="form" id="tableParams">
 
             <div class="form-group form-md-line-input has-success">
                 <input type="text" class="form-control" name="name" value="${name}" autofocus placeholder="名称">
                 <div class="form-control-focus"></div>
             </div>
-        </form>
+        </div>
 
     </div>
 </div>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
-                    <button class="btn btn-danger" onclick="tools.deleteByIds('admin');"> 批量删除 <i
+                    <button class="btn btn-danger" onclick="deleteByIds();"> 批量删除 <i
                             class="fa fa-times"></i></button>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                     <td>${item.phone}</td>
 
                     <td>
-                        <a href="javascript:void(0);" onclick="tools.del('admin','${item.id}')">删除</a>
+                        <a href="javascript:void(0);" onclick="deleteById('${item.id}')">删除</a>
                         <a href="#module=/admin/edit&id=${item.id}">查看\编辑</a>
                     </td>
                 </tr>
@@ -134,9 +134,12 @@
 <script src="/static/js/initList.js"></script>
 <script>
 
+    // 当前module
+    var module = "admin";
+
     // 分页插件参数
     var pageParam = {
-        url: "/admin/list",
+        url: module + "/list",
         pageSize: ${pageInfo.pageSize},         //每页显示行数 默认10
         currentPage: ${pageInfo.pageNum},   //当前页数
         totalPages: ${pageInfo.pages},      //总页数

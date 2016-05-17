@@ -15,7 +15,7 @@
 
           p:configLocation="classpath:ehcache.xml"
 
-          p:shared="false" />
+          p:shared="true" />
 
 
     <!-- 声明cacheManager -->

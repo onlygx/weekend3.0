@@ -27,27 +27,6 @@ import java.util.List;
 @RequestMapping("/power")
 public class PowerController extends AdminBaseController<Power> {
 
-    /**
-     * 数据库批量删除
-     * @param ids
-     * @return
-     */
-    @RequestMapping(value="/deleteByIds")
-    @ResponseBody
-    public Tip deleteByIds(@RequestParam("ids[]") List<Long> ids){
-        try {
-            for(Long id : ids){
-                Power temp = new Power();
-                temp.setId(id);
-                powerService.delete(temp);
-            }
-            return new Tip();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Tip(1);
-        }
-    }
-
 
     @RequestMapping("/listAll")
     public ModelAndView listAll(ModelMap model) throws Exception {

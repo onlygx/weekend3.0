@@ -1,8 +1,10 @@
 package com.elangzhi.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Log {
+public class Log extends BaseModel{
+
     private Long id;
 
     private String content;

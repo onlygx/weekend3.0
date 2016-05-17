@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="CityMapper" >
 
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
   <select id="selectByPrimaryKey" resultType="city" parameterType="city" >
     select
@@ -49,5 +50,8 @@
 
   <select id="list" resultType="city" parameterType="pd">
     select * from t_city where 1=1
+      <if test="name != null" >
+        and  `name` like CONCAT('%',#{name},'%')
+      </if>
   </select>
 </mapper>

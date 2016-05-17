@@ -165,7 +165,7 @@ function loginForm(){
 	//提交
 	$.post("/login/login",param,function(data){
 		if(data.success){
-			window.location.href="/#module=home";
+			window.location.href="/";
 		}else{
 			var _case = {
 					1:"没有此用户。",

@@ -1,6 +1,9 @@
 package com.elangzhi.ssm.model;
 
-public class AccountRole {
+import java.io.Serializable;
+
+public class AccountRole extends BaseModel{
+
     private Long id;
 
     private Long accountId;

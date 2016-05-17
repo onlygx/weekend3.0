@@ -60,7 +60,7 @@ function loadHash(){
     params["module"] = undefined;
     params["_t"] = new Date().getTime();
 
-    tools.get(_url, params, function(data){
+    tools.post(_url, params, function(data){
     	tools.setMain(data);
     });
 }

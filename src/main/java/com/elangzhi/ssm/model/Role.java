@@ -1,8 +1,9 @@
 package com.elangzhi.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Role{
+public class Role extends BaseModel{
 
     private Long id;
 

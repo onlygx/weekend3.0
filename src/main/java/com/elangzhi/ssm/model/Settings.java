@@ -1,6 +1,9 @@
 package com.elangzhi.ssm.model;
 
-public class Settings {
+import java.io.Serializable;
+
+public class Settings  extends BaseModel {
+
     private Long id;
 
     private String name;

@@ -1,10 +1,10 @@
 package com.elangzhi.ssm.model;
 
-import org.apache.ibatis.type.Alias;
-import org.springframework.context.annotation.Bean;
+import java.io.Serializable;
 
 
-public class Account {
+public class Account extends BaseModel{
+
     private Long id;
 
     private String userName;

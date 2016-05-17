@@ -85,26 +85,6 @@ public class AdminController extends AdminBaseController<Admin> {
     }
 
 
-    /**
-     * 数据库批量删除
-     * @param ids
-     * @return
-     */
-    @RequestMapping(value="/deleteByIds")
-    @ResponseBody
-    public Tip deleteByIds(@RequestParam("ids[]") List<Long> ids){
-        try {
-            for(Long id : ids){
-                Admin temp = new Admin();
-                temp.setId(id);
-                adminService.delete(temp);
-            }
-            return new Tip();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Tip(1);
-        }
-    }
 
     /**
      * 保存

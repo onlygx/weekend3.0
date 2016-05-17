@@ -115,7 +115,7 @@ tools.post = function(_url,_param,_success) {
         type: "post",
         data: _param,
         dataType: "json",
-        async: false,// 同步请求
+        async: true,// false:同步请求
         success: _success,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             tools.setMain(XMLHttpRequest.responseText);
@@ -205,65 +205,4 @@ tools.save = function(_module,formId){
         });
     }
     return state;
-};
-
-/**
- * 删除
- * @param _module 模块名称
- * @param _id 要删除的id
- */
-tools.del = function(_module,_id){
-    var state;
-    art.confirm("确定删除么？",function() {
-        tools.post(_module + "/delete", {"id": _id}, function (data) {
-            state = data.success;
-            if (data.success) {
-                art.tip("删除成功", 500, function () {
-                    loadHash();
-                });
-            }else{
-                tools.tip("删除失败！错误代号："+data.code,1000,null,"danger");
-            }
-        });
-    });
-    return state;
-};
-
-/**
- * 获取勾选了多少
- * @param _tableId
- * @returns {Array}
- */
-tools.getIds = function(_tableId){
-    var checks = $('#'+_tableId).find(".checkboxes:checked");
-    var ids = new Array();
-    checks.each(function(){
-        ids.push($(this).val());
-    });
-    return ids;
-};
-
-
-/**
- * 批量删除
- * @param _module 模块名称
- * @param _ids ids[]
- */
-tools.deleteByIds = function(_module){
-    var ids = tools.getIds("table");
-    if(ids.length == 0){
-        tools.tip("请先选择要删除的条目！",1000,null,"danger");
-        return;
-    }
-    art.confirm("确定删除选中信息么？",function(){
-        tools.post(_module+"/deleteByIds",{"ids":ids},function(data){
-            if(data.success){
-                tools.tip("批量删除成功。",null,function(){
-                    loadHash();
-                });
-            }else{
-                tools.tip("批量删除败！错误代号："+data.code,1000,null,"danger");
-            }
-        });
-    });
 };

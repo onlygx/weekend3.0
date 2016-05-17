@@ -6,11 +6,41 @@
 
     <display-name>ssmWeb</display-name>
 
-    <!-- Spring和mybatis的配置文件 -->
+    <!-- Spring 的配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring-*.xml</param-value>
+        <param-value>
+            classpath*:spring-mybatis.xml,
+            classpath*:spring-cache.xml
+        </param-value>
     </context-param>
+
+    <!-- Spring监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 防止Spring内存溢出监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <!-- Spring MVC servlet -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+
+    <!-- Spring MVC 拦截 -->
+    <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <!-- 连接池 启用Web监控统计功能   start-->
     <filter>
@@ -50,30 +80,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
-    <!-- Spring监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <!-- 防止Spring内存溢出监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
-
-
-    <!-- Spring MVC servlet -->
-    <servlet>
-        <servlet-name>SpringMVC</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-        <async-supported>true</async-supported>
-    </servlet>
-
-    <!-- Spring MVC 拦截 -->
-    <servlet-mapping>
-        <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
 
     <!-- 拦截静态资源 不用spring mvc来处理 -->
     <servlet-mapping>

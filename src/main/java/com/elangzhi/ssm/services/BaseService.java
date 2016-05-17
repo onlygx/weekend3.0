@@ -67,6 +67,18 @@ public class BaseService<T> {
 
 
     /**
+     * 批量删除
+     * @param t
+     * @return
+     * @throws Exception
+     */
+    public Integer deleteByIds(T t) throws Exception {
+        String statement = t.getClass().getSimpleName()+"Mapper.deleteByIds";
+        return lzDao.delete(statement,t);
+    }
+
+
+    /**
      * 查询列表
      * @param pd
      * @return

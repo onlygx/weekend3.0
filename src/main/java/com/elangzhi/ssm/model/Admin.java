@@ -1,8 +1,10 @@
 package com.elangzhi.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Admin extends Account {
+public class Admin extends Account{
+
     private Long id;
 
     private String name;
