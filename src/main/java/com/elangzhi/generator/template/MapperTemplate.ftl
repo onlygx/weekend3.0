@@ -1,54 +1,67 @@
+/**
+* @title ${modelName}
+* @author Created by GaoXiang
+* @time ${dateTime}
+* @version 1.0
+*/
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="CityMapper" >
+<!DOCTYPE ${r'mapper'} PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="${upper}Mapper" >
 
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-    <select id="selectByPrimaryKey" resultType="city" parameterType="city" >
-        select
-        id, parent_id, `name`, py, code, `type`, special
-        from t_city
-        where id = #{id,jdbcType=BIGINT}
+    <select id="selectByPrimaryKey" resultType="${modelPackage}" parameterType="${modelPackage}" >
+        select <#list fieldList as name><#if (name_index == 0) >${name}<#else>,${name}</#if></#list>
+        from ${tableName}
+        where id = ${r'#{id}'}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="city" >
-        delete from t_city
-        where id = #{id,jdbcType=BIGINT}
+
+    <delete id="deleteByPrimaryKey" parameterType="${modelPackage}" >
+        delete from ${tableName}
+        where id = ${r'#{id}'}
     </delete>
-    <insert id="insert" parameterType="city" >
-        insert into t_city (id, parent_id, `name`,
-        py, code, `type`, special
-        )
-        values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
-    #{py,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{special,jdbcType=INTEGER}
-        )
+
+
+    <delete id="deleteByIds" parameterType="${modelPackage}">
+
+        delete from ${tableName} where id in
+
+        <foreach item="ids" collection="ids" open="(" separator="," close=")">
+            ${r'#{ids}'}
+        </foreach>
+
+    </delete>
+
+
+    <insert id="insert" parameterType="${modelPackage}" >
+        insert into t_role (<#list fieldList as name><#if (name_index == 0) >${name}<#else>,${name}</#if></#list>)
+        values (<#list fieldListUp as name><#if (name_index == 0) >${r'#{'}${name}${r'}'}<#else>,${r'#{'}${name}${r'}'}</#if></#list>)
     </insert>
 
-    <update id="updateByPrimaryKey" parameterType="city" >
-        update t_city
+
+    <update id="updateByPrimaryKey" parameterType="role" >
+        update t_role
         <set >
-            <if test="parentId != null" >
-                parent_id = #{parentId,jdbcType=BIGINT},
-            </if>
             <if test="name != null" >
                 `name` = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="py != null" >
-                py = #{py,jdbcType=VARCHAR},
+            <if test="intro != null" >
+                intro = #{intro,jdbcType=VARCHAR},
             </if>
-            <if test="code != null" >
-                code = #{code,jdbcType=VARCHAR},
+            <if test="setTime != null" >
+                set_time = #{setTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="type != null" >
-                `type` = #{type,jdbcType=INTEGER},
-            </if>
-            <if test="special != null" >
-                special = #{special,jdbcType=INTEGER},
+            <if test="accountId != null" >
+                account_id = #{accountId,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="list" resultType="city" parameterType="pd">
-        select * from t_city where 1=1
+
+
+    <select id="list" resultType="${modelPackage}" parameterType="pd">
+        select * from ${tableName} where 1=1
     </select>
 </mapper>

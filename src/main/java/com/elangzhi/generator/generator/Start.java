@@ -1,5 +1,6 @@
 package com.elangzhi.generator.generator;
 
+import com.elangzhi.ssm.model.RolePower;
 import com.elangzhi.ssm.model.Version;
 
 /**
@@ -8,7 +9,7 @@ import com.elangzhi.ssm.model.Version;
 public class Start {
     public static void main(String[] args) {
 
-        new ModuleConfig("客户端版本管理",Version.class).startGenerator();
+        new ModuleConfig("角色权限管理",RolePower.class).startGenerator();
 
     }
 }

@@ -1,9 +1,8 @@
 package com.elangzhi.generator.util;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 数据模型创建工具类
@@ -44,19 +43,32 @@ public class DataModuleBuild {
      * @return
      */
     public static Map createMapperDataModle(String moduleName,Class clazz) {
+
+        Field[] fields = clazz.getDeclaredFields();
+
         String className = clazz.getSimpleName();
 
         //生成需要的参数
-        String lower = GenUtil.LowStr(className);
+        //String lower = GenUtil.LowStr(className);
         String upper = GenUtil.UpStr(className);
 
         Map root = new HashMap();
         root.put("dateTime", sdf.format(new Date()));
         root.put("modelName", moduleName);
-        root.put("lower", lower);
+        root.put("tableName", "t"+GenUtil.caseToUnderline(upper));
         root.put("upper", upper);
         root.put("modelPackage", Path.modelImport + upper);
-        root.put("daoPackage", Path.daoImport + upper + "Dao");
+
+        //加载所有列
+        List<String> fieldList = new ArrayList();
+        List<String> fieldListUp = new ArrayList();
+        for(Field field : fields){
+            fieldList.add(GenUtil.caseToUnderline(field.getName()));
+            fieldListUp.add(field.getName());
+        }
+        root.put("fieldList", fieldList);
+        root.put("fieldListUp", fieldListUp);
+
         return root;
     }
 

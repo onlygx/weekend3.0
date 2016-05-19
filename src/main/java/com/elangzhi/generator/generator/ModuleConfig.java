@@ -67,6 +67,7 @@ public class ModuleConfig {
             createController();
             createServices();
             createDao();
+            createMapper();
 
 
         }else{
@@ -92,6 +93,30 @@ public class ModuleConfig {
             //e.printStackTrace();
         }
     }
+
+
+
+    /**
+     * 生成 mapper
+     */
+    public void createMapper(){
+
+        String fileName = clazz.getSimpleName() + "Mapper.xml";
+
+        /*获取或创建一个模版*/
+        Template temp = getTemplate(Path.mapperFtl);
+
+        /*创建一个数据模型 Create a data model */
+        Map root = DataModuleBuild.createMapperDataModle(moduleName,clazz);
+
+        /* 控制台打印 */
+        //printToConsole(temp,root);
+
+        /* 生成文件 */
+        generatorSource(temp,root,Path.mapperPkg,fileName);
+
+    }
+
 
     /**
      * 生成 dao
