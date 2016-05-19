@@ -56,7 +56,6 @@ public class DataModuleBuild {
         root.put("lower", lower);
         root.put("upper", upper);
         root.put("modelPackage", Path.modelImport + upper);
-        root.put("servicePackage", Path.servicesImport + upper + "Service");
         root.put("daoPackage", Path.daoImport + upper + "Dao");
         return root;
     }
