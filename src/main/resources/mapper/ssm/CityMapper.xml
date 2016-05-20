@@ -4,13 +4,13 @@
 
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-  <select id="selectByPrimaryKey" resultType="city" parameterType="city" >
+  <select id="selectById" resultType="city" parameterType="city" >
     select
     id, parent_id, `name`, py, code, `type`, special
     from t_city
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="city" >
+  <delete id="deleteById" parameterType="city" >
     delete from t_city
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -23,7 +23,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="city" >
+  <update id="updateById" parameterType="city" >
     update t_city
     <set >
       <if test="parentId != null" >
@@ -48,7 +48,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="city" parameterType="pd">
+  <select id="list" resultType="city" parameterType="map">
     select * from t_city where 1=1
       <if test="name != null" >
         and  `name` like CONCAT('%',#{name},'%')

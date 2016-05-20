@@ -1,16 +1,13 @@
 package com.elangzhi.ssm.controller.power;
 
 import com.elangzhi.ssm.controller.AdminBaseController;
-import com.elangzhi.ssm.controller.json.Tip;
+import com.elangzhi.ssm.controller.util.ParamMap;
 import com.elangzhi.ssm.model.Power;
 import com.elangzhi.ssm.services.PowerService;
-import com.elangzhi.ssm.tools.PageData;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,8 +35,8 @@ public class PowerController extends AdminBaseController<Power> {
     @RequestMapping("/countByParentId")
     @ResponseBody
     public Integer countByParentId(HttpServletRequest request) throws Exception {
-        PageData pd = new PageData(request);
-        PageInfo<Power> pageInfo = powerService.list(pd);
+        ParamMap paramMap = new ParamMap(request);
+        PageInfo<Power> pageInfo = powerService.list(paramMap);
         return pageInfo.getList().size();
     }
 

@@ -101,21 +101,21 @@
     <!-- 配置事务的传播特性 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="insert*" propagation="REQUIRED" read-only="false" />
-            <tx:method name="save*"   propagation="REQUIRED" read-only="false" />
-            <tx:method name="delete*" propagation="REQUIRED" read-only="false" />
+            <tx:method name="insert*"   propagation="REQUIRED" read-only="false" />
+            <tx:method name="save*"      propagation="REQUIRED" read-only="false" />
+            <tx:method name="delete*"  propagation="REQUIRED" read-only="false" />
             <tx:method name="update*" propagation="REQUIRED" read-only="false" />
             <tx:method name="change*" propagation="REQUIRED" read-only="false" />
 
             <tx:method name="select*" propagation="SUPPORTS" />
-            <tx:method name="*list*"  propagation="SUPPORTS" />
+            <tx:method name="*list*"    propagation="SUPPORTS" />
         </tx:attributes>
     </tx:advice>
 
 
     <!-- 那些类的哪些方法参与事务(自动开启) -->
     <aop:config>
-        <aop:pointcut id="allServiceMethod" expression="execution(* com.elangzhi.ssm.services.*.*(..))"/>
+        <aop:pointcut id="allServiceMethod" expression="execution(* com.elangzhi..*.*(..))"/>
         <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
     </aop:config>
 

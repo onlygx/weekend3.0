@@ -20,7 +20,7 @@ public class AccountController extends AdminBaseController<Account> {
 
     @Override
     public Tip update(Account account) throws Exception {
-        Account old = accountService.selectOne(account);
+        Account old = accountService.selectById(account.getId(),Account.class);
         old.setPassword(account.getPassword());
         return super.update(old);
     }

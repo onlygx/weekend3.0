@@ -1,4 +1,4 @@
-package com.elangzhi.ssm.controller;
+package com.elangzhi.${lower}.controller;
 
 import com.elangzhi.ssm.controller.AdminBaseController;
 import ${modelPackage};
@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 
 /**
-* @title ${modelName}
-* @author Created by GaoXiang
-* @time ${dateTime}
+* ${modelName} Controller
+* @author GaoXiang
 * @version 1.0
 */
 @Controller

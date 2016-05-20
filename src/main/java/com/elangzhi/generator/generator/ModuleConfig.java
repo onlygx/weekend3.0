@@ -1,6 +1,7 @@
 package com.elangzhi.generator.generator;
 
 import com.elangzhi.generator.util.DataModuleBuild;
+import com.elangzhi.generator.util.GenUtil;
 import com.elangzhi.generator.util.Path;
 import freemarker.template.*;
 import org.apache.commons.io.FileUtils;
@@ -8,9 +9,10 @@ import java.io.*;
 import java.util.Map;
 
 /**
+ *  模板生成配置
  * Created by GaoXiang on 2016/5/17 0017.
  */
-public class ModuleConfig {
+class ModuleConfig {
 
     /* 创建一个合适的configuration */
     private Configuration cfg = new Configuration(new Version("2.3.23"));
@@ -21,7 +23,7 @@ public class ModuleConfig {
     private String moduleName;          //模块中文名
     private Class clazz;                //模块Bean类
 
-
+    @SuppressWarnings("unused")
     public ModuleConfig(){
 
         try {
@@ -33,7 +35,7 @@ public class ModuleConfig {
         }
     }
 
-    public ModuleConfig(String moduleName,Class module){
+    ModuleConfig(String moduleName,Class module){
         this.moduleName = moduleName;
         this.clazz = module;
 
@@ -52,6 +54,7 @@ public class ModuleConfig {
      * @param moduleName 模块名
      * @param module 模块Been类
      */
+    @SuppressWarnings("unused")
     public void createModule(String moduleName,Class module){
         this.moduleName = moduleName;
         this.clazz = module;
@@ -61,15 +64,19 @@ public class ModuleConfig {
     /**
      * 开始生成
      */
-    public void startGenerator(){
+    void startGenerator(){
 
         if(moduleName != null && clazz != null){
+
+            //首字母小写生成模块名称
+            Path.defaultModule = GenUtil.LowStr(clazz.getSimpleName());
+
             createController();
             createServices();
             createDao();
             createMapper();
 
-
+            createAddJsp();
         }else{
 
             System.out.println("请首先设置模块名称和Bean类，使用 createModule 方法或者构造方法。");
@@ -78,20 +85,19 @@ public class ModuleConfig {
     }
 
     /**
-     * 创建一个模板
-     * @param templateName
-     * @return
+     * 获取一个模板
+     * @param templateName 模板名称
+     * @return 模板对象
      */
-    public Template getTemplate(String templateName){
-        Template temp = null;
+    private Template getTemplate(String templateName){
+        Template temp;
         try {
             temp = cfg.getTemplate(templateName);
             return temp;
         } catch (IOException e) {
             System.out.println("创建模板失败！");
-            return temp;
-            //e.printStackTrace();
         }
+        return null;
     }
 
 
@@ -99,7 +105,28 @@ public class ModuleConfig {
     /**
      * 生成 mapper
      */
-    public void createMapper(){
+    private void createAddJsp(){
+
+        String fileName = "add.jsp";
+
+        /*获取或创建一个模版*/
+        Template temp = getTemplate(Path.addJspFtl);
+
+        /*创建一个数据模型 Create a data model */
+        Map root = DataModuleBuild.createJspDataModle(moduleName,clazz);
+
+        /* 控制台打印 */
+        //printToConsole(temp,root);
+
+        /* 生成文件 */
+        generatorSource(temp,root,Path.getJspPkg(),fileName);
+
+    }
+
+    /**
+     * 生成 mapper
+     */
+    private void createMapper(){
 
         String fileName = clazz.getSimpleName() + "Mapper.xml";
 
@@ -113,7 +140,7 @@ public class ModuleConfig {
         //printToConsole(temp,root);
 
         /* 生成文件 */
-        generatorSource(temp,root,Path.mapperPkg,fileName);
+        generatorSource(temp,root,Path.getMapperPkg(),fileName);
 
     }
 
@@ -121,7 +148,7 @@ public class ModuleConfig {
     /**
      * 生成 dao
      */
-    public void createServices(){
+    private void createServices(){
 
         String fileName = clazz.getSimpleName() + "Service.java";
 
@@ -135,7 +162,7 @@ public class ModuleConfig {
         //printToConsole(temp,root);
 
         /* 生成文件 */
-        generatorSource(temp,root,Path.servicesPkg,fileName);
+        generatorSource(temp,root,Path.getServicesPkg(),fileName);
 
     }
 
@@ -143,7 +170,7 @@ public class ModuleConfig {
     /**
      * 生成 dao
      */
-    public void createDao(){
+    private void createDao(){
 
         String fileName = clazz.getSimpleName() + "Dao.java";
 
@@ -157,14 +184,14 @@ public class ModuleConfig {
         //printToConsole(temp,root);
 
         /* 生成文件 */
-        generatorSource(temp,root,Path.daoPkg,fileName);
+        generatorSource(temp,root,Path.getDaoPkg(),fileName);
 
     }
 
     /**
      * 生成 controller
      */
-    public void createController(){
+    private void createController(){
 
         String fileName = clazz.getSimpleName() + "Controller.java";
 
@@ -178,16 +205,16 @@ public class ModuleConfig {
         //printToConsole(temp,root);
 
         /* 生成文件 */
-        generatorSource(temp,root,Path.controllerPkg,fileName);
+        generatorSource(temp,root,Path.getControllerPkg(),fileName);
 
     }
 
     /**
      * 生成文件到硬盘
-     * @param temp
-     * @param root
-     * @param dir
-     * @param fileName
+     * @param temp 模板
+     * @param root 数据模型
+     * @param dir 生成路径
+     * @param fileName 生成文件名
      */
     private void generatorSource(Template temp,Map root, String dir,String fileName) {
 
@@ -204,7 +231,7 @@ public class ModuleConfig {
             temp.process(root, writer);
             writer.close();
 
-            System.out.println(output);
+            System.out.println("生成：" + fileName + " 成功，地址：" + output);
         } catch (IOException e) {
             System.out.println("生成文件夹初始化错误！");
             //e.printStackTrace();
@@ -216,9 +243,10 @@ public class ModuleConfig {
 
     /**
      * 控制台打印模板
-     * @param temp
-     * @param root
+     * @param temp 模板
+     * @param root 数据模型
      */
+    @SuppressWarnings("unused")
     private void printToConsole(Template temp, Map root) {
 
         /* 合并数据模型和模版，控制台打印*/
@@ -236,19 +264,22 @@ public class ModuleConfig {
     }
 
 
-
+    @SuppressWarnings("unused")
     public String getModuleName() {
         return moduleName;
     }
 
+    @SuppressWarnings("unused")
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
 
+    @SuppressWarnings("unused")
     public Class getClazz() {
         return clazz;
     }
 
+    @SuppressWarnings("unused")
     public void setClazz(Class clazz) {
         this.clazz = clazz;
     }

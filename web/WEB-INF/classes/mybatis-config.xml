@@ -4,19 +4,18 @@
 <configuration>
 	
 	<settings>
-		<!-- 二级缓存 默认为 false -->
-        <!--<setting name="cacheEnabled" value="true" />-->
+		<!-- 使全局的映射器启用或禁用 缓存 默认为 true -->
+        <setting name="cacheEnabled" value="true" />
 
         <!-- 是否启用下划线与驼峰式命名规则的映射（如first_name => firstName） -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
 
-        <!-- 配置默认的执行器 -->
-        <setting name="defaultExecutorType" value="REUSE" /> 
+        <!-- 配置默认的执行器 SIMPLE  REUSE  BATCH 默认 SIMPLE-->
+        <setting name="defaultExecutorType" value="SIMPLE" />
     </settings>
 
 	<typeAliases>
 		<!-- 默认参数传递工具 -->
-		<typeAlias type="com.elangzhi.ssm.tools.PageData" alias="pd"/>
 		<typeAlias type="com.elangzhi.ssm.model.Account" alias="account"/>
 		<typeAlias type="com.elangzhi.ssm.model.AccountRole" alias="accountRole"/>
 		<typeAlias type="com.elangzhi.ssm.model.Admin" alias="admin"/>

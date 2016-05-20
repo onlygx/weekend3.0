@@ -31,8 +31,8 @@ import java.util.List;
 public class AdminController extends AdminBaseController<Admin> {
 
     @RequestMapping(value="/headimg")
-    public ModelAndView headimg(Admin admin,ModelMap model) throws Exception {
-        admin = adminService.selectOne(admin);
+    public ModelAndView headimg(@RequestParam Long id,ModelMap model) throws Exception {
+        Admin admin = adminService.selectById(id,Admin.class);
         model.put("data",admin);
         return new ModelAndView("admin/admin/headimg",model);
     }
@@ -71,11 +71,9 @@ public class AdminController extends AdminBaseController<Admin> {
 
             try {
                 //获取账号信息 更改头像
-                Admin param = new Admin();
-                param.setId(id);
-                Admin admin = adminService.selectOne(param);
+                Admin admin = adminService.selectById(id,Admin.class);
                 admin.setHead(url);
-                adminService.update(admin);
+                adminService.updateById(admin);
                 return new Tip(url);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -111,7 +109,7 @@ public class AdminController extends AdminBaseController<Admin> {
         if(resoult != null){
             return new Tip(3,resoult.getId());
         }else{
-            accountService.save(account);
+            accountService.insert(account);
             return super.save(admin);
         }
     }

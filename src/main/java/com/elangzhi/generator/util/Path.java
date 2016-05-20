@@ -6,23 +6,27 @@ package com.elangzhi.generator.util;
  */
 public class Path {
 
+    //默认模块
+    public static String defaultModule = "ssm";
+
     //保存路径
-    public static final String savePath = "d:/javaSource";
+    private static final String savePath = "d:/javaSource";
 
     //项目根路径
-    public static final String sysDir = System.getProperty("user.dir");
+    private static final String sysDir = System.getProperty("user.dir");
 
     //基本路径
-    public static final String home = savePath + "/src/main";
-    public static final String code = home + "/java/com/elangzhi/ssm";
-    public static final String resources = home + "/resources";
-    public static final String jsp = home + "/web/WEB-INF/jsp/admin";
+    private static final String home = savePath + "/src/main";
+    private static final String code = home + "/java/com/elangzhi";
+    private static final String resources = home + "/resources";
+    private static final String jsp = home + "/web/WEB-INF/jsp/admin";
 
     //生成java文件和mybatis映射xml文件路径
-    public static final String controllerPkg = code + "/controller";
-    public static final String servicesPkg = code + "/services";
-    public static final String daoPkg = code + "/dao";
-    public static final String mapperPkg = resources + "/mapper";
+    private String controllerPkg ;
+    private String servicesPkg;
+    private String daoPkg;
+    private String mapperPkg ;
+    private String jspPkg ;
 
     //模板文件夹路径 需要先获取
     public static final String ftlPath = sysDir + "/src/main/java/com/elangzhi/generator/template";
@@ -32,12 +36,46 @@ public class Path {
     public static final String servicesFtl = "ServicesTemplate.ftl";
     public static final String daoFtl = "DaoTemplate.ftl";
     public static final String mapperFtl = "MapperTemplate.ftl";
-
+    public static final String addJspFtl = "AddJspTemplate.ftl";
+    public static final String listJspFtl = "ListJspTemplate.ftl";
+    public static final String editJspFtl = "EditJspTemplate.ftl";
 
     //包路径
-    public static final String modelImport = "com.elangzhi.ssm.model.";
-    public static final String controllerImport = "com.elangzhi.ssm.controller.";
-    public static final String daoImport = "com.elangzhi.ssm.dao.";
-    public static final String servicesImport = "com.elangzhi.ssm.services.";
+    private static final String baseImport = "com.elangzhi.";
+    public static final String modelImport = baseImport + "ssm.model.";
+    private String daoImport;
+    private String servicesImport;
 
+
+    private static String getDefaultModule() {
+        return defaultModule;
+    }
+
+    public static String getControllerPkg() {
+        return code + "/" + getDefaultModule() + "/controller";
+    }
+
+    public static String getServicesPkg() {
+        return  code + "/" + getDefaultModule() + "/services";
+    }
+
+    public static String getDaoPkg() {
+        return  code + "/" + getDefaultModule() + "/dao";
+    }
+
+    public static String getMapperPkg() {
+        return  resources + "/mapper/" + getDefaultModule() ;
+    }
+
+    public static String getJspPkg() {
+        return jsp + "/" + getDefaultModule();
+    }
+
+    public static String getDaoImport() {
+        return baseImport + getDefaultModule() + ".dao.";
+    }
+
+    public static String getServicesImport() {
+        return baseImport + getDefaultModule() + ".services.";
+    }
 }

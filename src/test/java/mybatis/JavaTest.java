@@ -7,6 +7,7 @@ import com.elangzhi.ssm.model.RolePower;
 import com.elangzhi.ssm.services.BaseService;
 import org.junit.Test;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class JavaTest extends BaseService<Admin> {
     public void test1() {
         Admin admin = new Admin();
         try {
-            save(admin);
+            insert(admin);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,12 +32,16 @@ public class JavaTest extends BaseService<Admin> {
     public void test2() {
         Field[] fields = RolePower.class.getDeclaredFields();
 
-        List<String> fieldList = new ArrayList();
         for(Field field : fields){
-            fieldList.add(GenUtil.caseToUnderline(field.getName()));
+            Annotation[] allAnnotations = field.getAnnotations();
+            System.out.println(field.getName()+":");
+            for(Annotation annotation : allAnnotations){
+                Class annotationType = annotation.annotationType();
+
+                System.out.println(annotationType);
+            }
         }
 
-        System.out.println(fieldList);
     }
 
 }

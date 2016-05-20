@@ -4,14 +4,14 @@
 
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-  <select id="selectByPrimaryKey" resultType="rolePower" parameterType="rolePower" >
+  <select id="selectById" resultType="rolePower" parameterType="rolePower" >
     select 
     id, role_id, power_id
     from t_role_power
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteById" parameterType="java.lang.Long" >
     delete from t_role_power
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -23,7 +23,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="rolePower" >
+  <update id="updateById" parameterType="rolePower" >
     update t_role_power
     <set >
       <if test="roleId != null" >
@@ -36,7 +36,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="rolePower" parameterType="pd">
+  <select id="list" resultType="rolePower" parameterType="map">
     select * from t_role_power
   </select>
 </mapper>

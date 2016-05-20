@@ -12,7 +12,7 @@
 
   </select>
 
-  <select id="selectByPrimaryKey" resultType="account" parameterType="account" >
+  <select id="selectById" resultType="account" parameterType="account" >
     select
     id, user_name, `password`, `type`, `status`, info_id, qq_id, sina_id
     from t_account
@@ -45,7 +45,7 @@
     values ( #{id},#{userName},#{password},#{type},#{status},#{infoId},#{qqId},#{sinaId})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="account" >
+  <update id="updateById" parameterType="account" >
     update t_account
     <set >
       <if test="userName != null" >
@@ -73,11 +73,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <delete id="deleteByPrimaryKey"  parameterType="account" >
+  <delete id="deleteById"  parameterType="account" >
         delete from t_account where id = #{id}
   </delete>
 
-    <select id="list" resultType="account" parameterType="pd">
+    <select id="list" resultType="account" parameterType="map">
         select * from t_account
     </select>
 

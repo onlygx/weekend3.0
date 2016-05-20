@@ -4,14 +4,14 @@
 
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-  <select id="selectByPrimaryKey" resultType="version" parameterType="version" >
+  <select id="selectById" resultType="version" parameterType="version" >
     select
     id, code, `name`, url, set_time,content
     from t_version
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteById" parameterType="java.lang.Long" >
     delete from t_version
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -25,7 +25,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="version" >
+  <update id="updateByIdSelective" parameterType="version" >
     update t_version
     <set >
       <if test="code != null" >
@@ -47,7 +47,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-    <select id="list" resultType="version" parameterType="pd">
+    <select id="list" resultType="version" parameterType="map">
         select * from t_version
         where 1=1
         <if test="name != null" >

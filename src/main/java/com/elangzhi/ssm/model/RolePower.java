@@ -6,8 +6,14 @@ public class RolePower extends BaseModel{
 
     private Long id;
 
+    /**
+     * 角色Id
+     */
     private Long roleId;
 
+    /**
+     * 权限Id
+     */
     private Long powerId;
 
     public Long getId() {

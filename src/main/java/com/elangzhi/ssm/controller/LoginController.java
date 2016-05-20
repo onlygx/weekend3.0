@@ -102,9 +102,7 @@ public class LoginController {
     public void checkType(HttpSession session,Account resoult) throws Exception {
         // 判断类型 1 表示管理员
         if(resoult.getType() == 1){
-            Admin temp = new Admin();
-            temp.setId(resoult.getInfoId());
-            Admin admin = adminService.selectOne(temp);
+            Admin admin = adminService.selectById(resoult.getInfoId(),Admin.class);
             session.setAttribute(Const.ADMIN,admin);
         }
     }

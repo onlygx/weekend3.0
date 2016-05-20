@@ -3,13 +3,14 @@ package com.elangzhi.ssm.services;
 import com.elangzhi.ssm.dao.PowerDao;
 import com.elangzhi.ssm.model.Account;
 import com.elangzhi.ssm.model.Power;
-import com.elangzhi.ssm.tools.PageData;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by GaoXiang on 2016/3/2 0002.
@@ -23,16 +24,16 @@ public class PowerService extends BaseService<Power> {
 
     /**
      * 获取列表
-     * @param pd
+     * @param map
      * @return
      */
-    public PageInfo<Power> list(PageData pd) throws Exception {
-        return super.list(pd, Power.class);
+    public PageInfo<Power> list(Map map) throws Exception {
+        return super.list(map,Power.class);
     }
 
     /**
      * 获取指定用户的权限列表
-     * @param accountId
+     * @param account
      * @return
      */
     public List<Power> findByAccount(Account account){
@@ -54,7 +55,7 @@ public class PowerService extends BaseService<Power> {
      */
     public List<Power> listAll() throws Exception {
 
-        List<Power> p = list(new PageData(),Power.class).getList();
+        List<Power> p = list(new HashMap()).getList();
         List<Power> menu = searchListByParentId(p,0l);
         for(Power pp : menu){
             pp.setPowers(searchListByParentId(p,pp.getId()));

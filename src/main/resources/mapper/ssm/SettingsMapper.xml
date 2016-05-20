@@ -4,13 +4,13 @@
 
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-  <select id="selectByPrimaryKey" resultType="settings" parameterType="settings" >
+  <select id="selectById" resultType="settings" parameterType="settings" >
     select 
     id, `name`, `value`, account_id, `type`
     from t_settings
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteById" parameterType="java.lang.Long" >
     delete from t_settings
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -21,7 +21,7 @@
       #{accountId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="settings" >
+  <update id="updateById" parameterType="settings" >
     update t_settings
     <set >
       <if test="name != null" >
@@ -40,7 +40,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="settings" parameterType="pd">
+  <select id="list" resultType="settings" parameterType="map">
     select * from t_settings
   </select>
 </mapper>

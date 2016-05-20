@@ -4,22 +4,22 @@
 
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
-  <select id="selectByPrimaryKey" resultType="role" parameterType="role" >
+  <select id="selectById" resultType="role" parameterType="role" >
     select 
     id, `name`, intro, set_time, account_id
     from t_role
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="role" >
+  <delete id="deleteById" parameterType="role" >
     delete from t_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <delete id="deleteByIds" parameterType="role">
+  <delete id="deleteByIds" parameterType="list">
 
     delete from t_role where id in
 
-      <foreach item="ids" collection="ids" open="(" separator="," close=")">
+      <foreach item="ids" collection="list" open="(" separator="," close=")">
           #{ids}
       </foreach>
 
@@ -32,7 +32,7 @@
       #{setTime,jdbcType=TIMESTAMP}, #{accountId,jdbcType=BIGINT})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="role" >
+  <update id="updateById" parameterType="role" >
     update t_role
     <set >
       <if test="name != null" >
@@ -51,7 +51,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="list" resultType="role" parameterType="pd">
+  <select id="list" resultType="role" parameterType="map">
     select * from t_role where 1=1
     <if test="name != null" >
      and `name` like CONCAT('%',#{name},'%')
