@@ -77,6 +77,8 @@ class ModuleConfig {
             createMapper();
 
             createAddJsp();
+            createListJsp();
+            createEditJsp();
         }else{
 
             System.out.println("请首先设置模块名称和Bean类，使用 createModule 方法或者构造方法。");
@@ -103,7 +105,49 @@ class ModuleConfig {
 
 
     /**
-     * 生成 mapper
+     * 生成 edit.jsp
+     */
+    private void createEditJsp(){
+
+        String fileName = "edit.jsp";
+
+        /*获取或创建一个模版*/
+        Template temp = getTemplate(Path.editJspFtl);
+
+        /*创建一个数据模型 Create a data model */
+        Map root = DataModuleBuild.createJspDataModle(moduleName,clazz);
+
+        /* 控制台打印 */
+        //printToConsole(temp,root);
+
+        /* 生成文件 */
+        generatorSource(temp,root,Path.getJspPkg(),fileName);
+
+    }
+
+    /**
+     * 生成 list.jsp
+     */
+    private void createListJsp(){
+
+        String fileName = "list.jsp";
+
+        /*获取或创建一个模版*/
+        Template temp = getTemplate(Path.listJspFtl);
+
+        /*创建一个数据模型 Create a data model */
+        Map root = DataModuleBuild.createJspDataModle(moduleName,clazz);
+
+        /* 控制台打印 */
+        //printToConsole(temp,root);
+
+        /* 生成文件 */
+        generatorSource(temp,root,Path.getJspPkg(),fileName);
+
+    }
+
+    /**
+     * 生成 add.jsp
      */
     private void createAddJsp(){
 

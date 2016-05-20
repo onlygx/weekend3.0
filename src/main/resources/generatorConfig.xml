@@ -41,12 +41,12 @@
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetProject="src/main/resources/mapper"/>
+        <!--<sqlMapGenerator targetProject="src/main/resources/mapper" targetPackage=""/>-->
 
         <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.elangzhi.ssm.dao" targetProject="src/main/java"/>-->
 
 
-        <table tableName="%" enableCountByExample="false"
+        <table tableName="t_label" enableCountByExample="false"
                             enableUpdateByExample="false"
                             enableDeleteByExample="false"
                             enableSelectByExample="false"

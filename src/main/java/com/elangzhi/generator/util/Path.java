@@ -19,7 +19,7 @@ public class Path {
     private static final String home = savePath + "/src/main";
     private static final String code = home + "/java/com/elangzhi";
     private static final String resources = home + "/resources";
-    private static final String jsp = home + "/web/WEB-INF/jsp/admin";
+    private static final String jsp = savePath + "/web/WEB-INF/jsp/admin";
 
     //生成java文件和mybatis映射xml文件路径
     private String controllerPkg ;

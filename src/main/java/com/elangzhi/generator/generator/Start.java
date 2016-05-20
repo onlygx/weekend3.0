@@ -1,7 +1,9 @@
 package com.elangzhi.generator.generator;
 
 import com.elangzhi.ssm.model.AccountRole;
+import com.elangzhi.ssm.model.Label;
 import com.elangzhi.ssm.model.RolePower;
+import com.elangzhi.ssm.model.Version;
 
 /**
  * 生成代码
@@ -11,8 +13,7 @@ public class Start {
 
     public static void main(String[] args) {
 
-        new ModuleConfig("角色权限",RolePower.class).startGenerator();
-        new ModuleConfig("用户角色",AccountRole.class).startGenerator();
+        new ModuleConfig("标签管理",Label.class).startGenerator();
 
     }
 }
