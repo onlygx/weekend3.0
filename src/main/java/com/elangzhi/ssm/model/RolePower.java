@@ -1,8 +1,8 @@
 package com.elangzhi.ssm.model;
 
-import java.io.Serializable;
+import com.elangzhi.ssm.model.base.BaseModel;
 
-public class RolePower extends BaseModel{
+public class RolePower extends BaseModel {
 
     private Long id;
 

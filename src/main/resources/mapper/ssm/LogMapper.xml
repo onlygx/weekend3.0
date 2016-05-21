@@ -1,52 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 日志 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="LogMapper" >
 
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.Log" parameterType="long" >
+        select id,content,type,set_time,account_id,status
+        from t_log
+        where id = #{id}
+    </select>
 
-  <select id="selectById" resultType="log" parameterType="log" >
-    select id, content, `type`, set_time, account_id, `status`
-    from t_log
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteById" parameterType="log" >
-    delete from t_log
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="log" >
-    insert into t_log (id, content, `type`, 
-      set_time, account_id, `status`
-      )
-    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{setTime,jdbcType=TIMESTAMP}, #{accountId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}
-      )
-  </insert>
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_log
+        where id = #{id}
+    </delete>
 
-  <update id="updateById" parameterType="log" >
-    update t_log
-    <set >
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        `type` = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="setTime != null" >
-        set_time = #{setTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="accountId != null" >
-        account_id = #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        `status` = #{status,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_log where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 
-  <select id="list" parameterType="map" resultType="log">
-    select * from t_log where 1=1
-  </select>
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.Log" >
+        insert into t_log (id,content,type,set_time,account_id,status)
+        values (#{id},#{content},#{type},#{setTime},#{accountId},#{status})
+    </insert>
+
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.Log" >
+        update t_log
+        <set>
+            <if test="content != null" >
+                content = #{content},
+            </if>
+            <if test="type != null" >
+                type = #{type},
+            </if>
+            <if test="setTime != null" >
+                set_time = #{setTime},
+            </if>
+            <if test="accountId != null" >
+                account_id = #{accountId},
+            </if>
+            <if test="status != null" >
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.Log" parameterType="map">
+        select id,content,type,set_time,account_id,status
+        from t_log
+        where 1=1
+    </select>
 
 </mapper>

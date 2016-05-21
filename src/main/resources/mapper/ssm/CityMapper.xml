@@ -1,57 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 城市 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="CityMapper" >
 
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  <select id="selectById" resultType="city" parameterType="city" >
-    select
-    id, parent_id, `name`, py, code, `type`, special
-    from t_city
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteById" parameterType="city" >
-    delete from t_city
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="city" >
-    insert into t_city (id, parent_id, `name`, 
-      py, code, `type`, special
-      )
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{py,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{special,jdbcType=INTEGER}
-      )
-  </insert>
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.City" parameterType="long" >
+        select id,parent_id,name,py,code,type,special
+        from t_city
+        where id = #{id}
+    </select>
 
-  <update id="updateById" parameterType="city" >
-    update t_city
-    <set >
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="py != null" >
-        py = #{py,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null" >
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        `type` = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="special != null" >
-        special = #{special,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_city
+        where id = #{id}
+    </delete>
 
-  <select id="list" resultType="city" parameterType="map">
-    select * from t_city where 1=1
-      <if test="name != null" >
-        and  `name` like CONCAT('%',#{name},'%')
-      </if>
-  </select>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_city where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.City" >
+        insert into t_city (id,parent_id,name,py,code,type,special)
+        values (#{id},#{parentId},#{name},#{py},#{code},#{type},#{special})
+    </insert>
+
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.City" >
+        update t_city
+        <set>
+            <if test="parentId != null" >
+                parent_id = #{parentId},
+            </if>
+            <if test="name != null" >
+                name = #{name},
+            </if>
+            <if test="py != null" >
+                py = #{py},
+            </if>
+            <if test="code != null" >
+                code = #{code},
+            </if>
+            <if test="type != null" >
+                type = #{type},
+            </if>
+            <if test="special != null" >
+                special = #{special},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.City" parameterType="map">
+        select id,parent_id,name,py,code,type,special
+        from t_city
+        where 1=1
+        <if test="name != null" >
+            and  `name` like CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
 </mapper>

@@ -1,6 +1,6 @@
 package com.elangzhi.ssm.model;
 
-import java.io.Serializable;
+import com.elangzhi.ssm.model.base.BaseModel;
 
 public class Settings  extends BaseModel {
 

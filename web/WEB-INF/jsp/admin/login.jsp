@@ -163,7 +163,7 @@ function loginForm(){
 	param["password"] = $.md5(param["password"] );
 
 	//提交
-	$.post("/login/login",param,function(data){
+	$.post("/login/admin",param,function(data){
 		if(data.success){
 			window.location.href="/";
 		}else{

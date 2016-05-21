@@ -6,6 +6,7 @@ import com.elangzhi.ssm.model.Account;
 import com.elangzhi.ssm.model.Admin;
 import com.elangzhi.ssm.services.AccountService;
 import com.elangzhi.ssm.services.AdminService;
+import com.elangzhi.ssm.tools.Const;
 import com.elangzhi.ssm.tools.ImageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,30 +23,46 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 管理员信息
- * Created by GaoXiang on 2016/2/29 0029.
+ * 管理员 Controller
+ * @author GaoXiang
+ * @version 1.0
  */
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController extends AdminBaseController<Admin> {
 
+    /**
+     * 携带信息跳转到修改头像页面
+     * @param id 管理员id
+     * @return 头衔修改页面
+     * @throws Exception 跳转头像修改页面错误
+     */
     @RequestMapping(value="/headimg")
-    public ModelAndView headimg(@RequestParam Long id,ModelMap model) throws Exception {
-        Admin admin = adminService.selectById(id,Admin.class);
-        model.put("data",admin);
-        return new ModelAndView("admin/admin/headimg",model);
+    public ModelAndView headImg(@RequestParam Long id) throws Exception {
+        return new ModelAndView("admin/admin/headimg","data",adminService.selectById(id));
     }
 
+    /**
+     * 裁剪并应用新头像
+     * @param request 请求信息
+     * @param session 获取session
+     * @param x1 裁剪开始坐标
+     * @param y1 裁剪开始坐标
+     * @param w 裁剪宽度
+     * @param h 裁剪高度
+     * @param id 管理员id
+     * @param src 完整图片地址
+     * @return
+     */
     @RequestMapping(value="/changeHead")
     @ResponseBody
     public Tip changeHead(HttpServletRequest request,HttpSession session,
-            @RequestParam(required = false) Integer x1, // 起点x
-            @RequestParam(required = false) Integer y1, // 起点y
-            @RequestParam(required = false) Integer w,  // 宽度
-            @RequestParam(required = false) Integer h,  // 高度
-            @RequestParam(required = false) Long id,    // adminId
-            @RequestParam(required = false) String src  // 图片地址
+            @RequestParam(required = false) Integer x1,
+            @RequestParam(required = false) Integer y1,
+            @RequestParam(required = false) Integer w,
+            @RequestParam(required = false) Integer h,
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String src
     ) {
 
         if ("".equals(src)) {
@@ -54,7 +71,7 @@ public class AdminController extends AdminBaseController<Admin> {
             return new Tip(2); //请选择剪裁区域
         } else {
             File file = new File(src);
-            //上传地址
+            //保存地址
             String url = "/images/headImage/"
                     + System.currentTimeMillis()
                     + "_head"
@@ -71,9 +88,11 @@ public class AdminController extends AdminBaseController<Admin> {
 
             try {
                 //获取账号信息 更改头像
-                Admin admin = adminService.selectById(id,Admin.class);
+                Admin admin = adminService.selectById(id);
                 admin.setHead(url);
                 adminService.updateById(admin);
+                //更新session内对象
+                session.setAttribute(Const.ADMIN,admin);
                 return new Tip(url);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -95,20 +114,20 @@ public class AdminController extends AdminBaseController<Admin> {
     @Override
     public Tip save(Admin admin) throws Exception {
 
-        Account account = new Account();
-        account.setId(admin.getId()+1);
-        account.setUserName(admin.getUserName());
-        account.setPassword(admin.getPassword());
-        account.setInfoId(admin.getId());
-        account.setStatus(1);
-        account.setType(1);
-
-        admin.setSetTime(new Date());
-        admin.setName(admin.getUserName());
-        Account resoult = accountService.findByUserName(account);
-        if(resoult != null){
-            return new Tip(3,resoult.getId());
+        Account isNull = accountService.findByUserName(admin.getUserName());
+        if(isNull != null){
+            return new Tip(3,isNull.getId());
         }else{
+            Account account = new Account();
+            account.setId(admin.getId()+1);
+            account.setUserName(admin.getUserName());
+            account.setPassword(admin.getPassword());
+            account.setInfoId(admin.getId());
+            account.setStatus(1);
+            account.setType(1);
+
+            admin.setSetTime(new Date());
+            admin.setName(admin.getUserName());
             accountService.insert(account);
             return super.save(admin);
         }

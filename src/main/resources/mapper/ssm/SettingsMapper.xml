@@ -1,46 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 客户设置 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="SettingsMapper" >
 
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  <select id="selectById" resultType="settings" parameterType="settings" >
-    select 
-    id, `name`, `value`, account_id, `type`
-    from t_settings
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteById" parameterType="java.lang.Long" >
-    delete from t_settings
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="settings" >
-    insert into t_settings (id, `name`, `value`, 
-      account_id, `type`)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{accountId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER})
-  </insert>
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.Settings" parameterType="long" >
+        select id,name,value,account_id,type
+        from t_settings
+        where id = #{id}
+    </select>
 
-  <update id="updateById" parameterType="settings" >
-    update t_settings
-    <set >
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null" >
-        `value` = #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="accountId != null" >
-        account_id = #{accountId,jdbcType=BIGINT},
-      </if>
-      <if test="type != null" >
-        `type` = #{type,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_settings
+        where id = #{id}
+    </delete>
 
-  <select id="list" resultType="settings" parameterType="map">
-    select * from t_settings
-  </select>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_settings where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.Settings" >
+        insert into t_settings (id,name,value,account_id,type)
+        values (#{id},#{name},#{value},#{accountId},#{type})
+    </insert>
+
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.Settings" >
+        update t_settings
+        <set>
+            <if test="name != null" >
+                name = #{name},
+            </if>
+            <if test="value != null" >
+                value = #{value},
+            </if>
+            <if test="accountId != null" >
+                account_id = #{accountId},
+            </if>
+            <if test="type != null" >
+                type = #{type},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.Settings" parameterType="map">
+        select id,name,value,account_id,type
+        from t_settings
+        where 1=1
+    </select>
+
 </mapper>

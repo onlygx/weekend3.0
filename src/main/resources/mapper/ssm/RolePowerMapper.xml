@@ -1,42 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 角色权限 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="RolePowerMapper" >
 
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  <select id="selectById" resultType="rolePower" parameterType="rolePower" >
-    select 
-    id, role_id, power_id
-    from t_role_power
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.RolePower" parameterType="long" >
+        select id,role_id,power_id
+        from t_role_power
+        where id = #{id}
+    </select>
 
-  <delete id="deleteById" parameterType="java.lang.Long" >
-    delete from t_role_power
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_role_power
+        where id = #{id}
+    </delete>
 
-  <insert id="insert" parameterType="rolePower" >
-    insert into t_role_power (id, role_id, power_id
-      )
-    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{powerId,jdbcType=BIGINT}
-      )
-  </insert>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_role_power where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 
-  <update id="updateById" parameterType="rolePower" >
-    update t_role_power
-    <set >
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="powerId != null" >
-        power_id = #{powerId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.RolePower" >
+        insert into t_role_power (id,role_id,power_id)
+        values (#{id},#{roleId},#{powerId})
+    </insert>
 
-  <select id="list" resultType="rolePower" parameterType="map">
-    select * from t_role_power
-  </select>
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.RolePower" >
+        update t_role_power
+        <set>
+            <if test="roleId != null" >
+                role_id = #{roleId},
+            </if>
+            <if test="powerId != null" >
+                power_id = #{powerId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.RolePower" parameterType="map">
+        select id,role_id,power_id
+        from t_role_power
+        where 1=1
+    </select>
+
 </mapper>

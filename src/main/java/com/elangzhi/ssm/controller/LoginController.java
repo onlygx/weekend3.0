@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * 登陆
- * Created by GaoXiang on 2016/5/3 0003.
+ * @version 1.0
  */
 
 @Controller
@@ -28,9 +28,9 @@ public class LoginController {
 
     /**
      * 跳转到登陆页面
-     * @return
+     * @return 登陆界面
      */
-    @RequestMapping(value="/loginPage",method = RequestMethod.GET)
+    @RequestMapping(value="/",method = RequestMethod.GET)
     public ModelAndView loginPage(){
         // 验证码操作
         return new ModelAndView("admin/login");
@@ -38,36 +38,36 @@ public class LoginController {
 
     /**
      * 登陆验证
-     * @param account
+     * @param account 用户信息{userName,password}
      * @return success = true 登陆成功，
      * code = 1 用户不存在
      * code = 2 密码错误
      * code = 3 服务器拒绝登陆
      */
     @ResponseBody
-    @RequestMapping(value="/login",method = RequestMethod.POST)
+    @RequestMapping(value="/admin",method = RequestMethod.POST)
     public Tip login(Account account, HttpSession session) throws Exception {
-        Account resoult = accountService.findByUserName(account);
+        Account acc = accountService.findByUserName(account.getUserName());
 
         //判断有没有账号
-        if(resoult == null){
+        if(acc == null){
             return new Tip(1);
 
         // 判断密码
-        }else if(checkPwd(resoult.getPassword(),account.getPassword())){
+        }else if(checkPwd(acc.getPassword(),account.getPassword())){
 
             //判断状态1 表示正常
-            if(resoult.getStatus() < 0){
+            if(acc.getStatus() < 0){
                 return new Tip(3);
             }
 
-            session.setAttribute(Const.ACCOUNT,resoult);
+            session.setAttribute(Const.ACCOUNT,acc);
 
             // 检查分类并获取详细信息
-            checkType(session,resoult);
+            checkType(session,acc);
 
             //检查权限并缓存
-            checkPower(session,resoult);
+            checkPower(session,acc.getId());
 
             return new Tip();
         }else{
@@ -78,28 +78,28 @@ public class LoginController {
 
     /**
      * 检查并获取权限
-     * @param session
-     * @param resoult
+     * @param session session对象
+     * @param accountId 账户id
      */
-    private void checkPower(HttpSession session, Account resoult) {
-        List<Power> powerList = powerService.findByAccount(resoult);
+    private void checkPower(HttpSession session,Long accountId) {
+        List<Power> powerList = powerService.findByAccountId(accountId);
         session.setAttribute(Const.POWER_LIST,powerList);
     }
 
     /**
      * 验证密码
-     * @param pwd
-     * @param param
-     * @return
+     * @param pwd 真密码
+     * @param param 参数密码
+     * @return 验证结果
      */
-    public boolean checkPwd(String pwd,String param){
+    private boolean checkPwd(String pwd,String param){
         return pwd.equals(param);
     }
 
     /**
      * 检查分类并分类缓存详细信息
      */
-    public void checkType(HttpSession session,Account resoult) throws Exception {
+    private void checkType(HttpSession session,Account resoult) throws Exception {
         // 判断类型 1 表示管理员
         if(resoult.getType() == 1){
             Admin admin = adminService.selectById(resoult.getInfoId(),Admin.class);

@@ -3,14 +3,15 @@ package com.elangzhi.ssm.services;
 import com.elangzhi.ssm.dao.CityDao;
 import com.elangzhi.ssm.model.City;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by GaoXiang on 2016/5/16 0016.
+ * 城市 Service
+ * @author GaoXiang
+ * @version 1.0
  */
 @Service
 public class CityService extends BaseService<City> {

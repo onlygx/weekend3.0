@@ -16,22 +16,30 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 权限管理
- * Created by GaoXiang on 2016/2/29 0029.
+ * 权限 Controller
+ * @author GaoXiang
+ * @version 1.0
  */
-
 @Controller
 @RequestMapping("/power")
 public class PowerController extends AdminBaseController<Power> {
 
-
+    /**
+     * 获取全部权限，主要用于权限父类选择
+     * @return 全部权限列表，第一层list的parentId 为 0
+     * @throws Exception 返回全部权限列表错误
+     */
     @RequestMapping("/listAll")
-    public ModelAndView listAll(ModelMap model) throws Exception {
-        List<Power> powerList = powerService.listAll();
-        model.put("powerList",powerList);
-        return new ModelAndView("admin/power/chooseParent",model);
+    public ModelAndView listAll() throws Exception {
+        return new ModelAndView("admin/power/chooseParent","powerList",powerService.listAll());
     }
 
+    /**
+     * 统计这一个父类下的权限有多少个，用于判断该权限排序
+     * @param request 请求参数
+     * @return 统计结果
+     * @throws Exception 权限个数统计错误
+     */
     @RequestMapping("/countByParentId")
     @ResponseBody
     public Integer countByParentId(HttpServletRequest request) throws Exception {

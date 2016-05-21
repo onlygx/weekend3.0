@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by GaoXiang on 2016/5/16 0016.
+ * 城市 Dao
+ * @author GaoXiang
+ * @version 1.0
  */
 @Repository
 public class CityDao extends LzDao<City> {
@@ -86,4 +88,5 @@ public class CityDao extends LzDao<City> {
     public PageInfo<City> list(Map map,int page,int size) throws Exception {
         return list("CityMapper.list",map,new RowBounds(page,size));
     }
+
 }

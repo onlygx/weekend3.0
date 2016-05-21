@@ -1,9 +1,10 @@
 package com.elangzhi.ssm.model;
 
-import java.io.Serializable;
+import com.elangzhi.ssm.model.base.BaseModel;
+
 import java.util.List;
 
-public class Power extends BaseModel{
+public class Power extends BaseModel {
 
     private Long id;
 

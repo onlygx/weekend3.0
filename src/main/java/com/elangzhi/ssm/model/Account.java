@@ -1,9 +1,9 @@
 package com.elangzhi.ssm.model;
 
-import java.io.Serializable;
+import com.elangzhi.ssm.model.base.BaseModel;
 
 
-public class Account extends BaseModel{
+public class Account extends BaseModel {
 
     private Long id;
 

@@ -1,5 +1,6 @@
 package com.elangzhi.ssm.controller;
 
+import com.elangzhi.generator.util.GenUtil;
 import com.elangzhi.ssm.controller.json.Tip;
 import com.elangzhi.ssm.controller.util.ParamMap;
 import com.elangzhi.ssm.services.BaseService;
@@ -32,7 +33,16 @@ public class AdminBaseController<T> {
 
     @Autowired
     ProjectConfig projectConfig;
+/*
 
+    public AdminBaseController(){
+        logger.error(this.getClass());
+    }
+
+    public AdminBaseController(T t){
+        logger.error("获取到的类型：" + t.getClass().getSimpleName());
+    }
+*/
 
     /**
      * 进入添加页面 携带一个生成的id --> longId
@@ -42,7 +52,7 @@ public class AdminBaseController<T> {
     @RequestMapping(value="/add")
     public ModelAndView add(ModelMap model,T t){
         model.put("longId", UUIDFactory.getLongId());
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/add",model);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/add",model);
     }
 
 
@@ -56,7 +66,7 @@ public class AdminBaseController<T> {
     @RequestMapping(value="/edit")
     public ModelAndView edit(ModelMap model,@RequestParam Long id,T t) throws Exception {
         model.put("data",baseService.selectById(id,t.getClass()));
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/edit",model);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/edit",model);
     }
 
     /**
@@ -72,8 +82,7 @@ public class AdminBaseController<T> {
             baseService.insert(obj);
             return new Tip();
         } catch (Exception e) {
-            logger.error(this.getClass()+ ": 添加失败！错误原因如下：");
-            e.printStackTrace();
+            logger.error(obj.getClass()+ ": 添加失败！");
             return new Tip(1);
         }
     }
@@ -91,8 +100,7 @@ public class AdminBaseController<T> {
             baseService.updateById(obj);
             return new Tip();
         } catch (Exception e) {
-            logger.error(this.getClass()+ ": 修改失败！错误原因如下：");
-            e.printStackTrace();
+            logger.error(obj.getClass()+ ": 修改失败！");
             return new Tip(1);
         }
     }
@@ -109,8 +117,7 @@ public class AdminBaseController<T> {
             baseService.deleteById(id,t.getClass());
             return new Tip();
         } catch (Exception e) {
-            logger.error(this.getClass()+ ": 删除失败！错误原因如下：");
-            e.printStackTrace();
+            logger.error(t.getClass()+ ": 删除失败！");
             return new Tip(1);
         }
     }
@@ -128,8 +135,7 @@ public class AdminBaseController<T> {
             baseService.deleteByIds(ids,t.getClass());
             return new Tip();
         } catch (Exception e) {
-            logger.error(this.getClass()+ ": 批量删除失败！错误原因如下：");
-            e.printStackTrace();
+            logger.error(t.getClass()+ ": 批量删除失败！");
             return new Tip(1);
         }
     }
@@ -159,7 +165,7 @@ public class AdminBaseController<T> {
         ParamMap paramMap = new ParamMap(request);
         PageInfo<T> pageInfo =  baseService.list(paramMap,t.getClass());
         paramMap.put("pageInfo",pageInfo);
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/list",paramMap);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/list",paramMap);
     }
 
     /**
@@ -174,7 +180,7 @@ public class AdminBaseController<T> {
         ParamMap paramMap = new ParamMap(request);
         PageInfo<T> pageInfo =  baseService.list(paramMap,1,projectConfig.getPageSize(),t.getClass());
         paramMap.put("pageInfo",pageInfo);
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/list",paramMap);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/list",paramMap);
     }
 
     /**
@@ -190,7 +196,7 @@ public class AdminBaseController<T> {
         ParamMap paramMap = new ParamMap(request);
         PageInfo<T> pageInfo =  baseService.list(paramMap,page,projectConfig.getPageSize(),t.getClass());
         paramMap.put("pageInfo",pageInfo);
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/list",paramMap);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/list",paramMap);
     }
 
     /**
@@ -207,7 +213,7 @@ public class AdminBaseController<T> {
         ParamMap paramMap = new ParamMap(request);
         PageInfo<T> pageInfo =  baseService.list(paramMap,page,size,t.getClass());
         paramMap.put("pageInfo",pageInfo);
-        return new ModelAndView("admin/"+t.getClass().getSimpleName().toLowerCase()+"/list",paramMap);
+        return new ModelAndView("admin/"+ GenUtil.LowStr(t.getClass().getSimpleName()) +"/list",paramMap);
     }
 
 }

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="weekend:war exploded">
-    <output-path>$PROJECT_DIR$/web</output-path>
+    <output-path>$PROJECT_DIR$/target/classes</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -47,6 +47,9 @@
           <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.0.0" />
           <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:2.10.0" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-ehcache:1.0.0" />
+          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="weekend3.0" />
+          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="weekend3.0" />
+          <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="weekend3.0/web/Web" />

@@ -42,14 +42,14 @@
     <update id="updateById" parameterType="${modelPackage}" >
         update ${tableName}
         <set>
-            <#list fieldList as field>
-                <#if (field.name == "id") >
-                <#else>
-                    <if test="${field.name} != null" >
-                        ${field.under} = ${field.nameParam},
-                    </if>
-                </#if>
-            </#list>
+    <#list fieldList as field>
+        <#if (field.name == "id") >
+        <#else>
+            <if test="${field.name} != null" >
+                ${field.under} = ${field.nameParam},
+            </if>
+        </#if>
+    </#list>
         </set>
         where id = ${r'#{id}'}
     </update>

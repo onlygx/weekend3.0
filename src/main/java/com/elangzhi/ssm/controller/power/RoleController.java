@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 
 /**
- * 角色管理
- * Created by GaoXiang on 2016/5/8 0008.
+ * 角色 Controller
+ * @author GaoXiang
+ * @version 1.0
  */
-
 @Controller
 @RequestMapping("/role")
 public class RoleController extends AdminBaseController<Role>{

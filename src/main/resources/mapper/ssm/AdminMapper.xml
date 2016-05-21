@@ -1,69 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 管理员 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="AdminMapper" >
 
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  <select id="selectById" resultType="admin"  parameterType="admin" >
-    select
-     id, `name`, email, phone, address, sex, id_card, set_time, head
-    from t_admin
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.Admin" parameterType="long" >
+        select id,name,email,phone,address,sex,id_card,set_time,head
+        from t_admin
+        where id = #{id}
+    </select>
 
-  <insert id="insert" parameterType="admin" >
-    insert into t_admin (id, `name`, email,
-      phone, address, sex,
-      id_card, set_time, head
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-      #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
-      #{idCard,jdbcType=VARCHAR}, #{setTime,jdbcType=TIMESTAMP}, #{head,jdbcType=VARCHAR}
-      )
-  </insert>
-
-    <delete id="deleteById" parameterType="admin" >
-        delete from t_admin where id = #{id}
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_admin
+        where id = #{id}
     </delete>
 
-  <update id="updateById" parameterType="admin" >
-    update t_admin
-    <set >
-      <if test="name != null" >
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="idCard != null" >
-        id_card = #{idCard,jdbcType=VARCHAR},
-      </if>
-      <if test="setTime != null" >
-        set_time = #{setTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="head != null" >
-        head = #{head,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_admin where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 
-  <select id="list" resultType="admin" parameterType="map">
-    select *
-    from t_admin
-    where 1=1
-    <if test="name != null">
-      and `name` like CONCAT('%',#{name},'%')
-    </if>
-  </select>
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.Admin" >
+        insert into t_admin (id,name,email,phone,address,sex,id_card,set_time,head)
+        values (#{id},#{name},#{email},#{phone},#{address},#{sex},#{idCard},#{setTime},#{head})
+    </insert>
+
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.Admin" >
+        update t_admin
+        <set>
+            <if test="name != null" >
+                name = #{name},
+            </if>
+            <if test="email != null" >
+                email = #{email},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone},
+            </if>
+            <if test="address != null" >
+                address = #{address},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard},
+            </if>
+            <if test="setTime != null" >
+                set_time = #{setTime},
+            </if>
+            <if test="head != null" >
+                head = #{head},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.Admin" parameterType="map">
+        select id,name,email,phone,address,sex,id_card,set_time,head
+        from t_admin
+        where 1=1
+        <if test="name != null">
+            and `name` like CONCAT('%',#{name},'%')
+        </if>
+    </select>
 
 </mapper>

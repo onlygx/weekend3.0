@@ -11,24 +11,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @Controller
-//@RequestMapping("/")
 public class IndexController{
 
     /**
      * 跳转到首页
-     * @param request
-     * @param model
-     * @return
+     * @return 首页页面
      */
     @RequestMapping(value="/")
-    public ModelAndView index(HttpServletRequest request,ModelMap model){
+    public ModelAndView index(){
         return new ModelAndView("admin/index");
     }
 
 
     /**
      * 跳转到欢迎页面
-     * @return
+     * @return 欢迎页面
      */
     @RequestMapping(value="/home")
     public ModelAndView home(){

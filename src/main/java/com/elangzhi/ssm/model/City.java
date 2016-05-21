@@ -1,8 +1,8 @@
 package com.elangzhi.ssm.model;
 
-import java.io.Serializable;
+import com.elangzhi.ssm.model.base.BaseModel;
 
-public class City extends BaseModel{
+public class City extends BaseModel {
 
     private Long id;
 

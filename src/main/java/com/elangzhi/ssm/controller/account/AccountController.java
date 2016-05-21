@@ -10,17 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 
 /**
- * 账号操作
- * Created by GaoXiang on 2016/5/4 0004.
+ * 账户 Controller
+ * @author GaoXiang
+ * @version 1.0
  */
 @Controller
 @RequestMapping("/account")
 public class AccountController extends AdminBaseController<Account> {
 
 
+    /**
+     * 重写 update 方法
+     * @param account
+     * @return
+     * @throws Exception
+     */
     @Override
     public Tip update(Account account) throws Exception {
-        Account old = accountService.selectById(account.getId(),Account.class);
+        Account old = accountService.selectById(account.getId());
         old.setPassword(account.getPassword());
         return super.update(old);
     }

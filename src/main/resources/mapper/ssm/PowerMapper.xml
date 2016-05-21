@@ -1,74 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+* 权限 Mapper
+* @author GaoXiang
+* @version 1.0
+-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="PowerMapper" >
 
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- 开启缓存 打印日志使用：LoggingEhcache。 不打印日志使用：EhcacheCache。 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  <select id="selectById" resultType="power"  parameterType="power" >
-    select *
-    from t_power
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <!-- 根据 id 查询所有列 -->
+    <select id="selectById" resultType="com.elangzhi.ssm.model.Power" parameterType="long" >
+        select id,name,intro,parent_id,type,url,sort,icon
+        from t_power
+        where id = #{id}
+    </select>
 
-  <delete id="deleteById"   parameterType="power" >
-    delete from t_power
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <!-- 根据 id 删除 -->
+    <delete id="deleteById" parameterType="long" >
+        delete from t_power
+        where id = #{id}
+    </delete>
 
-  <insert id="insert" parameterType="power">
-    insert into t_power (id, `name`, intro, 
-      parent_id, `type`, url, 
-      sort, icon)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR})
-  </insert>
+    <!-- 批量删除，参数是名为ids的list -->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_power where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
 
-  <update id="updateById" parameterType="power">
-    update t_power
-    set `name` = #{name,jdbcType=VARCHAR},
-      intro = #{intro,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      `type` = #{type,jdbcType=INTEGER},
-      url = #{url,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
-      icon = #{icon,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <!-- 插入数据 -->
+    <insert id="insert" parameterType="com.elangzhi.ssm.model.Power" >
+        insert into t_power (id,name,intro,parent_id,type,url,sort,icon)
+        values (#{id},#{name},#{intro},#{parentId},#{type},#{url},#{sort},#{icon})
+    </insert>
 
-  <select id="list" resultType="power" parameterType="map">
-    select *
-    from t_power
-    where 1=1
-      <if test="name != null">
-        and `name` like CONCAT('%',#{name},'%')
-      </if>
-      <if test="parentId != null">
-        and parent_id = #{parentId}
-      </if>
-    order by sort
-  </select>
+    <!-- 根据 id 更新数据 -->
+    <update id="updateById" parameterType="com.elangzhi.ssm.model.Power" >
+        update t_power
+        <set>
+            <if test="name != null" >
+                name = #{name},
+            </if>
+            <if test="intro != null" >
+                intro = #{intro},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId},
+            </if>
+            <if test="type != null" >
+                type = #{type},
+            </if>
+            <if test="url != null" >
+                url = #{url},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort},
+            </if>
+            <if test="icon != null" >
+                icon = #{icon},
+            </if>
 
-  <select id="findByAccount" parameterType="account" resultType="power">
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 查询列表，分页信息不在此处控制，参数为map，返回实体 -->
+    <select id="list" resultType="com.elangzhi.ssm.model.Power" parameterType="map">
+        select id,name,intro,parent_id,type,url,sort,icon
+        from t_power
+        where 1=1
+        <if test="name != null">
+            and `name` like CONCAT('%',#{name},'%')
+        </if>
+        <if test="parentId != null">
+            and parent_id = #{parentId}
+        </if>
+    </select>
+
+
+    <!--根据accountId获取用户所有权限-->
+    <select id="findByAccountId" resultType="com.elangzhi.ssm.model.Power" parameterType="long">
         select distinct a.*
         from t_power a
         left join t_role_power b on a.id = b.power_id
         where 1=1
             and b.role_id in (
-                select c.role_id from t_account_role c where c.account_id = #{id}
+              select c.role_id
+              from t_account_role c
+              where c.account_id = #{id}
             )
             and a.type = 0
         order by a.sort
-  </select>
+    </select>
 
-    <select id="findByRole" parameterType="role" resultType="power">
+    <!--根据roleId获取所有权限 属于此角色的返回时携带 角色id:belong -->
+    <select id="findByRoleId" resultType="com.elangzhi.ssm.model.Power" parameterType="long">
         select c.*,d.role_id belong
         from t_power c
         left join(
-            select a.id,b.role_id from t_power a
+            select a.id,b.role_id
+            from t_power a
             left join t_role_power b on a.id = b.power_id
             where b.role_id = #{id}
         ) d on c.id = d.id
         order by c.sort
-     </select>
+    </select>
+
 </mapper>

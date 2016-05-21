@@ -12,7 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * 
 * 类名称：LoginHandlerInterceptor.java
 * 类描述：拦截器
-* @author Gx
+* @author GaoXiang
 * @version 1.6
  */
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
