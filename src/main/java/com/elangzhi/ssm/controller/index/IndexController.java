@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 首页控制
- * Created by GaoXiang on 2015/10/22 0022.
+ * 首页访问控制 Controller
+ * @author GaoXiang
+ * @version 1.0
  */
-
 @Controller
 public class IndexController{
 

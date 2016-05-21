@@ -170,7 +170,7 @@
 		tools.post("/login/logout",null,function(data){
 			if(data.success){
                 art.tip("退出成功！",500,function(){
-                    window.location.href = "/login/loginPage";
+                    window.location.href = "/login/";
                 })
 			}
 		})
