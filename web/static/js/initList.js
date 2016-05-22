@@ -116,7 +116,7 @@ function getPaginatorOption(_param,_formParam){
 function tableSearch() {
 
     var param = tools.formParams("tableParams");
-    var url = module + "/list";
+    var url = module + "/list/1/" + pageParam.pageSize;
 
     tools.post(url,param,function(data){
         tools.setMain(data);
