@@ -1,4 +1,4 @@
-package com.elangzhi.${lower}.services;
+package com.elangzhi.modules.${lower}.services;
 
 import ${daoPackage};
 import ${modelPackage};

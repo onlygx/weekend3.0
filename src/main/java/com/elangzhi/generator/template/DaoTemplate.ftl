@@ -1,4 +1,4 @@
-package com.elangzhi.${lower}.dao;
+package com.elangzhi.modules.${lower}.dao;
 
 import ${modelPackage};
 import com.elangzhi.ssm.dao.LzDao;

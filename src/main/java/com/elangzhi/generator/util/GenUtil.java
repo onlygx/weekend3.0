@@ -2,7 +2,7 @@ package com.elangzhi.generator.util;
 
 /**
  * 生成工具工具类
- * Created by GaoXiang on 2016/5/19 0019.
+ * Created by GaoXiang
  */
 public class GenUtil {
 

@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * 数据模型创建工具类
- * Created by GaoXiang on 2016/5/19 0019.
+ * Created by GaoXiang
  */
 public class DataModuleBuild {
 

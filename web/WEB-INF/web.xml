@@ -88,18 +88,13 @@
         <url-pattern>/images/*</url-pattern>
         <url-pattern>/upload/*</url-pattern>
         <url-pattern>/fonts/*</url-pattern>
+        <url-pattern>/favicon.ico</url-pattern>
     </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
-<!--
-    <error-page>
-        <error-code>500</error-code>
-        <location>/500.jsp</location>
-    </error-page>
--->
 
     <!-- session失效时间(分钟) -->
     <session-config>

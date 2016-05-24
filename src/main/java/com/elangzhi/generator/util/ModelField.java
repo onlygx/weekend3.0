@@ -2,7 +2,7 @@ package com.elangzhi.generator.util;
 
 /**
  * 实体属性遍历工具
- * Created by GaoXiang on 2016/5/20 0020.
+ * Created by GaoXiang
  */
 public class ModelField {
 

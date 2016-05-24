@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  *  模板生成配置
- * Created by GaoXiang on 2016/5/17 0017.
+ * Created by GaoXiang
  */
 class ModuleConfig {
 
@@ -72,6 +72,7 @@ class ModuleConfig {
             Path.defaultModule = GenUtil.LowStr(clazz.getSimpleName());
 
             createController();
+            createAppController();
             createServices();
             createDao();
             createMapper();
@@ -229,6 +230,27 @@ class ModuleConfig {
 
         /* 生成文件 */
         generatorSource(temp,root,Path.getDaoPkg(),fileName);
+
+    }
+
+    /**
+     * 生成 客户端 controller
+     */
+    private void createAppController(){
+
+        String fileName = "App" + clazz.getSimpleName() + "Controller.java";
+
+        /*获取或创建一个模版*/
+        Template temp = getTemplate(Path.appControllerFtl);
+
+        /*创建一个数据模型 Create a data model */
+        Map root = DataModuleBuild.createBaseDataModle(moduleName,clazz);
+
+        /* 控制台打印 */
+        //printToConsole(temp,root);
+
+        /* 生成文件 */
+        generatorSource(temp,root,Path.getAppControllerPkg(),fileName);
 
     }
 

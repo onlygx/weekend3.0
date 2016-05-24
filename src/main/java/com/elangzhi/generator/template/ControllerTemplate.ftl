@@ -1,4 +1,4 @@
-package com.elangzhi.${lower}.controller;
+package com.elangzhi.modules.${lower}.controller;
 
 import com.elangzhi.ssm.controller.AdminBaseController;
 import ${modelPackage};

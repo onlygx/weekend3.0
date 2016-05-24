@@ -2,7 +2,7 @@ package com.elangzhi.generator.util;
 
 /**
  * 代码生成路径
- * Created by GaoXiang on 2016/5/19 0019.
+ * Created by GaoXiang
  */
 public class Path {
 
@@ -17,22 +17,24 @@ public class Path {
 
     //基本路径
     private static final String home = savePath + "/src/main";
-    private static final String code = home + "/java/com/elangzhi";
+    private static final String code = home + "/java/com/elangzhi/modules";
     private static final String resources = home + "/resources";
-    private static final String jsp = savePath + "/web/WEB-INF/jsp/admin";
+    private static final String jsp = savePath + "/web/WEB-INF/jsp";
 
     //生成java文件和mybatis映射xml文件路径
-    private String controllerPkg ;
-    private String servicesPkg;
-    private String daoPkg;
-    private String mapperPkg ;
-    private String jspPkg ;
+    static String controllerPkg = "/controller";
+    static String appControllerPkg = "/app";
+    static String servicesPkg = "/services";
+    static String daoPkg = "/dao";
+    static String mapperPkg = "/mapper";
+    static String jspPkg = "/admin";
 
     //模板文件夹路径 需要先获取
     public static final String ftlPath = sysDir + "/src/main/java/com/elangzhi/generator/template";
 
     //模板路径
     public static final String controllerFtl = "ControllerTemplate.ftl";
+    public static final String appControllerFtl = "AppControllerTemplate.ftl";
     public static final String servicesFtl = "ServicesTemplate.ftl";
     public static final String daoFtl = "DaoTemplate.ftl";
     public static final String mapperFtl = "MapperTemplate.ftl";
@@ -42,9 +44,9 @@ public class Path {
 
     //包路径
     private static final String baseImport = "com.elangzhi.";
-    public static final String modelImport = baseImport + "ssm.model.";
-    private String daoImport;
-    private String servicesImport;
+    static final String modelImport = "com.elangzhi.ssm.model.";
+    private static String daoImport = ".dao.";
+    private static String servicesImport = ".services.";
 
 
     private static String getDefaultModule() {
@@ -52,30 +54,34 @@ public class Path {
     }
 
     public static String getControllerPkg() {
-        return code + "/" + getDefaultModule() + "/controller";
+        return code + "/" + getDefaultModule() + controllerPkg;
+    }
+
+    public static String getAppControllerPkg() {
+        return code + "/" + getDefaultModule() + appControllerPkg;
     }
 
     public static String getServicesPkg() {
-        return  code + "/" + getDefaultModule() + "/services";
+        return  code + "/" + getDefaultModule() + servicesPkg;
     }
 
     public static String getDaoPkg() {
-        return  code + "/" + getDefaultModule() + "/dao";
+        return  code + "/" + getDefaultModule() + daoPkg;
     }
 
     public static String getMapperPkg() {
-        return  resources + "/mapper/" + getDefaultModule() ;
+        return  resources + mapperPkg + "/" + getDefaultModule() ;
     }
 
     public static String getJspPkg() {
-        return jsp + "/" + getDefaultModule();
+        return jsp + jspPkg + "/" + getDefaultModule();
     }
 
     public static String getDaoImport() {
-        return baseImport + getDefaultModule() + ".dao.";
+        return baseImport + "modules." + getDefaultModule() + daoImport;
     }
 
     public static String getServicesImport() {
-        return baseImport + getDefaultModule() + ".services.";
+        return baseImport + "modules." + getDefaultModule() + servicesImport;
     }
 }
