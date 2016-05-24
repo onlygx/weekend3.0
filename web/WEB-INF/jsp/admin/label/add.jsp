@@ -8,12 +8,12 @@ Version: 1.0
     <div class="portlet-title">
         <div class="caption">
             <span class="caption-subject font-red-sunglo bold uppercase">标签</span>
-            <span class="caption-helper">编辑</span>
+            <span class="caption-helper">添加</span>
         </div>
     </div>
     <div class="portlet-body form">
         <!-- BEGIN FORM-->
-        <form action="#" class="form-horizontal" id="editForm">
+        <form action="#" class="form-horizontal" id="saveForm">
             <div class="form-body">
 
                 <div class="form-group hide">
@@ -21,7 +21,7 @@ Version: 1.0
                     <div class="col-md-4">
                         <div class="input-icon">
                             <i class="fa fa-male"></i>
-                            <input type="hidden" name="id" value="${data.id}">
+                            <input type="hidden" name="id" value="${longId}">
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@ Version: 1.0
                     <div class="col-md-4">
                         <div class="input-icon">
                             <i class="fa  fa-qq"></i>
-                            <input type="text" class="form-control" required name="name" value="${data.name}" placeholder="">
+                            <input type="text" class="form-control" required name="name" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@ Version: 1.0
                     <div class="col-md-4">
                         <div class="input-icon">
                             <i class="fa  fa-qq"></i>
-                            <input type="text" class="form-control" required name="type" value="${data.type}" placeholder="">
+                            <input type="text" class="form-control" required name="type" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ Version: 1.0
                     <div class="col-md-4">
                         <div class="input-icon">
                             <i class="fa  fa-qq"></i>
-                            <input type="text" class="form-control" required name="intro" value="${data.intro}" placeholder="">
+                            <input type="text" class="form-control" required name="intro" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -61,16 +61,17 @@ Version: 1.0
                     <div class="col-md-4">
                         <div class="input-icon">
                             <i class="fa  fa-qq"></i>
-                            <input type="text" class="form-control" required name="status" value="${data.status}" placeholder="">
+                            <input type="text" class="form-control" required name="status" placeholder="">
                         </div>
                     </div>
                 </div>
 
             </div>
+
             <div class="form-actions">
                 <div class="row">
-                    <div class="col-md-offset-3 col-md-5">
-                        <button type="button" class="btn green" onclick="tools.edit('label');">
+                    <div class="col-md-offset-3 col-md-4">
+                        <button type="button" class="btn green" onclick="tools.save('label');">
                             <i class="fa  fa-cog fa-spin "></i>提交</button>
                         <button type="button" class="btn default" onclick="history.go(-1);">
                             <i class="fa  fa-refresh fa-spin "></i>返回</button>
@@ -81,7 +82,7 @@ Version: 1.0
         <!-- END FORM-->
     </div>
 </div>
-<script>
 
+<script>
 
 </script>

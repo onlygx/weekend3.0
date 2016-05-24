@@ -1,6 +1,6 @@
 package com.elangzhi.generator.generator;
 
-import com.elangzhi.ssm.model.*;
+import com.elangzhi.ssm.model.Label;
 
 /**
  * 生成代码
@@ -10,7 +10,7 @@ public class Start {
 
     public static void main(String[] args) {
 
-        new ModuleConfig("商品评价",Version.class).startGenerator();
+        new ModuleConfig("标签",Label.class).startGenerator();
 
     }
 }

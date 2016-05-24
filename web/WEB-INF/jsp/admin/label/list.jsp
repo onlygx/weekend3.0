@@ -9,7 +9,7 @@ Version: 1.0
 <div class="page-head">
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
-        <h1>标签管理<small> 列表</small></h1>
+        <h1>标签<small> 列表</small></h1>
     </div>
     <!-- END PAGE TITLE -->
 </div>
